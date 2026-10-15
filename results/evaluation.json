@@ -1,0 +1,3572 @@
+{
+  "summary": {
+    "baseline": {
+      "label": "ระบบเดิม (ข้อ 1)",
+      "hit@5": 1.0,
+      "recall@5": 0.863,
+      "mrr@5": 0.922,
+      "precision": 0.353,
+      "avg_kept": 5,
+      "avg_bm25_results": 0.238,
+      "zero_bm25_questions": 18,
+      "context_coverage": 0.048,
+      "avg_from_graph": 0,
+      "avg_search_seconds": 0.773
+    },
+    "improved_no_rerank": {
+      "label": "ปรับปรุง A+B+C (ยังไม่ rerank)",
+      "hit@5": 1.0,
+      "recall@5": 0.765,
+      "mrr@5": 0.941,
+      "precision": 0.706,
+      "avg_kept": 5,
+      "avg_bm25_results": 19.286,
+      "zero_bm25_questions": 0,
+      "context_coverage": 1.0,
+      "avg_from_graph": 0,
+      "avg_search_seconds": 0.269
+    },
+    "improved_rerank": {
+      "label": "ปรับปรุง A+B+C+D (rerank ไม่กรอง)",
+      "hit@5": 1.0,
+      "recall@5": 0.819,
+      "mrr@5": 0.931,
+      "precision": 0.718,
+      "avg_kept": 5,
+      "avg_bm25_results": 19.286,
+      "zero_bm25_questions": 0,
+      "context_coverage": 1.0,
+      "avg_from_graph": 0,
+      "avg_search_seconds": 28.137
+    },
+    "improved": {
+      "label": "ปรับปรุง A+B+C+D+D2 (rerank + กรอง ≥ 0.1)",
+      "hit@5": 1.0,
+      "recall@5": 0.819,
+      "mrr@5": 0.931,
+      "precision": 0.753,
+      "avg_kept": 3.714,
+      "avg_bm25_results": 19.286,
+      "zero_bm25_questions": 0,
+      "context_coverage": 1.0,
+      "avg_from_graph": 0,
+      "avg_search_seconds": 28.137
+    },
+    "improved_graph": {
+      "label": "ปรับปรุงครบ + GraphRAG (ระบบสุดท้าย)",
+      "hit@5": 1.0,
+      "recall@5": 0.819,
+      "mrr@5": 0.931,
+      "precision": 0.753,
+      "avg_kept": 3.714,
+      "avg_bm25_results": 19.286,
+      "zero_bm25_questions": 0,
+      "context_coverage": 1.0,
+      "avg_from_graph": 3.381,
+      "avg_search_seconds": 27.009
+    }
+  },
+  "threshold_sweep": [
+    {
+      "threshold": 0.0,
+      "avg_kept": 5,
+      "removed": 0.0,
+      "hit@5": 1.0,
+      "recall@5": 0.819,
+      "precision": 0.718,
+      "answerable_rejected": 0,
+      "unanswerable_rejected": 0,
+      "unanswerable_total": 4
+    },
+    {
+      "threshold": 0.05,
+      "avg_kept": 4.238,
+      "removed": 0.152,
+      "hit@5": 1.0,
+      "recall@5": 0.819,
+      "precision": 0.753,
+      "answerable_rejected": 0,
+      "unanswerable_rejected": 1,
+      "unanswerable_total": 4
+    },
+    {
+      "threshold": 0.1,
+      "avg_kept": 3.714,
+      "removed": 0.257,
+      "hit@5": 1.0,
+      "recall@5": 0.819,
+      "precision": 0.753,
+      "answerable_rejected": 0,
+      "unanswerable_rejected": 3,
+      "unanswerable_total": 4
+    },
+    {
+      "threshold": 0.2,
+      "avg_kept": 3.381,
+      "removed": 0.324,
+      "hit@5": 0.941,
+      "recall@5": 0.74,
+      "precision": 0.747,
+      "answerable_rejected": 0,
+      "unanswerable_rejected": 4,
+      "unanswerable_total": 4
+    },
+    {
+      "threshold": 0.3,
+      "avg_kept": 3.19,
+      "removed": 0.362,
+      "hit@5": 0.882,
+      "recall@5": 0.721,
+      "precision": 0.781,
+      "answerable_rejected": 1,
+      "unanswerable_rejected": 4,
+      "unanswerable_total": 4
+    },
+    {
+      "threshold": 0.5,
+      "avg_kept": 2.762,
+      "removed": 0.448,
+      "hit@5": 0.882,
+      "recall@5": 0.681,
+      "precision": 0.86,
+      "answerable_rejected": 2,
+      "unanswerable_rejected": 4,
+      "unanswerable_total": 4
+    }
+  ],
+  "threshold_default": 0.1,
+  "ingest_info": {},
+  "per_question": [
+    {
+      "id": "Q1",
+      "question": "โรคหัดและโรคหัดเยอรมันแตกต่างกันอย่างไร?",
+      "gold": [
+        "doc_8",
+        "doc_1",
+        "doc_3"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_1",
+            "doc_2",
+            "doc_3",
+            "doc_7",
+            "doc_6"
+          ],
+          "top_sections": [
+            "doc_1",
+            "doc_2",
+            "doc_3",
+            "doc_7",
+            "doc_6"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 3.94,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_1_p1",
+            "doc_8_p1",
+            "doc_1_p2",
+            "doc_3_p1",
+            "doc_2_p3"
+          ],
+          "top_sections": [
+            "doc_1",
+            "doc_8",
+            "doc_3",
+            "doc_2"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.19,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_1_p1",
+            "doc_1_p2",
+            "doc_8_p1",
+            "doc_2_p3",
+            "doc_2_p2"
+          ],
+          "top_sections": [
+            "doc_1",
+            "doc_8",
+            "doc_2"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 41.8,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved": {
+          "top": [
+            "doc_1_p1",
+            "doc_1_p2",
+            "doc_8_p1",
+            "doc_2_p3",
+            "doc_2_p2"
+          ],
+          "top_sections": [
+            "doc_1",
+            "doc_8",
+            "doc_2"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 41.8,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_graph": {
+          "top": [
+            "doc_1_p1",
+            "doc_1_p2",
+            "doc_8_p1",
+            "doc_2_p3",
+            "doc_2_p2"
+          ],
+          "top_sections": [
+            "doc_1",
+            "doc_8",
+            "doc_2"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 36.0,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.6
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_1_p1",
+          "section_id": "doc_1",
+          "score": 0.9742898344993591
+        },
+        {
+          "id": "doc_1_p2",
+          "section_id": "doc_1",
+          "score": 0.9290522933006287
+        },
+        {
+          "id": "doc_8_p1",
+          "section_id": "doc_8",
+          "score": 0.9205920696258545
+        },
+        {
+          "id": "doc_2_p3",
+          "section_id": "doc_2",
+          "score": 0.8926181793212891
+        },
+        {
+          "id": "doc_2_p2",
+          "section_id": "doc_2",
+          "score": 0.890697717666626
+        }
+      ],
+      "graph_paths": {
+        "doc_1_p1": "[hop1][MENTIONS] จาก โรคหัด (คำถามเอ่ยถึงโรคหัด)",
+        "doc_1_p2": "[hop1][MENTIONS] จาก โรคหัด (คำถามเอ่ยถึงโรคหัด)",
+        "doc_8_p1": "[hop1][ABOUT_TOPIC] จาก การแยกโรค (หัดเยอรมัน) (คำถามถามเรื่องการแยกโรคของหัดเยอรมัน)",
+        "doc_2_p3": "[hop1][MENTIONS] จาก โรคหัด (คำถามเอ่ยถึงโรคหัด)",
+        "doc_2_p2": "[hop1][MENTIONS] จาก โรคหัด (คำถามเอ่ยถึงโรคหัด)"
+      }
+    },
+    {
+      "id": "Q2",
+      "question": "อธิบายสาเหตุของโรคหัดเยอรมันและการป้องกัน",
+      "gold": [
+        "doc_2",
+        "doc_13"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_2",
+            "doc_0",
+            "doc_1",
+            "doc_13",
+            "doc_15"
+          ],
+          "top_sections": [
+            "doc_2",
+            "doc_0",
+            "doc_1",
+            "doc_13",
+            "doc_15"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 4.58,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_13_p1",
+            "doc_2_p1",
+            "doc_0",
+            "doc_14",
+            "doc_13_p3"
+          ],
+          "top_sections": [
+            "doc_13",
+            "doc_2",
+            "doc_0",
+            "doc_14"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.24,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_2_p1",
+            "doc_2_p2",
+            "doc_2_p3",
+            "doc_13_p1",
+            "doc_13_p3"
+          ],
+          "top_sections": [
+            "doc_2",
+            "doc_13"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 34.88,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved": {
+          "top": [
+            "doc_2_p1",
+            "doc_2_p2",
+            "doc_2_p3",
+            "doc_13_p1",
+            "doc_13_p3"
+          ],
+          "top_sections": [
+            "doc_2",
+            "doc_13"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 34.88,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved_graph": {
+          "top": [
+            "doc_2_p1",
+            "doc_2_p2",
+            "doc_2_p3",
+            "doc_13_p1",
+            "doc_13_p3"
+          ],
+          "top_sections": [
+            "doc_2",
+            "doc_13"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 32.5,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 1.0
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_2_p1",
+          "section_id": "doc_2",
+          "score": 0.9712256193161011
+        },
+        {
+          "id": "doc_2_p2",
+          "section_id": "doc_2",
+          "score": 0.9589592218399048
+        },
+        {
+          "id": "doc_2_p3",
+          "section_id": "doc_2",
+          "score": 0.9577348232269287
+        },
+        {
+          "id": "doc_13_p1",
+          "section_id": "doc_13",
+          "score": 0.9307337403297424
+        },
+        {
+          "id": "doc_13_p3",
+          "section_id": "doc_13",
+          "score": 0.9250050187110901
+        }
+      ],
+      "graph_paths": {
+        "doc_2_p1": "[hop1][ABOUT_TOPIC] จาก สาเหตุ (หัดเยอรมัน) (คำถามถามเรื่องสาเหตุของหัดเยอรมัน)",
+        "doc_2_p2": "[hop1][ABOUT_TOPIC] จาก สาเหตุ (หัดเยอรมัน) (คำถามถามเรื่องสาเหตุของหัดเยอรมัน)",
+        "doc_2_p3": "[hop1][ABOUT_TOPIC] จาก สาเหตุ (หัดเยอรมัน) (คำถามถามเรื่องสาเหตุของหัดเยอรมัน)",
+        "doc_13_p1": "[hop1][ABOUT_TOPIC] จาก การป้องกัน (หัดเยอรมัน) (คำถามถามเรื่องการป้องกันของหัดเยอรมัน)",
+        "doc_13_p3": "[hop1][ABOUT_TOPIC] จาก การป้องกัน (หัดเยอรมัน) (คำถามถามเรื่องการป้องกันของหัดเยอรมัน)"
+      }
+    },
+    {
+      "id": "Q3",
+      "question": "ทำไมโรคหัดเยอรมันจึงมีอันตรายกับหญิงตั้งครรภ์?",
+      "gold": [
+        "doc_6",
+        "doc_3",
+        "doc_1"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_6",
+            "doc_1",
+            "doc_2",
+            "doc_11",
+            "doc_13"
+          ],
+          "top_sections": [
+            "doc_6",
+            "doc_1",
+            "doc_2",
+            "doc_11",
+            "doc_13"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 1.79,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_6_p1",
+            "doc_6_p2",
+            "doc_6_p3",
+            "doc_9_p2",
+            "doc_13_p2"
+          ],
+          "top_sections": [
+            "doc_6",
+            "doc_9",
+            "doc_13"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 1.38,
+          "hit": 1.0,
+          "recall": 0.3333333333333333,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_6_p2",
+            "doc_6_p1",
+            "doc_1_p1",
+            "doc_6_p3",
+            "doc_13_p2"
+          ],
+          "top_sections": [
+            "doc_6",
+            "doc_1",
+            "doc_13"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 30.84,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved": {
+          "top": [
+            "doc_6_p2",
+            "doc_6_p1",
+            "doc_1_p1",
+            "doc_6_p3",
+            "doc_13_p2"
+          ],
+          "top_sections": [
+            "doc_6",
+            "doc_1",
+            "doc_13"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 30.84,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved_graph": {
+          "top": [
+            "doc_6_p2",
+            "doc_6_p1",
+            "doc_1_p1",
+            "doc_6_p3",
+            "doc_13_p2"
+          ],
+          "top_sections": [
+            "doc_6",
+            "doc_1",
+            "doc_13"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 28.22,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.8
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_6_p2",
+          "section_id": "doc_6",
+          "score": 0.977683424949646
+        },
+        {
+          "id": "doc_6_p1",
+          "section_id": "doc_6",
+          "score": 0.9743743538856506
+        },
+        {
+          "id": "doc_1_p1",
+          "section_id": "doc_1",
+          "score": 0.9600806832313538
+        },
+        {
+          "id": "doc_6_p3",
+          "section_id": "doc_6",
+          "score": 0.9559449553489685
+        },
+        {
+          "id": "doc_13_p2",
+          "section_id": "doc_13",
+          "score": 0.8906766176223755
+        }
+      ],
+      "graph_paths": {
+        "doc_6_p2": "[hop1][ABOUT_TOPIC] จาก ภาวะแทรกซ้อน (หัดเยอรมัน) (คำถามถามเรื่องภาวะแทรกซ้อนของหัดเยอรมัน)",
+        "doc_6_p1": "[hop1][ABOUT_TOPIC] จาก ภาวะแทรกซ้อน (หัดเยอรมัน) (คำถามถามเรื่องภาวะแทรกซ้อนของหัดเยอรมัน)",
+        "doc_1_p1": "[hop1][MENTIONS] จาก การตั้งครรภ์ (คำถามเอ่ยถึงการตั้งครรภ์)",
+        "doc_6_p3": "[hop1][ABOUT_TOPIC] จาก ภาวะแทรกซ้อน (หัดเยอรมัน) (คำถามถามเรื่องภาวะแทรกซ้อนของหัดเยอรมัน)",
+        "doc_13_p2": "[hop1][MENTIONS] จาก การตั้งครรภ์ (คำถามเอ่ยถึงการตั้งครรภ์)"
+      }
+    },
+    {
+      "id": "Q4",
+      "question": "ถ้าคนที่ฉีดวัคซีนป้องกันโรคหัดเยอรมันแล้ว จะมีโอกาสติดเชื้อหรือไม่?",
+      "gold": [
+        "doc_13"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_13",
+            "doc_2",
+            "doc_11",
+            "doc_1",
+            "doc_3"
+          ],
+          "top_sections": [
+            "doc_13",
+            "doc_2",
+            "doc_11",
+            "doc_1",
+            "doc_3"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.77,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.2
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_13_p2",
+            "doc_13_p1",
+            "doc_13_p3",
+            "doc_10_p3",
+            "doc_9_p3"
+          ],
+          "top_sections": [
+            "doc_13",
+            "doc_10",
+            "doc_9"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.25,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_10_p3",
+            "doc_13_p2",
+            "doc_13_p1",
+            "doc_13_p3",
+            "doc_11_p1"
+          ],
+          "top_sections": [
+            "doc_10",
+            "doc_13",
+            "doc_11"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 27.38,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 0.5,
+          "precision": 0.6
+        },
+        "improved": {
+          "top": [
+            "doc_10_p3",
+            "doc_13_p2",
+            "doc_13_p1",
+            "doc_13_p3",
+            "doc_11_p1"
+          ],
+          "top_sections": [
+            "doc_10",
+            "doc_13",
+            "doc_11"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 27.38,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 0.5,
+          "precision": 0.6
+        },
+        "improved_graph": {
+          "top": [
+            "doc_10_p3",
+            "doc_13_p2",
+            "doc_13_p1",
+            "doc_13_p3",
+            "doc_11_p1"
+          ],
+          "top_sections": [
+            "doc_10",
+            "doc_13",
+            "doc_11"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 24.32,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 0.5,
+          "precision": 0.6
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_10_p3",
+          "section_id": "doc_10",
+          "score": 0.9800488948822021
+        },
+        {
+          "id": "doc_13_p2",
+          "section_id": "doc_13",
+          "score": 0.9766512513160706
+        },
+        {
+          "id": "doc_13_p1",
+          "section_id": "doc_13",
+          "score": 0.4615509808063507
+        },
+        {
+          "id": "doc_13_p3",
+          "section_id": "doc_13",
+          "score": 0.3433903157711029
+        },
+        {
+          "id": "doc_11_p1",
+          "section_id": "doc_11",
+          "score": 0.21234960854053497
+        }
+      ],
+      "graph_paths": {
+        "doc_10_p3": "[hop1][MENTIONS] จาก วัคซีน (คำถามเอ่ยถึงวัคซีน)",
+        "doc_13_p2": "[hop1][ABOUT_TOPIC] จาก การป้องกัน (หัดเยอรมัน) (คำถามถามเรื่องการป้องกันของหัดเยอรมัน)",
+        "doc_13_p1": "[hop1][ABOUT_TOPIC] จาก การป้องกัน (หัดเยอรมัน) (คำถามถามเรื่องการป้องกันของหัดเยอรมัน)",
+        "doc_13_p3": "[hop1][ABOUT_TOPIC] จาก การป้องกัน (หัดเยอรมัน) (คำถามถามเรื่องการป้องกันของหัดเยอรมัน)",
+        "doc_11_p1": "[hop1][MENTIONS] จาก วัคซีน (คำถามเอ่ยถึงวัคซีน)"
+      }
+    },
+    {
+      "id": "Q5",
+      "question": "โรคหัดเยอรมันมีผลกระทบอย่างไรต่อระบบสาธารณสุขและเศรษฐกิจของประเทศ?",
+      "gold": [],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_1",
+            "doc_2",
+            "doc_6",
+            "doc_3",
+            "doc_5"
+          ],
+          "top_sections": [
+            "doc_1",
+            "doc_2",
+            "doc_6",
+            "doc_3",
+            "doc_5"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.28
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_2_p3",
+            "doc_16",
+            "doc_1_p1",
+            "doc_9_p2",
+            "doc_1_p2"
+          ],
+          "top_sections": [
+            "doc_2",
+            "doc_16",
+            "doc_1",
+            "doc_9"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.22
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_1_p1",
+            "doc_2_p3",
+            "doc_5_p1",
+            "doc_10_p2",
+            "doc_6_p3"
+          ],
+          "top_sections": [
+            "doc_1",
+            "doc_2",
+            "doc_5",
+            "doc_10",
+            "doc_6"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 25.83
+        },
+        "improved": {
+          "top": [
+            "doc_1_p1"
+          ],
+          "top_sections": [
+            "doc_1"
+          ],
+          "kept": 1,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 25.83
+        },
+        "improved_graph": {
+          "top": [
+            "doc_1_p1"
+          ],
+          "top_sections": [
+            "doc_1"
+          ],
+          "kept": 1,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 1,
+          "context_coverage": 1.0,
+          "seconds": 25.59
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_1_p1",
+          "section_id": "doc_1",
+          "score": 0.16647933423519135
+        },
+        {
+          "id": "doc_2_p3",
+          "section_id": "doc_2",
+          "score": 0.0735303983092308
+        },
+        {
+          "id": "doc_5_p1",
+          "section_id": "doc_5",
+          "score": 0.05199882760643959
+        },
+        {
+          "id": "doc_3_p3",
+          "section_id": "doc_3",
+          "score": 0.051587387919425964
+        },
+        {
+          "id": "doc_6_p1",
+          "section_id": "doc_6",
+          "score": 0.04774593189358711
+        }
+      ],
+      "graph_paths": {
+        "doc_1_p1": "[hop2][HAS_TOPIC → ABOUT_TOPIC] จาก หัดเยอรมัน (คำถามเอ่ยถึงหัดเยอรมัน)",
+        "doc_2_p3": "[hop2][HAS_TOPIC → ABOUT_TOPIC] จาก หัดเยอรมัน (คำถามเอ่ยถึงหัดเยอรมัน)",
+        "doc_5_p1": "[hop1][ABOUT_TOPIC] จาก ภาวะแทรกซ้อน (หัดเยอรมัน) (คำถามถามเรื่องภาวะแทรกซ้อนของหัดเยอรมัน)",
+        "doc_3_p3": "[hop2][HAS_TOPIC → ABOUT_TOPIC] จาก หัดเยอรมัน (คำถามเอ่ยถึงหัดเยอรมัน)",
+        "doc_6_p1": "[hop1][ABOUT_TOPIC] จาก ภาวะแทรกซ้อน (หัดเยอรมัน) (คำถามถามเรื่องภาวะแทรกซ้อนของหัดเยอรมัน)"
+      }
+    },
+    {
+      "id": "Q6",
+      "question": "ผมจะรู้ได้อย่างไรว่าผมเป็นโรคหัดแบบไหน",
+      "gold": [
+        "doc_7",
+        "doc_8",
+        "doc_6"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_3",
+            "doc_1",
+            "doc_6",
+            "doc_2",
+            "doc_8"
+          ],
+          "top_sections": [
+            "doc_3",
+            "doc_1",
+            "doc_6",
+            "doc_2",
+            "doc_8"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.26,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 0.3333333333333333,
+          "precision": 0.4
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_8_p1",
+            "doc_3_p3",
+            "doc_1_p1",
+            "doc_8_p2",
+            "doc_14"
+          ],
+          "top_sections": [
+            "doc_8",
+            "doc_3",
+            "doc_1",
+            "doc_14"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.21,
+          "hit": 1.0,
+          "recall": 0.3333333333333333,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_6_p3",
+            "doc_8_p1",
+            "doc_3_p2",
+            "doc_3_p3",
+            "doc_9_p2"
+          ],
+          "top_sections": [
+            "doc_6",
+            "doc_8",
+            "doc_3",
+            "doc_9"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 28.51,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved": {
+          "top": [
+            "doc_6_p3",
+            "doc_8_p1",
+            "doc_3_p2"
+          ],
+          "top_sections": [
+            "doc_6",
+            "doc_8",
+            "doc_3"
+          ],
+          "kept": 3,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 28.51,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.6666666666666666
+        },
+        "improved_graph": {
+          "top": [
+            "doc_6_p3",
+            "doc_8_p1",
+            "doc_3_p2"
+          ],
+          "top_sections": [
+            "doc_6",
+            "doc_8",
+            "doc_3"
+          ],
+          "kept": 3,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 2,
+          "context_coverage": 1.0,
+          "seconds": 28.12,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.6666666666666666
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_6_p3",
+          "section_id": "doc_6",
+          "score": 0.20540210604667664
+        },
+        {
+          "id": "doc_8_p1",
+          "section_id": "doc_8",
+          "score": 0.1909773200750351
+        },
+        {
+          "id": "doc_3_p2",
+          "section_id": "doc_3",
+          "score": 0.12887293100357056
+        },
+        {
+          "id": "doc_3_p3",
+          "section_id": "doc_3",
+          "score": 0.08232290297746658
+        },
+        {
+          "id": "doc_3_p4",
+          "section_id": "doc_3",
+          "score": 0.06549277156591415
+        }
+      ],
+      "graph_paths": {
+        "doc_8_p1": "[hop1][MENTIONS] จาก โรคหัด (คำถามเอ่ยถึงโรคหัด)",
+        "doc_3_p2": "[hop1][MENTIONS] จาก โรคหัด (คำถามเอ่ยถึงโรคหัด)",
+        "doc_3_p3": "[hop1][MENTIONS] จาก โรคหัด (คำถามเอ่ยถึงโรคหัด)",
+        "doc_3_p4": "[hop1][MENTIONS] จาก โรคหัด (คำถามเอ่ยถึงโรคหัด)"
+      }
+    },
+    {
+      "id": "Q7",
+      "question": "โรคต้อกระจก หรือโรคอะไรที่เกี่ยวข้องกันบ้าง",
+      "gold": [
+        "doc_28",
+        "doc_29",
+        "doc_38"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_28",
+            "doc_39",
+            "doc_38",
+            "doc_27",
+            "doc_29"
+          ],
+          "top_sections": [
+            "doc_28",
+            "doc_39",
+            "doc_38",
+            "doc_27",
+            "doc_29"
+          ],
+          "kept": 5,
+          "sparse_count": 2,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.4,
+          "seconds": 0.41,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_38",
+            "doc_29_p2",
+            "doc_29_p3",
+            "doc_31",
+            "doc_32"
+          ],
+          "top_sections": [
+            "doc_38",
+            "doc_29",
+            "doc_31",
+            "doc_32"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.23,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_38",
+            "doc_29_p2",
+            "doc_40",
+            "doc_28_p1",
+            "doc_39"
+          ],
+          "top_sections": [
+            "doc_38",
+            "doc_29",
+            "doc_40",
+            "doc_28",
+            "doc_39"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 23.95,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved": {
+          "top": [
+            "doc_38",
+            "doc_29_p2",
+            "doc_40",
+            "doc_28_p1",
+            "doc_39"
+          ],
+          "top_sections": [
+            "doc_38",
+            "doc_29",
+            "doc_40",
+            "doc_28",
+            "doc_39"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 23.95,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_graph": {
+          "top": [
+            "doc_38",
+            "doc_29_p2",
+            "doc_40",
+            "doc_28_p1",
+            "doc_39"
+          ],
+          "top_sections": [
+            "doc_38",
+            "doc_29",
+            "doc_40",
+            "doc_28",
+            "doc_39"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 2,
+          "context_coverage": 1.0,
+          "seconds": 24.15,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_38",
+          "section_id": "doc_38",
+          "score": 0.9559826254844666
+        },
+        {
+          "id": "doc_29_p2",
+          "section_id": "doc_29",
+          "score": 0.40132877230644226
+        },
+        {
+          "id": "doc_40",
+          "section_id": "doc_40",
+          "score": 0.39794307947158813
+        },
+        {
+          "id": "doc_28_p1",
+          "section_id": "doc_28",
+          "score": 0.338513046503067
+        },
+        {
+          "id": "doc_39",
+          "section_id": "doc_39",
+          "score": 0.31071946024894714
+        }
+      ],
+      "graph_paths": {
+        "doc_38": "[hop1][ABOUT_TOPIC] จาก เรื่องที่เกี่ยวข้อง (ต้อกระจก) (คำถามถามเรื่องเรื่องที่เกี่ยวข้องของต้อกระจก)",
+        "doc_28_p1": "[hop2][HAS_TOPIC → ABOUT_TOPIC] จาก ต้อกระจก (คำถามเอ่ยถึงต้อกระจก)"
+      }
+    },
+    {
+      "id": "Q8",
+      "question": "อหิวาตกโรคเกิดจากเชื้ออะไร และติดต่อได้อย่างไร",
+      "gold": [
+        "doc_19",
+        "doc_18"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_19",
+            "doc_18",
+            "doc_25",
+            "doc_24",
+            "doc_17"
+          ],
+          "top_sections": [
+            "doc_19",
+            "doc_18",
+            "doc_25",
+            "doc_24",
+            "doc_17"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.32,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_19_p3",
+            "doc_19_p5",
+            "doc_19_p4",
+            "doc_19_p8",
+            "doc_19_p1"
+          ],
+          "top_sections": [
+            "doc_19"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.25,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_19_p3",
+            "doc_19_p5",
+            "doc_19_p4",
+            "doc_19_p1",
+            "doc_19_p2"
+          ],
+          "top_sections": [
+            "doc_19"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 33.39,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved": {
+          "top": [
+            "doc_19_p3",
+            "doc_19_p5",
+            "doc_19_p4",
+            "doc_19_p1",
+            "doc_19_p2"
+          ],
+          "top_sections": [
+            "doc_19"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 33.39,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved_graph": {
+          "top": [
+            "doc_19_p3",
+            "doc_19_p5",
+            "doc_19_p4",
+            "doc_19_p1",
+            "doc_19_p2"
+          ],
+          "top_sections": [
+            "doc_19"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 27.96,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 1.0
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_19_p3",
+          "section_id": "doc_19",
+          "score": 0.9928033947944641
+        },
+        {
+          "id": "doc_19_p5",
+          "section_id": "doc_19",
+          "score": 0.9881182312965393
+        },
+        {
+          "id": "doc_19_p4",
+          "section_id": "doc_19",
+          "score": 0.9855682253837585
+        },
+        {
+          "id": "doc_19_p1",
+          "section_id": "doc_19",
+          "score": 0.9844692349433899
+        },
+        {
+          "id": "doc_19_p2",
+          "section_id": "doc_19",
+          "score": 0.9819471836090088
+        }
+      ],
+      "graph_paths": {
+        "doc_19_p3": "[hop1][ABOUT_TOPIC] จาก สาเหตุ (อหิวาตกโรค) (คำถามถามเรื่องสาเหตุของอหิวาตกโรค)",
+        "doc_19_p5": "[hop1][ABOUT_TOPIC] จาก สาเหตุ (อหิวาตกโรค) (คำถามถามเรื่องสาเหตุของอหิวาตกโรค)",
+        "doc_19_p4": "[hop1][ABOUT_TOPIC] จาก สาเหตุ (อหิวาตกโรค) (คำถามถามเรื่องสาเหตุของอหิวาตกโรค)",
+        "doc_19_p1": "[hop1][ABOUT_TOPIC] จาก สาเหตุ (อหิวาตกโรค) (คำถามถามเรื่องสาเหตุของอหิวาตกโรค)",
+        "doc_19_p2": "[hop1][ABOUT_TOPIC] จาก สาเหตุ (อหิวาตกโรค) (คำถามถามเรื่องสาเหตุของอหิวาตกโรค)"
+      }
+    },
+    {
+      "id": "Q9",
+      "question": "วิธีรักษาโรคกรดไหลย้อนมีอะไรบ้าง",
+      "gold": [
+        "doc_48"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_48",
+            "doc_49",
+            "doc_41",
+            "doc_46",
+            "doc_47"
+          ],
+          "top_sections": [
+            "doc_48",
+            "doc_49",
+            "doc_41",
+            "doc_46",
+            "doc_47"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.37,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.2
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_48_p10",
+            "doc_48_p8",
+            "doc_49",
+            "doc_48_p11",
+            "doc_48_p1"
+          ],
+          "top_sections": [
+            "doc_48",
+            "doc_49"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.2,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_48_p10",
+            "doc_48_p4",
+            "doc_48_p7",
+            "doc_48_p5",
+            "doc_48_p1"
+          ],
+          "top_sections": [
+            "doc_48"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 27.62,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved": {
+          "top": [
+            "doc_48_p10",
+            "doc_48_p4",
+            "doc_48_p7",
+            "doc_48_p5",
+            "doc_48_p1"
+          ],
+          "top_sections": [
+            "doc_48"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 27.62,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved_graph": {
+          "top": [
+            "doc_48_p10",
+            "doc_48_p4",
+            "doc_48_p7",
+            "doc_48_p5",
+            "doc_48_p1"
+          ],
+          "top_sections": [
+            "doc_48"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 25.68,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 1.0
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_48_p10",
+          "section_id": "doc_48",
+          "score": 0.9986856579780579
+        },
+        {
+          "id": "doc_48_p4",
+          "section_id": "doc_48",
+          "score": 0.9985194802284241
+        },
+        {
+          "id": "doc_48_p7",
+          "section_id": "doc_48",
+          "score": 0.9984972476959229
+        },
+        {
+          "id": "doc_48_p5",
+          "section_id": "doc_48",
+          "score": 0.9984550476074219
+        },
+        {
+          "id": "doc_48_p1",
+          "section_id": "doc_48",
+          "score": 0.9983060359954834
+        }
+      ],
+      "graph_paths": {
+        "doc_48_p10": "[hop1][ABOUT_TOPIC] จาก การรักษา (กรดไหลย้อน) (คำถามถามเรื่องการรักษาของกรดไหลย้อน)",
+        "doc_48_p4": "[hop1][ABOUT_TOPIC] จาก การรักษา (กรดไหลย้อน) (คำถามถามเรื่องการรักษาของกรดไหลย้อน)",
+        "doc_48_p7": "[hop1][ABOUT_TOPIC] จาก การรักษา (กรดไหลย้อน) (คำถามถามเรื่องการรักษาของกรดไหลย้อน)",
+        "doc_48_p5": "[hop1][ABOUT_TOPIC] จาก การรักษา (กรดไหลย้อน) (คำถามถามเรื่องการรักษาของกรดไหลย้อน)",
+        "doc_48_p1": "[hop1][ABOUT_TOPIC] จาก การรักษา (กรดไหลย้อน) (คำถามถามเรื่องการรักษาของกรดไหลย้อน)"
+      }
+    },
+    {
+      "id": "Q10",
+      "question": "การผ่าตัดต้อกระจกมีขั้นตอนอย่างไร",
+      "gold": [
+        "doc_35",
+        "doc_34",
+        "doc_33"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_35",
+            "doc_33",
+            "doc_34",
+            "doc_36",
+            "doc_27"
+          ],
+          "top_sections": [
+            "doc_35",
+            "doc_33",
+            "doc_34",
+            "doc_36",
+            "doc_27"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.21,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_35_p1",
+            "doc_35_p5",
+            "doc_35_p3",
+            "doc_35_p4",
+            "doc_34_p2"
+          ],
+          "top_sections": [
+            "doc_35",
+            "doc_34"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.17,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_35_p1",
+            "doc_35_p3",
+            "doc_35_p2",
+            "doc_34_p2",
+            "doc_35_p6"
+          ],
+          "top_sections": [
+            "doc_35",
+            "doc_34"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 23.73,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved": {
+          "top": [
+            "doc_35_p1",
+            "doc_35_p3",
+            "doc_35_p2",
+            "doc_34_p2",
+            "doc_35_p6"
+          ],
+          "top_sections": [
+            "doc_35",
+            "doc_34"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 23.73,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved_graph": {
+          "top": [
+            "doc_35_p1",
+            "doc_35_p3",
+            "doc_35_p2",
+            "doc_34_p2",
+            "doc_35_p6"
+          ],
+          "top_sections": [
+            "doc_35",
+            "doc_34"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 23.39,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 1.0,
+          "precision": 1.0
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_35_p1",
+          "section_id": "doc_35",
+          "score": 0.9875109195709229
+        },
+        {
+          "id": "doc_35_p3",
+          "section_id": "doc_35",
+          "score": 0.9800981283187866
+        },
+        {
+          "id": "doc_35_p2",
+          "section_id": "doc_35",
+          "score": 0.9770146608352661
+        },
+        {
+          "id": "doc_34_p2",
+          "section_id": "doc_34",
+          "score": 0.9385285973548889
+        },
+        {
+          "id": "doc_35_p6",
+          "section_id": "doc_35",
+          "score": 0.9366453289985657
+        }
+      ],
+      "graph_paths": {
+        "doc_35_p1": "[hop1][ABOUT_TOPIC] จาก การรักษา (ต้อกระจก) (คำถามถามเรื่องการรักษาของต้อกระจก)",
+        "doc_35_p3": "[hop1][ABOUT_TOPIC] จาก การรักษา (ต้อกระจก) (คำถามถามเรื่องการรักษาของต้อกระจก)",
+        "doc_35_p2": "[hop1][ABOUT_TOPIC] จาก การรักษา (ต้อกระจก) (คำถามถามเรื่องการรักษาของต้อกระจก)",
+        "doc_34_p2": "[hop1][ABOUT_TOPIC] จาก การรักษา (ต้อกระจก) (คำถามถามเรื่องการรักษาของต้อกระจก)",
+        "doc_35_p6": "[hop1][ABOUT_TOPIC] จาก การรักษา (ต้อกระจก) (คำถามถามเรื่องการรักษาของต้อกระจก)"
+      }
+    },
+    {
+      "id": "Q11",
+      "question": "ป้องกันอหิวาตกโรคได้อย่างไร",
+      "gold": [
+        "doc_25"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_25",
+            "doc_24",
+            "doc_23",
+            "doc_18",
+            "doc_19"
+          ],
+          "top_sections": [
+            "doc_25",
+            "doc_24",
+            "doc_23",
+            "doc_18",
+            "doc_19"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.21,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.2
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_25_p1",
+            "doc_25_p4",
+            "doc_25_p2",
+            "doc_25_p3",
+            "doc_23_p1"
+          ],
+          "top_sections": [
+            "doc_25",
+            "doc_23"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.2,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_25_p1",
+            "doc_25_p3",
+            "doc_25_p2",
+            "doc_25_p4",
+            "doc_24_p1"
+          ],
+          "top_sections": [
+            "doc_25",
+            "doc_24"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 27.09,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved": {
+          "top": [
+            "doc_25_p1",
+            "doc_25_p3",
+            "doc_25_p2",
+            "doc_25_p4",
+            "doc_24_p1"
+          ],
+          "top_sections": [
+            "doc_25",
+            "doc_24"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 27.09,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved_graph": {
+          "top": [
+            "doc_25_p1",
+            "doc_25_p3",
+            "doc_25_p2",
+            "doc_25_p4",
+            "doc_24_p1"
+          ],
+          "top_sections": [
+            "doc_25",
+            "doc_24"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 25.32,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.8
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_25_p1",
+          "section_id": "doc_25",
+          "score": 0.9957681894302368
+        },
+        {
+          "id": "doc_25_p3",
+          "section_id": "doc_25",
+          "score": 0.9905936121940613
+        },
+        {
+          "id": "doc_25_p2",
+          "section_id": "doc_25",
+          "score": 0.9892491102218628
+        },
+        {
+          "id": "doc_25_p4",
+          "section_id": "doc_25",
+          "score": 0.9794607162475586
+        },
+        {
+          "id": "doc_24_p1",
+          "section_id": "doc_24",
+          "score": 0.7812091112136841
+        }
+      ],
+      "graph_paths": {
+        "doc_25_p1": "[hop1][ABOUT_TOPIC] จาก การป้องกัน (อหิวาตกโรค) (คำถามถามเรื่องการป้องกันของอหิวาตกโรค)",
+        "doc_25_p3": "[hop1][ABOUT_TOPIC] จาก การป้องกัน (อหิวาตกโรค) (คำถามถามเรื่องการป้องกันของอหิวาตกโรค)",
+        "doc_25_p2": "[hop1][ABOUT_TOPIC] จาก การป้องกัน (อหิวาตกโรค) (คำถามถามเรื่องการป้องกันของอหิวาตกโรค)",
+        "doc_25_p4": "[hop1][ABOUT_TOPIC] จาก การป้องกัน (อหิวาตกโรค) (คำถามถามเรื่องการป้องกันของอหิวาตกโรค)",
+        "doc_24_p1": "[hop2][HAS_TOPIC → ABOUT_TOPIC] จาก อหิวาตกโรค (คำถามเอ่ยถึงอหิวาตกโรค)"
+      }
+    },
+    {
+      "id": "Q12",
+      "question": "อะไรทำให้โรคกรดไหลย้อนกำเริบ",
+      "gold": [
+        "doc_44",
+        "doc_43"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_44",
+            "doc_42",
+            "doc_46",
+            "doc_43",
+            "doc_45"
+          ],
+          "top_sections": [
+            "doc_44",
+            "doc_42",
+            "doc_46",
+            "doc_43",
+            "doc_45"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.28,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_44_p1",
+            "doc_44_p3",
+            "doc_44_p2",
+            "doc_44_p4",
+            "doc_42"
+          ],
+          "top_sections": [
+            "doc_44",
+            "doc_42"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.17,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_44_p3",
+            "doc_44_p2",
+            "doc_44_p1",
+            "doc_44_p4",
+            "doc_46_p3"
+          ],
+          "top_sections": [
+            "doc_44",
+            "doc_46"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 29.37,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved": {
+          "top": [
+            "doc_44_p3",
+            "doc_44_p2",
+            "doc_44_p1",
+            "doc_44_p4",
+            "doc_46_p3"
+          ],
+          "top_sections": [
+            "doc_44",
+            "doc_46"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 29.37,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved_graph": {
+          "top": [
+            "doc_44_p3",
+            "doc_44_p2",
+            "doc_44_p1",
+            "doc_44_p4",
+            "doc_46_p3"
+          ],
+          "top_sections": [
+            "doc_44",
+            "doc_46"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 29.78,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 0.8
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_44_p3",
+          "section_id": "doc_44",
+          "score": 0.9985344409942627
+        },
+        {
+          "id": "doc_44_p2",
+          "section_id": "doc_44",
+          "score": 0.9975391626358032
+        },
+        {
+          "id": "doc_44_p1",
+          "section_id": "doc_44",
+          "score": 0.9970368146896362
+        },
+        {
+          "id": "doc_44_p4",
+          "section_id": "doc_44",
+          "score": 0.9871117472648621
+        },
+        {
+          "id": "doc_46_p3",
+          "section_id": "doc_46",
+          "score": 0.9247329831123352
+        }
+      ],
+      "graph_paths": {
+        "doc_44_p3": "[hop1][ABOUT_TOPIC] จาก ปัจจัยเสี่ยง (กรดไหลย้อน) (คำถามถามเรื่องปัจจัยเสี่ยงของกรดไหลย้อน)",
+        "doc_44_p2": "[hop1][ABOUT_TOPIC] จาก ปัจจัยเสี่ยง (กรดไหลย้อน) (คำถามถามเรื่องปัจจัยเสี่ยงของกรดไหลย้อน)",
+        "doc_44_p1": "[hop1][ABOUT_TOPIC] จาก ปัจจัยเสี่ยง (กรดไหลย้อน) (คำถามถามเรื่องปัจจัยเสี่ยงของกรดไหลย้อน)",
+        "doc_44_p4": "[hop1][ABOUT_TOPIC] จาก ปัจจัยเสี่ยง (กรดไหลย้อน) (คำถามถามเรื่องปัจจัยเสี่ยงของกรดไหลย้อน)",
+        "doc_46_p3": "[hop2][MENTIONS → MENTIONS] จาก สาเหตุของโรคกรดไหลย้อน (vector search เจอเป็นอันดับต้น)"
+      }
+    },
+    {
+      "id": "Q13",
+      "question": "อหิวาตกโรคมีภาวะแทรกซ้อนอะไรบ้าง",
+      "gold": [
+        "doc_21"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_21",
+            "doc_20",
+            "doc_24",
+            "doc_18",
+            "doc_19"
+          ],
+          "top_sections": [
+            "doc_21",
+            "doc_20",
+            "doc_24",
+            "doc_18",
+            "doc_19"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.38,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.2
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_21_p1",
+            "doc_21_p2",
+            "doc_21_p3",
+            "doc_18_p1",
+            "doc_23_p1"
+          ],
+          "top_sections": [
+            "doc_21",
+            "doc_18",
+            "doc_23"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.17,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_21_p1",
+            "doc_21_p2",
+            "doc_21_p3",
+            "doc_22",
+            "doc_18_p1"
+          ],
+          "top_sections": [
+            "doc_21",
+            "doc_22",
+            "doc_18"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 27.83,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved": {
+          "top": [
+            "doc_21_p1",
+            "doc_21_p2",
+            "doc_21_p3",
+            "doc_22",
+            "doc_18_p1"
+          ],
+          "top_sections": [
+            "doc_21",
+            "doc_22",
+            "doc_18"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 27.83,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_graph": {
+          "top": [
+            "doc_21_p1",
+            "doc_21_p2",
+            "doc_21_p3",
+            "doc_22",
+            "doc_18_p1"
+          ],
+          "top_sections": [
+            "doc_21",
+            "doc_22",
+            "doc_18"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 4,
+          "context_coverage": 1.0,
+          "seconds": 27.66,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_21_p1",
+          "section_id": "doc_21",
+          "score": 0.999404788017273
+        },
+        {
+          "id": "doc_21_p2",
+          "section_id": "doc_21",
+          "score": 0.9986335635185242
+        },
+        {
+          "id": "doc_21_p3",
+          "section_id": "doc_21",
+          "score": 0.9980341792106628
+        },
+        {
+          "id": "doc_22",
+          "section_id": "doc_22",
+          "score": 0.42254361510276794
+        },
+        {
+          "id": "doc_18_p1",
+          "section_id": "doc_18",
+          "score": 0.28003212809562683
+        }
+      ],
+      "graph_paths": {
+        "doc_21_p1": "[hop1][ABOUT_TOPIC] จาก ภาวะแทรกซ้อน (อหิวาตกโรค) (คำถามถามเรื่องภาวะแทรกซ้อนของอหิวาตกโรค)",
+        "doc_21_p2": "[hop1][ABOUT_TOPIC] จาก ภาวะแทรกซ้อน (อหิวาตกโรค) (คำถามถามเรื่องภาวะแทรกซ้อนของอหิวาตกโรค)",
+        "doc_21_p3": "[hop1][ABOUT_TOPIC] จาก ภาวะแทรกซ้อน (อหิวาตกโรค) (คำถามถามเรื่องภาวะแทรกซ้อนของอหิวาตกโรค)",
+        "doc_22": "[hop2][HAS_TOPIC → ABOUT_TOPIC] จาก อหิวาตกโรค (คำถามเอ่ยถึงอหิวาตกโรค)"
+      }
+    },
+    {
+      "id": "Q14",
+      "question": "วัคซีน MMR ควรฉีดตอนอายุเท่าไร",
+      "gold": [
+        "doc_13"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_13",
+            "doc_11",
+            "doc_1",
+            "doc_6",
+            "doc_9"
+          ],
+          "top_sections": [
+            "doc_13",
+            "doc_11",
+            "doc_1",
+            "doc_6",
+            "doc_9"
+          ],
+          "kept": 5,
+          "sparse_count": 1,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.2,
+          "seconds": 0.35,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.2
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_13_p1",
+            "doc_13_p2",
+            "doc_11_p1",
+            "doc_25_p4",
+            "doc_10_p3"
+          ],
+          "top_sections": [
+            "doc_13",
+            "doc_11",
+            "doc_25",
+            "doc_10"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.21,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_13_p1",
+            "doc_25_p4",
+            "doc_13_p2",
+            "doc_10_p3",
+            "doc_11_p1"
+          ],
+          "top_sections": [
+            "doc_13",
+            "doc_25",
+            "doc_10",
+            "doc_11"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 24.26,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved": {
+          "top": [
+            "doc_13_p1"
+          ],
+          "top_sections": [
+            "doc_13"
+          ],
+          "kept": 1,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 24.26,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved_graph": {
+          "top": [
+            "doc_13_p1"
+          ],
+          "top_sections": [
+            "doc_13"
+          ],
+          "kept": 1,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 1,
+          "context_coverage": 1.0,
+          "seconds": 23.28,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 1.0
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_13_p1",
+          "section_id": "doc_13",
+          "score": 0.8804165720939636
+        },
+        {
+          "id": "doc_25_p4",
+          "section_id": "doc_25",
+          "score": 0.011859902180731297
+        },
+        {
+          "id": "doc_13_p2",
+          "section_id": "doc_13",
+          "score": 0.009405816905200481
+        },
+        {
+          "id": "doc_10_p3",
+          "section_id": "doc_10",
+          "score": 0.004018224310129881
+        },
+        {
+          "id": "doc_11_p1",
+          "section_id": "doc_11",
+          "score": 0.0036817435175180435
+        }
+      ],
+      "graph_paths": {
+        "doc_13_p1": "[hop1][MENTIONS] จาก วัคซีน (คำถามเอ่ยถึงวัคซีน)",
+        "doc_25_p4": "[hop1][MENTIONS] จาก วัคซีน (คำถามเอ่ยถึงวัคซีน)",
+        "doc_13_p2": "[hop1][MENTIONS] จาก วัคซีน (คำถามเอ่ยถึงวัคซีน)",
+        "doc_10_p3": "[hop1][MENTIONS] จาก วัคซีน (คำถามเอ่ยถึงวัคซีน)",
+        "doc_11_p1": "[hop1][MENTIONS] จาก วัคซีน (คำถามเอ่ยถึงวัคซีน)"
+      }
+    },
+    {
+      "id": "Q15",
+      "question": "Vibrio cholerae คืออะไร",
+      "gold": [
+        "doc_19",
+        "doc_18"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_19",
+            "doc_18",
+            "doc_2",
+            "doc_1",
+            "doc_6"
+          ],
+          "top_sections": [
+            "doc_19",
+            "doc_18",
+            "doc_2",
+            "doc_1",
+            "doc_6"
+          ],
+          "kept": 5,
+          "sparse_count": 2,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.4,
+          "seconds": 0.24,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_26_p2",
+            "doc_26_p1",
+            "doc_19_p1",
+            "doc_18_p1",
+            "doc_19_p2"
+          ],
+          "top_sections": [
+            "doc_26",
+            "doc_19",
+            "doc_18"
+          ],
+          "kept": 5,
+          "sparse_count": 5,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.18,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 0.5,
+          "precision": 0.6
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_18_p1",
+            "doc_26_p1",
+            "doc_19_p1",
+            "doc_26_p2",
+            "doc_19_p2"
+          ],
+          "top_sections": [
+            "doc_18",
+            "doc_26",
+            "doc_19"
+          ],
+          "kept": 5,
+          "sparse_count": 5,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 26.55,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved": {
+          "top": [
+            "doc_18_p1",
+            "doc_26_p1",
+            "doc_19_p1",
+            "doc_26_p2",
+            "doc_19_p2"
+          ],
+          "top_sections": [
+            "doc_18",
+            "doc_26",
+            "doc_19"
+          ],
+          "kept": 5,
+          "sparse_count": 5,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 26.55,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved_graph": {
+          "top": [
+            "doc_18_p1",
+            "doc_26_p1",
+            "doc_19_p1",
+            "doc_26_p2",
+            "doc_19_p2"
+          ],
+          "top_sections": [
+            "doc_18",
+            "doc_26",
+            "doc_19"
+          ],
+          "kept": 5,
+          "sparse_count": 5,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 26.73,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 1.0,
+          "precision": 0.6
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_18_p1",
+          "section_id": "doc_18",
+          "score": 0.9320839047431946
+        },
+        {
+          "id": "doc_26_p1",
+          "section_id": "doc_26",
+          "score": 0.9122622609138489
+        },
+        {
+          "id": "doc_19_p1",
+          "section_id": "doc_19",
+          "score": 0.8933727741241455
+        },
+        {
+          "id": "doc_26_p2",
+          "section_id": "doc_26",
+          "score": 0.8786851167678833
+        },
+        {
+          "id": "doc_19_p2",
+          "section_id": "doc_19",
+          "score": 0.840708315372467
+        }
+      ],
+      "graph_paths": {
+        "doc_18_p1": "[hop1][ABOUT_TOPIC] จาก ภาพรวม (อหิวาตกโรค) (คำถามถามเรื่องภาพรวมของอหิวาตกโรค)",
+        "doc_26_p1": "[hop2][HAS_TOPIC → ABOUT_TOPIC] จาก อหิวาตกโรค (คำถามเอ่ยถึงอหิวาตกโรค)",
+        "doc_19_p1": "[hop2][HAS_TOPIC → ABOUT_TOPIC] จาก อหิวาตกโรค (คำถามเอ่ยถึงอหิวาตกโรค)",
+        "doc_26_p2": "[hop2][HAS_TOPIC → ABOUT_TOPIC] จาก อหิวาตกโรค (คำถามเอ่ยถึงอหิวาตกโรค)",
+        "doc_19_p2": "[hop2][HAS_TOPIC → ABOUT_TOPIC] จาก อหิวาตกโรค (คำถามเอ่ยถึงอหิวาตกโรค)"
+      }
+    },
+    {
+      "id": "Q16",
+      "question": "ค่าผ่าตัดต้อกระจกราคาเท่าไร",
+      "gold": [],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_33",
+            "doc_35",
+            "doc_36",
+            "doc_27",
+            "doc_34"
+          ],
+          "top_sections": [
+            "doc_33",
+            "doc_35",
+            "doc_36",
+            "doc_27",
+            "doc_34"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.22
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_36",
+            "doc_34_p2",
+            "doc_35_p4",
+            "doc_35_p3",
+            "doc_34_p1"
+          ],
+          "top_sections": [
+            "doc_36",
+            "doc_34",
+            "doc_35"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.18
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_34_p2",
+            "doc_35_p3",
+            "doc_33_p2",
+            "doc_35_p1",
+            "doc_35_p2"
+          ],
+          "top_sections": [
+            "doc_34",
+            "doc_35",
+            "doc_33"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 23.94
+        },
+        "improved": {
+          "top": [],
+          "top_sections": [],
+          "kept": 0,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": null,
+          "seconds": 23.94
+        },
+        "improved_graph": {
+          "top": [],
+          "top_sections": [],
+          "kept": 0,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 0,
+          "context_coverage": null,
+          "seconds": 23.56
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_34_p2",
+          "section_id": "doc_34",
+          "score": 0.01344197615981102
+        },
+        {
+          "id": "doc_35_p3",
+          "section_id": "doc_35",
+          "score": 0.004889009520411491
+        },
+        {
+          "id": "doc_33_p2",
+          "section_id": "doc_33",
+          "score": 0.0029949552845209837
+        },
+        {
+          "id": "doc_35_p1",
+          "section_id": "doc_35",
+          "score": 0.002419427502900362
+        },
+        {
+          "id": "doc_35_p2",
+          "section_id": "doc_35",
+          "score": 0.002185826888307929
+        }
+      ],
+      "graph_paths": {
+        "doc_34_p2": "[hop1][ABOUT_TOPIC] จาก การรักษา (ต้อกระจก) (คำถามถามเรื่องการรักษาของต้อกระจก)",
+        "doc_35_p3": "[hop1][ABOUT_TOPIC] จาก การรักษา (ต้อกระจก) (คำถามถามเรื่องการรักษาของต้อกระจก)",
+        "doc_33_p2": "[hop1][ABOUT_TOPIC] จาก การรักษา (ต้อกระจก) (คำถามถามเรื่องการรักษาของต้อกระจก)",
+        "doc_35_p1": "[hop1][ABOUT_TOPIC] จาก การรักษา (ต้อกระจก) (คำถามถามเรื่องการรักษาของต้อกระจก)",
+        "doc_35_p2": "[hop1][ABOUT_TOPIC] จาก การรักษา (ต้อกระจก) (คำถามถามเรื่องการรักษาของต้อกระจก)"
+      }
+    },
+    {
+      "id": "Q17",
+      "question": "โรคไมเกรนรักษาอย่างไร",
+      "gold": [],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_48",
+            "doc_23",
+            "doc_9",
+            "doc_38",
+            "doc_12"
+          ],
+          "top_sections": [
+            "doc_48",
+            "doc_23",
+            "doc_9",
+            "doc_38",
+            "doc_12"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.34
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_23_p1",
+            "doc_9_p3",
+            "doc_9_p1",
+            "doc_49",
+            "doc_48_p5"
+          ],
+          "top_sections": [
+            "doc_23",
+            "doc_9",
+            "doc_49",
+            "doc_48"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.18
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_23_p2",
+            "doc_23_p3",
+            "doc_23_p4",
+            "doc_9_p1",
+            "doc_23_p1"
+          ],
+          "top_sections": [
+            "doc_23",
+            "doc_9"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 25.24
+        },
+        "improved": {
+          "top": [],
+          "top_sections": [],
+          "kept": 0,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": null,
+          "seconds": 25.24
+        },
+        "improved_graph": {
+          "top": [],
+          "top_sections": [],
+          "kept": 0,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 0,
+          "context_coverage": null,
+          "seconds": 27.59
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_23_p2",
+          "section_id": "doc_23",
+          "score": 0.0518038272857666
+        },
+        {
+          "id": "doc_23_p3",
+          "section_id": "doc_23",
+          "score": 0.04666160047054291
+        },
+        {
+          "id": "doc_23_p4",
+          "section_id": "doc_23",
+          "score": 0.04369337111711502
+        },
+        {
+          "id": "doc_9_p1",
+          "section_id": "doc_9",
+          "score": 0.038592033088207245
+        },
+        {
+          "id": "doc_23_p1",
+          "section_id": "doc_23",
+          "score": 0.02376501075923443
+        }
+      ],
+      "graph_paths": {
+        "doc_23_p2": "[seed] vector search เจอเป็นอันดับต้น",
+        "doc_23_p3": "[seed] vector search เจอเป็นอันดับต้น",
+        "doc_23_p4": "[seed] vector search เจอเป็นอันดับต้น",
+        "doc_9_p1": "[hop2][MENTIONS → MENTIONS] จาก วิธีรักษาอหิวาตกโรค (vector search เจอเป็นอันดับต้น)",
+        "doc_23_p1": "[seed] vector search เจอเป็นอันดับต้น"
+      }
+    },
+    {
+      "id": "Q18",
+      "question": "ไข้เลือดออกป้องกันได้อย่างไร",
+      "gold": [],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_13",
+            "doc_25",
+            "doc_37",
+            "doc_8",
+            "doc_49"
+          ],
+          "top_sections": [
+            "doc_13",
+            "doc_25",
+            "doc_37",
+            "doc_8",
+            "doc_49"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.21
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_13_p1",
+            "doc_25_p1",
+            "doc_37_p1",
+            "doc_25_p4",
+            "doc_25_p2"
+          ],
+          "top_sections": [
+            "doc_13",
+            "doc_25",
+            "doc_37"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.2
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_25_p4",
+            "doc_25_p1",
+            "doc_25_p3",
+            "doc_25_p2",
+            "doc_13_p1"
+          ],
+          "top_sections": [
+            "doc_25",
+            "doc_13"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 25.17
+        },
+        "improved": {
+          "top": [],
+          "top_sections": [],
+          "kept": 0,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": null,
+          "seconds": 25.17
+        },
+        "improved_graph": {
+          "top": [],
+          "top_sections": [],
+          "kept": 0,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 0,
+          "context_coverage": null,
+          "seconds": 25.47
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_25_p4",
+          "section_id": "doc_25",
+          "score": 0.06092187017202377
+        },
+        {
+          "id": "doc_25_p1",
+          "section_id": "doc_25",
+          "score": 0.054718974977731705
+        },
+        {
+          "id": "doc_25_p3",
+          "section_id": "doc_25",
+          "score": 0.051880065351724625
+        },
+        {
+          "id": "doc_25_p2",
+          "section_id": "doc_25",
+          "score": 0.0461575984954834
+        },
+        {
+          "id": "doc_13_p1",
+          "section_id": "doc_13",
+          "score": 0.020830588415265083
+        }
+      ],
+      "graph_paths": {
+        "doc_25_p4": "[hop2][MENTIONS → MENTIONS] จาก วิธีป้องกันโรคหัดเยอรมัน (vector search เจอเป็นอันดับต้น)",
+        "doc_25_p1": "[hop2][MENTIONS → MENTIONS] จาก วิธีป้องกันโรคหัดเยอรมัน (vector search เจอเป็นอันดับต้น)",
+        "doc_25_p3": "[hop2][MENTIONS → MENTIONS] จาก วิธีป้องกันโรคหัดเยอรมัน (vector search เจอเป็นอันดับต้น)",
+        "doc_25_p2": "[hop2][MENTIONS → MENTIONS] จาก วิธีป้องกันโรคหัดเยอรมัน (vector search เจอเป็นอันดับต้น)",
+        "doc_13_p1": "[seed] vector search เจอเป็นอันดับต้น"
+      }
+    },
+    {
+      "id": "Q19",
+      "question": "ถ้าแม่ติดเชื้อหัดเยอรมันระหว่างตั้งครรภ์ ลูกเสี่ยงเป็นต้อกระจกไหม และต้อกระจกในทารกรักษาอย่างไร",
+      "gold": [
+        "doc_29",
+        "doc_6",
+        "doc_33",
+        "doc_9"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_6",
+            "doc_9",
+            "doc_10",
+            "doc_11",
+            "doc_1"
+          ],
+          "top_sections": [
+            "doc_6",
+            "doc_9",
+            "doc_10",
+            "doc_11",
+            "doc_1"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.38,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 0.4
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_9_p3",
+            "doc_6_p1",
+            "doc_6_p3",
+            "doc_6_p2",
+            "doc_9_p2"
+          ],
+          "top_sections": [
+            "doc_9",
+            "doc_6"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.41,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 1.0
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_9_p3",
+            "doc_6_p1",
+            "doc_6_p2",
+            "doc_3_p4",
+            "doc_29_p1"
+          ],
+          "top_sections": [
+            "doc_9",
+            "doc_6",
+            "doc_3",
+            "doc_29"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 27.78,
+          "hit": 1.0,
+          "recall": 0.75,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved": {
+          "top": [
+            "doc_9_p3",
+            "doc_6_p1",
+            "doc_6_p2",
+            "doc_3_p4",
+            "doc_29_p1"
+          ],
+          "top_sections": [
+            "doc_9",
+            "doc_6",
+            "doc_3",
+            "doc_29"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 27.78,
+          "hit": 1.0,
+          "recall": 0.75,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved_graph": {
+          "top": [
+            "doc_9_p3",
+            "doc_6_p1",
+            "doc_6_p2",
+            "doc_3_p4",
+            "doc_29_p1"
+          ],
+          "top_sections": [
+            "doc_9",
+            "doc_6",
+            "doc_3",
+            "doc_29"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 5,
+          "context_coverage": 1.0,
+          "seconds": 25.08,
+          "hit": 1.0,
+          "recall": 0.75,
+          "mrr": 1.0,
+          "precision": 0.8
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_9_p3",
+          "section_id": "doc_9",
+          "score": 0.9742209911346436
+        },
+        {
+          "id": "doc_6_p1",
+          "section_id": "doc_6",
+          "score": 0.9350031614303589
+        },
+        {
+          "id": "doc_6_p2",
+          "section_id": "doc_6",
+          "score": 0.9296679496765137
+        },
+        {
+          "id": "doc_3_p4",
+          "section_id": "doc_3",
+          "score": 0.8745150566101074
+        },
+        {
+          "id": "doc_29_p1",
+          "section_id": "doc_29",
+          "score": 0.7138484120368958
+        }
+      ],
+      "graph_paths": {
+        "doc_9_p3": "[hop1][ABOUT_TOPIC] จาก การรักษา (หัดเยอรมัน) (คำถามถามเรื่องการรักษาของหัดเยอรมัน)",
+        "doc_6_p1": "[hop1][ABOUT_TOPIC] จาก ภาวะแทรกซ้อน (หัดเยอรมัน) (คำถามถามเรื่องภาวะแทรกซ้อนของหัดเยอรมัน)",
+        "doc_6_p2": "[hop1][ABOUT_TOPIC] จาก ภาวะแทรกซ้อน (หัดเยอรมัน) (คำถามถามเรื่องภาวะแทรกซ้อนของหัดเยอรมัน)",
+        "doc_3_p4": "[hop1][MENTIONS_DISEASE] จาก ต้อกระจก (คำถามเอ่ยถึงต้อกระจก)",
+        "doc_29_p1": "[hop1][ABOUT_TOPIC] จาก สาเหตุ (ต้อกระจก) (คำถามถามเรื่องสาเหตุของต้อกระจก)"
+      }
+    },
+    {
+      "id": "Q20",
+      "question": "เบาหวานเป็นปัจจัยเสี่ยงของโรคอะไรบ้างในเอกสารชุดนี้",
+      "gold": [
+        "doc_29",
+        "doc_44"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_44",
+            "doc_51",
+            "doc_15",
+            "doc_39",
+            "doc_6"
+          ],
+          "top_sections": [
+            "doc_44",
+            "doc_51",
+            "doc_15",
+            "doc_39",
+            "doc_6"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.28,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 0.2
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_44_p2",
+            "doc_44_p4",
+            "doc_44_p1",
+            "doc_44_p3",
+            "doc_51"
+          ],
+          "top_sections": [
+            "doc_44",
+            "doc_51"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.2,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 0.8
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_44_p3",
+            "doc_48_p5",
+            "doc_6_p2",
+            "doc_44_p2",
+            "doc_44_p1"
+          ],
+          "top_sections": [
+            "doc_44",
+            "doc_48",
+            "doc_6"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 29.23,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 0.6
+        },
+        "improved": {
+          "top": [
+            "doc_44_p3",
+            "doc_48_p5",
+            "doc_6_p2"
+          ],
+          "top_sections": [
+            "doc_44",
+            "doc_48",
+            "doc_6"
+          ],
+          "kept": 3,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 29.23,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 0.3333333333333333
+        },
+        "improved_graph": {
+          "top": [
+            "doc_44_p3",
+            "doc_48_p5",
+            "doc_6_p2"
+          ],
+          "top_sections": [
+            "doc_44",
+            "doc_48",
+            "doc_6"
+          ],
+          "kept": 3,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 2,
+          "context_coverage": 1.0,
+          "seconds": 29.62,
+          "hit": 1.0,
+          "recall": 0.5,
+          "mrr": 1.0,
+          "precision": 0.3333333333333333
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_44_p3",
+          "section_id": "doc_44",
+          "score": 0.6051828861236572
+        },
+        {
+          "id": "doc_48_p5",
+          "section_id": "doc_48",
+          "score": 0.2964515686035156
+        },
+        {
+          "id": "doc_6_p2",
+          "section_id": "doc_6",
+          "score": 0.1637945920228958
+        },
+        {
+          "id": "doc_44_p2",
+          "section_id": "doc_44",
+          "score": 0.0967949628829956
+        },
+        {
+          "id": "doc_44_p1",
+          "section_id": "doc_44",
+          "score": 0.050519976764917374
+        }
+      ],
+      "graph_paths": {
+        "doc_44_p3": "[hop1][MENTIONS] จาก เบาหวาน (คำถามเอ่ยถึงเบาหวาน)",
+        "doc_6_p2": "[hop1][MENTIONS] จาก เบาหวาน (คำถามเอ่ยถึงเบาหวาน)",
+        "doc_44_p2": "[hop1][MENTIONS] จาก เบาหวาน (คำถามเอ่ยถึงเบาหวาน)",
+        "doc_44_p1": "[hop1][MENTIONS] จาก เบาหวาน (คำถามเอ่ยถึงเบาหวาน)"
+      }
+    },
+    {
+      "id": "Q21",
+      "question": "ต้อหินเกิดร่วมกับโรคใดได้บ้างในเอกสารชุดนี้",
+      "gold": [
+        "doc_32",
+        "doc_29",
+        "doc_6"
+      ],
+      "systems": {
+        "baseline": {
+          "top": [
+            "doc_38",
+            "doc_39",
+            "doc_32",
+            "doc_27",
+            "doc_29"
+          ],
+          "top_sections": [
+            "doc_38",
+            "doc_39",
+            "doc_32",
+            "doc_27",
+            "doc_29"
+          ],
+          "kept": 5,
+          "sparse_count": 0,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 0.0,
+          "seconds": 0.41,
+          "hit": 1.0,
+          "recall": 0.6666666666666666,
+          "mrr": 0.3333333333333333,
+          "precision": 0.4
+        },
+        "improved_no_rerank": {
+          "top": [
+            "doc_39",
+            "doc_32",
+            "doc_38",
+            "doc_29_p2",
+            "doc_6_p2"
+          ],
+          "top_sections": [
+            "doc_39",
+            "doc_32",
+            "doc_38",
+            "doc_29",
+            "doc_6"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 0.2,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 0.5,
+          "precision": 0.6
+        },
+        "improved_rerank": {
+          "top": [
+            "doc_35_p2",
+            "doc_38",
+            "doc_6_p2",
+            "doc_32",
+            "doc_29_p2"
+          ],
+          "top_sections": [
+            "doc_35",
+            "doc_38",
+            "doc_6",
+            "doc_32",
+            "doc_29"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 26.48,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "precision": 0.6
+        },
+        "improved": {
+          "top": [
+            "doc_35_p2",
+            "doc_38",
+            "doc_6_p2",
+            "doc_32",
+            "doc_29_p2"
+          ],
+          "top_sections": [
+            "doc_35",
+            "doc_38",
+            "doc_6",
+            "doc_32",
+            "doc_29"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 0,
+          "from_graph": 0,
+          "context_coverage": 1.0,
+          "seconds": 26.48,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "precision": 0.6
+        },
+        "improved_graph": {
+          "top": [
+            "doc_35_p2",
+            "doc_38",
+            "doc_6_p2",
+            "doc_32",
+            "doc_29_p2"
+          ],
+          "top_sections": [
+            "doc_35",
+            "doc_38",
+            "doc_6",
+            "doc_32",
+            "doc_29"
+          ],
+          "kept": 5,
+          "sparse_count": 20,
+          "graph_count": 20,
+          "from_graph": 4,
+          "context_coverage": 1.0,
+          "seconds": 27.16,
+          "hit": 1.0,
+          "recall": 1.0,
+          "mrr": 0.3333333333333333,
+          "precision": 0.6
+        }
+      },
+      "rerank_top5": [
+        {
+          "id": "doc_35_p2",
+          "section_id": "doc_35",
+          "score": 0.3742079436779022
+        },
+        {
+          "id": "doc_38",
+          "section_id": "doc_38",
+          "score": 0.31190937757492065
+        },
+        {
+          "id": "doc_6_p2",
+          "section_id": "doc_6",
+          "score": 0.19916749000549316
+        },
+        {
+          "id": "doc_32",
+          "section_id": "doc_32",
+          "score": 0.1934202015399933
+        },
+        {
+          "id": "doc_29_p2",
+          "section_id": "doc_29",
+          "score": 0.18515805900096893
+        }
+      ],
+      "graph_paths": {
+        "doc_35_p2": "[hop1][MENTIONS] จาก ต้อหิน (คำถามเอ่ยถึงต้อหิน)",
+        "doc_38": "[hop1][MENTIONS] จาก ต้อหิน (คำถามเอ่ยถึงต้อหิน)",
+        "doc_32": "[hop1][MENTIONS] จาก ต้อหิน (คำถามเอ่ยถึงต้อหิน)",
+        "doc_29_p2": "[hop1][MENTIONS] จาก ต้อหิน (คำถามเอ่ยถึงต้อหิน)"
+      }
+    }
+  ],
+  "analyzer_demo": {
+    "อาการของหัดเยอรมัน": {
+      "standard": [
+        "อาการของหัดเยอรมัน"
+      ],
+      "thai": [
+        "อาการ",
+        "หัดเยอรมัน"
+      ]
+    },
+    "วัคซีน MMR ควรฉีดตอนอายุเท่าไร": {
+      "standard": [
+        "วัคซีน",
+        "mmr",
+        "ควรฉีดตอนอายุเท่าไร"
+      ],
+      "thai": [
+        "วัคซีน",
+        "mmr",
+        "ควร",
+        "ฉีด",
+        "ตอน",
+        "อายุ",
+        "เท่าไร"
+      ]
+    }
+  },
+  "answers": [
+    {
+      "id": "Q1",
+      "question": "โรคหัดและโรคหัดเยอรมันแตกต่างกันอย่างไร?",
+      "baseline": {
+        "answer": "โรคหัด (Measles) และโรคหัดเยอรมัน (German Measles หรือ Rubella) แม้จะมีชื่อคล้ายคลึงกัน แต่เป็นโรคที่แตกต่างกันอย่างชัดเจนในด้านต่าง ๆ ดังนี้:\n\n### สาเหตุ\n- **โรคหัด**: เกิดจากเชื้อไวรัส **Measles virus** ซึ่งอยู่ในตระกูล **Paramyxoviridae**.\n- **โรคหัดเยอรมัน**: เกิดจากเชื้อไวรัส **Rubella virus** ซึ่งอยู่ในตระกูล **Togaviridae**.\n\n### อาการ\n- **โรคหัด**:\n  - ผื่นที่เริ่มจากศีรษะแล้วกระจายลงมาตามลำตัว\n  - ไข้สูง (อาจเกิน 39 องศาเซลเซียส)\n  - ไอแห้ง\n  - ตาแดง\n  - คันในปาก\n  - อาการอาจรุนแรงและมีภาวะแทรกซ้อนได้ เช่น ปอดบวม สมองอักเสบ\n\n- **โรคหัดเยอรมัน**:\n  - ผื่นที่เริ่มจากหน้าแล้วกระจายลงมาตามลำตัว แขน และขา (ผื่นจะจางหายไปภายใน 3 วัน)\n  - ไข้ต่ำ ๆ ถึงปานกลาง (ไม่เกิน 38.5 องศาเซลเซียส)\n  - ต่อมน้ำเหลืองโต (เฉพาะบริเวณหลังหู หลังคอ ท้ายทอย และข้างคอ)\n  - ตาแดง\n  - อาการทั่วไปไม่รุนแรงและมักหายได้เองโดยไม่มีภาวะแทรกซ้อนร้ายแรง\n\n### ระยะฟักตัว\n- **โรคหัด**: ประมาณ 10-14 วัน\n- **โรคหัดเยอรมัน**: ประมาณ 12-24 วัน (โดยเฉลี่ย 16-18 วัน)\n\n### ระยะติดต่อ\n- **โรคหัด**: ตั้งแต่ 4 วันก่อนผื่นขึ้นจนถึง 4 วันหลังจากผื่นเริ่มขึ้น\n- **โรคหัดเยอรมัน**: ตั้งแต่ 5-7 วันก่อนผื่นขึ้นจนถึง 6-7 วันหลังจากผื่นเริ่มขึ้น\n\n### ภาวะแทรกซ้อน\n- **โรคหัด**:\n  - ปอดบวม\n  - สมองอักเสบ\n  - การติดเชื้อช่องท้อง\n  - ภาวะขาดน้ำ\n\n- **โรคหัดเยอรมัน**:\n  - ภาวะแทรกซ้อนร้ายแรงเกิดขึ้นในหญิงตั้งครรภ์ โดยเฉพาะในช่วงไตรมาสแรก อาจทำให้ทารกในครรภ์มีความพิการแต่กำเนิด เช่น หูหนวก หัวใจพิการ ต้อกระจก ปัญญาอ่อน\n  - ในเด็กและผู้ใหญ่ทั่วไป มักไม่มีภาวะแทรกซ้อนร้ายแรง\n\n### การป้องกัน\n- **โรคหัด**: ฉีดวัคซีน **MMR** (Measles, Mumps, and Rubella) ซึ่งป้องกันโรคหัด โรคหัดเยอรมัน และโรคตับอักเสบเอ\n- **โรคหัดเยอรมัน**: ฉีดวัคซีน **MMR** ซึ่งป้องกันโรคหัด โรคหัดเยอรมัน และโรคตับอักเสบเอ\n\n### สรุป\nโรคหัดและโรคหัดเยอรมันเป็นโรคที่แตกต่างกันในด้านสาเหตุ อาการ ระยะฟักตัว ระยะติดต่อ และภาวะแทรกซ้อน แต่สามารถป้อง",
+        "chars": 1781,
+        "truncated": true,
+        "no_evidence": false,
+        "has_cjk": false,
+        "citations": 0,
+        "seconds": 51.4
+      },
+      "improved": {
+        "answer": "โรคหัดและโรคหัดเยอรมันมีความแตกต่างกันดังนี้:\n\n1. **ชื่อเรียกและสาเหตุ**:\n   - โรคหัด: เกิดจากการติดเชื้อไวรัสหัด (Measles virus) [doc_8_p1]\n   - โรคหัดเยอรมัน: เกิดจากการติดเชื้อไวรัสหัดเยอรมัน (Rubella virus) [doc_1_p1]\n\n2. **อาการ**:\n   - โรคหัด: ผู้ป่วยจะมีไข้สูงตลอดเวลา, หน้าแดง, เบื่ออาหาร, ซึม, ในเด็กเล็กมักร้องงอแง. หลังจากมีไข้ได้ประมาณ 3-4 วัน, จะมีผื่นแดงขึ้นตามตัวโดยเริ่มจากที่ชายผมและซอกคอ, แล้วลามไปตามหน้าผาก, ใบหน้า, ลำตัว, และแขนขา. ผื่นเล็ก ๆ จะค่อย ๆ แผ่ติดกันเป็นแผ่นกว้าง และผื่นจะค่อย ๆ จางหายไปภายใน 4-7 วัน. เหลือให้เห็นเป็นรอยแต้มสีคล้ำ ๆ และอาจมีอาการลอกตามมา. ส่วนอาการไข้นั้นจะเป็นอยู่ประมาณ 1 สัปดาห์, ซึ่งอาการต่าง ๆ มักจะทุเลาหลังผื่นขึ้นได้ประมาณ 3-4 วัน [doc_8_p1]\n   - โรคหัดเยอรมัน: ผู้ป่วยจะมีอาการไข้และออกผื่นคล้ายโรคหัด, แต่จะมีความรุนแรงและโรคแทรกซ้อนน้อยกว่าหัด. ผื่นจะเริ่มขึ้นที่ใบหน้าและลามไปตามลำตัวและแขนขา, ผื่นจะค่อย ๆ จางหายไปภายใน 1-3 วัน [doc_1_p1]\n\n3. **ความรุนแรงและผลแทรกซ้อน**:\n   - โรคหัด: มักมีความรุนแรงและอาจมีผลแทรกซ้อนที่รุนแรง เช่น ปอดอักเสบ, สมองอักเสบ, และการเสียชีวิต [doc_8_p1]\n   - โรคหัดเยอรมัน: ไม่ใช่โรคร้ายแรงถ้าเป็นกับเด็กหรือผู้ใหญ่ทั่วไป, มักจะหายได้เองโดยไม่มีโรคแทรกซ้อนที่รุนแรง. แต่ถ้าเกิดในหญิงตั้งครรภ์ในช่วงไตรมาสแรก, เชื้ออาจแพร่กระจายเข้าทารกในครรภ์, ทำให้ทารกพิการ, แท้ง, หรือตายในครรภ์ [doc_1_p1]\n\n4. **การติดต่อ**:\n   - โรคหัด: ติดต่อได้โดยการหายใจสูดเอาฝอยละอองเสมหะที่ผู้ป่วยไอหรือจามรด, หรือติดต่อโดยการสัมผัส [doc_2_p2]\n   - โรคหัดเยอรมัน: ติดต่อได้โดยการหายใจสูดเอาฝอยละอองเสมหะที่ผู้ป่วยไอหรือจามรด, หรือติดต่อโดยการสัมผัส [doc_2_p2]\n\n5. **ระยะฟักตัว**:\n   - โรคหัด: ไม่มีข้อมูลในเอกสาร\n   - โรคหัดเยอรมัน: ระยะฟักตัวประมาณ 12-24 วัน, โดยเฉลี่ยประมาณ 16-18 วัน [doc_2_p3]\n\n6. **ระยะติดต่อ**:\n   - โรคหัด: ไม่มีข้อมูลในเอกสาร\n   - โรคหัดเยอรมัน: ตั้งแต่ 5 วันก่อนผื่นขึ้นจนกระทั่ง 6 วันหลังจากผื่นเริ่มขึ้น [doc_2_p3]\n\n7. **การแพร่ระบาด**:\n   - โรคหัด: มักพบการระบาดในช่วงที่มีการสัมผัสใกล้ชิดกับผู้ป่วย [doc_2_p2]\n   - โรคหัดเยอรมัน: มักพบการระบาดในโรงเรียน, โรงงาน, ที่ทำงาน, และช่วงเดือนมกราคมถึงเดือนเมษายน [doc_2_p3]",
+        "chars": 2015,
+        "truncated": false,
+        "no_evidence": false,
+        "has_cjk": false,
+        "citations": 4,
+        "seconds": 41.1
+      }
+    },
+    {
+      "id": "Q2",
+      "question": "อธิบายสาเหตุของโรคหัดเยอรมันและการป้องกัน",
+      "baseline": {
+        "answer": "### สาเหตุของโรคหัดเยอรมัน\n\nโรคหัดเยอรมัน (German measles หรือ Rubella) เกิดจากการติดเชื้อไวรัสที่มีชื่อว่า \"รูเบลลา\" (Rubella virus) ซึ่งจัดอยู่ในตระกูลโทกาวิริดี (Togaviridae) เชื้อนี้จะอยู่ในน้ำมูก น้ำลาย และเสมหะของผู้ป่วย และสามารถแพร่กระจายได้ผ่านทางการหายใจสูดเอาฝอยละอองเสมหะที่ผู้ป่วยไอหรือจามรด หรือการสัมผัสกับสารคัดหลั่งที่ติดเชื้อ เชื้อสามารถถูกทำลายได้ง่ายด้วยน้ำยาแอลกอฮอล์ 70%, ฟอร์มาลิน, อะซีโตน, คลอรีน, แสงแดดหรือยูวี, ความร้อนตั้งแต่ 56 องศาเซลเซียสขึ้นไป และความเย็นที่ -10 ถึง -20 องศาเซลเซียส\n\n### การป้องกันโรคหัดเยอรมัน\n\n1. **การฉีดวัคซีน**:\n   - วัคซีนเอ็มเอ็มอาร์ (MMR) ป้องกันโรคหัด, คางทูม, และหัดเยอรมัน แนะนำให้ฉีดเข็มแรกเมื่อเด็กอายุได้ 9-12 เดือน และให้ฉีดเข็มที่ 2 เมื่ออายุได้ 4-6 ปี\n   - กลุ่มเด็กหญิงวัยรุ่นและกลุ่มหญิงวัยเจริญพันธุ์ที่ยังไม่เคยได้รับการฉีดวัคซีน ควรฉีดวัคซีนป้องกันหัดเยอรมันเดี่ยว ๆ หรือวัคซีนรวมเอ็มเอ็มอาร์ 1 เข็ม\n   - หญิงวัยเจริญพันธุ์ที่ตั้งใจจะมีลูก ควรฉีดวัคซีนก่อนตั้งครรภ์ และคุมกำเนิดไปอย่างน้อย 3 เดือนหลังฉีดวัคซีน\n\n2. **การหลีกเลี่ยงการติดเชื้อ**:\n   - หลีกเลี่ยงการเข้าไปในพื้นที่ที่มีผู้คนแออัด เช่น ห้างสรรพสินค้า, สถานบันเทิง, งานมหรสพ เป็นต้น\n   - ใส่หน้ากากอนามัยและหมั่นล้างมือด้วยน้ำกับสบู่หรือชโลมมือด้วยแอลกอฮอล์เพื่อกำจัดเชื้อโรค\n   - อย่าใช้นิ้วมือขยี้ตาหรือแคะไชจมูกถ้ายังไม่ได้ล้างมือให้สะอาด\n\n3. **การดูแลผู้ป่วย**:\n   - อย่าเข้าใกล้หรือนอนรวมกับผู้ป่วย\n   - ไม่ใช้สิ่งของเครื่องใช้ เช่น แก้วน้ำ, จาน, ชาม, ผ้าเช็ดหน้า, ผ้าเช็ดตัว, โทรศัพท์, ของเล่น, เครื่องใช้ต่าง ๆ ร่วมกับผู้ป่วย\n   - ถ้าจำเป็นต้องดูแลผู้ป่วยอย่างใกล้ชิด ควรสวมหน้ากากอนามัยและหมั่นล้างมือด้วยน้ำกับสบู่ให้สะอาดอยู่เสมอ\n\nการปฏิบัติตามคำแนะนำข้างต้นจะช่วยลดความเสี่ยงในการติดเชื้อหัดเยอรมันและป้องกัน",
+        "chars": 1653,
+        "truncated": true,
+        "no_evidence": false,
+        "has_cjk": false,
+        "citations": 0,
+        "seconds": 33.7
+      },
+      "improved": {
+        "answer": "### สาเหตุของโรคหัดเยอรมัน\n\n1. **เชื้อไวรัส**:\n   - โรคหัดเยอรมันเกิดจากเชื้อไวรัสที่มีชื่อว่า \"รูเบลลา\" (Rubella) หรือ \"รูเบลลาไวรัส\" (Rubella virus) ซึ่งจัดอยู่ในตระกูลโทกาวิริดี (Togaviridae) [doc_2_p1]\n\n2. **การติดต่อ**:\n   - เชื้อไวรัสสามารถติดต่อได้โดยการหายใจสูดเอาฝอยละอองเสมหะที่ผู้ป่วยไอหรือจามรด\n   - เชื้ออาจติดอยู่ที่มือของผู้ป่วย สิ่งของเครื่องใช้ต่าง ๆ (เช่น แก้วน้ำ จาน ชาม ผ้าเช็ดหน้า ผ้าเช็ดตัว หนังสือ โทรศัพท์ ของเล่น เป็นต้น) หรือสิ่งแวดล้อม\n   - เมื่อคนปกติมาสัมผัสถูกมือของผู้ป่วย สิ่งของเครื่องใช้ หรือสิ่งแวดล้อมที่แปดเปื้อนเชื้อ เชื้อก็จะติดมากับมือของคน ๆ นั้น เมื่อใช้นิ้วมือขยี้ตาหรือแคะไชจมูกเชื้อหัดเยอรมันก็จะเข้าสู่ร่างกายได้ [doc_2_p2]\n\n3. **กลไกการเกิดโรค**:\n   - เมื่อผู้ป่วยได้รับเชื้อหัดเยอรมันเข้าสู่ระบบทางเดินหายใจแล้ว เชื้อนี้จะกระจายเข้าสู่กระแสเลือดเป็นครั้งแรกแล้วไปสู่ระบบน้ำเหลือง ต่อมน้ำเหลือง (ทำให้ต่อมน้ำเหลืองโต) ตับ และม้าม ก่อนที่จะเพิ่มจำนวนเชื้อแล้วกระจายเข้าสู่กระแสเลือดเป็นครั้งที่สอง ทำให้เกิดอาการที่ระบบต่าง ๆ ได้แตกต่างกันไป และสามารถตรวจพบเชื้อในระบบต่าง ๆ ได้ เช่น ในเลือด ปัสสาวะ และน้ำไขสันหลัง [doc_2_p3]\n\n### การป้องกันโรคหัดเยอรมัน\n\n1. **การฉีดวัคซีน**:\n   - โรคหัดเยอรมันสามารถป้องกันได้โดยการฉีดวัคซีน โดยแพทย์แนะนำให้ฉีดวัคซีนรวมเอ็มเอ็มอาร์ป้องกันโรคหัด คางทูม และหัดเยอรมัน (MMR) แก่เด็กทุกคน ซึ่งในบ้านเราแนะนำให้ฉีดเข็มแรกเมื่อเด็กอายุได้ 9-12 เดือน และให้ฉีดเข็มที่ 2 เมื่ออายุได้ 4-6 ปี และไม่จำเป็นต้องฉีดกระตุ้นภูมิคุ้มกันอีก ซึ่งภูมิคุ้มกันต้านทานโรคคางทูมจะคงอยู่ไปได้ตลอดชีวิต [doc_13_p1]\n   - กลุ่มเด็กหญิงวัยรุ่นและกลุ่มหญิงวัยเจริญพันธุ์ ถ้ายังไม่เคยได้รับการฉีดวัคซีนมาก่อน แพทย์จะฉีดวัคซีนป้องกันหัดเยอรมันเดี่ยว ๆ หรือฉีดเป็นวัคซีนรวมเอ็มเอ็มอาร์ป้องกันโรคหัด คางทูม และหัดเยอรมัน (MMR) ให้ 1 เข็ม [doc_13_p1]\n\n2. **การปฏิบัติตัวในช่วงการระบาด**:\n   - ในช่วงที่มีการระบาดของโรคหัดเยอรมัน ควรหลีกเลี่ยงการเข้าไปในพื้นที่ที่มีผู้คนแออัด เช่น ห้างสรรพสินค้า สถานบันเทิง งานมหรสพ เป็นต้น แต่ถ้าหลีกเลี่ยงไม่ได้ ควรสวมหน้ากากอนามัย หมั่นล้างมือด้วยน้ำกับสบู่ให้สะอาด หรือชโลมมือด้วยแอลกอฮอล์เพื่อกำจัดเชื้อโรคที่อาจติดมาจากการสัมผัสถูกเสมหะของผู้ป่วย และอย่าใช้นิ้วมือขยี้ตาหรือแคะไชจมูกถ้ายังไม่ได้ล้างมือให้สะอาด [doc_13_p3]\n   - ในช่วงที่มีการระบาดของโรค สำหรับผู้หญิงวัยเจริญพันธุ์ที่แต่งงานแล้วและยังไม่เคยได้รับการฉีดวัคซีนหรือไม่เคยเป็นโรคนี้มาก่อน ควรคุมกำเนิดไว้ก่อนจนกว่าจะพ้นระยะการระบาดของโรค และระหว่างนี้ควรไปฉีดวัคซีนป้องกันโรคหัดเยอรมันและคุมกำเนิดร่วมด้วยต่อไปอีกอย่างน้อย 3 เดือน [doc_13_p3]\n   - อย่าเข้าใกล้หรือนอนรวมกับผู้ป่วย แต่ถ้าจำเป็นต้องดูแลผู้ป่วยอย่างใกล้ชิด ควรสวมหน้ากากอนามัยและหมั่นล้างมือด้วยน้ำกับสบู่ให้สะอาดอยู่เสมอ [doc_13_p3]\n   - ไม่ใช้สิ่งของเครื่องใช้ เช่น แก้วน้ำ จาน ชาม ผ้าเช็ดหน้า ผ้าเช็ดตัว โทรศัพท์ ของเล่น เครื่องใช้ต่าง ๆ ฯลฯ ร่วมกับผู้ป่วย และควรหลีกเลี่ยงการสัมผัสมือกับผู้ป่วยโดยตรง [doc_13_p3]",
+        "chars": 2732,
+        "truncated": false,
+        "no_evidence": false,
+        "has_cjk": false,
+        "citations": 5,
+        "seconds": 58.6
+      }
+    },
+    {
+      "id": "Q3",
+      "question": "ทำไมโรคหัดเยอรมันจึงมีอันตรายกับหญิงตั้งครรภ์?",
+      "baseline": {
+        "answer": "โรคหัดเยอรมันมีความอันตรายกับหญิงตั้งครรภ์อย่างมาก เนื่องจากเชื้อไวรัสสามารถแพร่กระจายจากแม่ไปสู่ทารกในครรภ์ โดยเฉพาะในช่วงไตรมาสแรกของการตั้งครรภ์ ซึ่งสามารถก่อให้เกิดภาวะแทรกซ้อนรุนแรงหลายประการ ดังนี้:\n\n1. **การแท้งบุตรหรือการตายคลอด**: เชื้อไวรัสหัดเยอรมันสามารถทำให้เกิดการแท้งบุตรหรือการตายคลอด (การคลอดทารกที่ตายในครรภ์) ซึ่งเป็นภาวะที่รุนแรงและส่งผลต่อสุขภาพจิตของมารดา\n\n2. **การคลอดก่อนกำหนด**: เชื้อไวรัสอาจทำให้เกิดการคลอดก่อนกำหนด ซึ่งเพิ่มความเสี่ยงในการเกิดภาวะแทรกซ้อนในทารก\n\n3. **โรคหัดเยอรมันแต่กำเนิด (Congenital Rubella Syndrome - CRS)**: ทารกที่ติดเชื้อหัดเยอรมันในช่วงตั้งครรภ์มักจะเกิดความพิการหรือความผิดปกติหลายอย่าง ซึ่งมักจะมีความรุนแรงและส่งผลต่อคุณภาพชีวิตในระยะยาว ความผิดปกติที่พบได้บ่อย ได้แก่:\n   - **เจริญเติบโตช้า**: ทารกที่คลอดมาอาจมีน้ำหนักตัวแรกเกิดน้อย\n   - **หูหนวก**: ทารกอาจมีปัญหาการได้ยิน มักเป็นทั้งสองข้าง\n   - **ต้อกระจก**: พบได้ประมาณ 1 ใน 3 ของทารกที่เป็นหัดเยอรมันแต่กำเนิด อาจเป็นกับตาเพียงข้างเดียวหรือสองข้าง\n   - **นัยน์ตาเล็ก (Microphthalmia)**: ตาของทารกอาจมีขนาดเล็กผิดปกติ\n   - **จอประสาทตาพิการ (Retinopathy)**\n   - **หัวใจพิการ**: เช่น Patent ductus arteriosus (PDA)\n   - **ปัญญาอ่อน**: ทารกอาจมีปัญหาทางการเรียนรู้และพัฒนาการ\n   - **ภาวะเกล็ดเลือดต่ำ (เลือดออกง่าย)**\n   - **โลหิตจาง**\n   - **ตับโต**\n   - **ม้ามโต**\n   - **ศีรษะเล็กผิดปกติ**\n   - **ต้อหิน**\n   - **ผนังหัวใจรั่ว (ASD, VSD)**\n   - **มีหินปูนในสมอง**\n   - **ซีด**\n   - **ดีซ่าน (ตัวเหลืองตาเหลือง)**\n   - **สมองอักเสบ**\n   - **ตับอักเสบ**\n   - **กล้ามเนื้อหัวใจอักเสบ**\n   - **ผิวหนังเป็นลายออกสีน้ำเงิน**\n   - **เบาหวานเมื่อเป็นผู้ใหญ่ (อายุ 20-30 ปี)**\n\n4. **โอกาสเสี่ยงต่อการเกิดความผิดปกติ**: ความเสี่ยงของการเกิดความผิดปกติในทารกขึ้นอยู่กับอายุครรภ์ของมารดาในขณะที่มีการติดเชื้อหัดเยอรมัน\n   - หากมารดาเป็นหัดเยอรมันในช่วงเดือนที่ 2 ของตั้งครรภ์ ทารกมีโอกาสผิดปกติสูงถึง 60-85%\n   - หากมารดาเป็นหัดเยอรมันในช่วงเดือนที่ 3 ของตั",
+        "chars": 1858,
+        "truncated": true,
+        "no_evidence": false,
+        "has_cjk": false,
+        "citations": 0,
+        "seconds": 34.5
+      },
+      "improved": {
+        "answer": "โรคหัดเยอรมันมีอันตรายกับหญิงตั้งครรภ์เนื่องจากเชื้อหัดเยอรมันสามารถแพร่กระจายจากแม่ไปสู่ทารกในครรภ์ โดยเฉพาะอย่างยิ่งในช่วงไตรมาสแรกของการตั้งครรภ์ ซึ่งอาจทำให้เกิดภาวะแทรกซ้อนที่รุนแรง ดังนี้:\n\n1. **การแท้งบุตรหรือการตายคลอด**: เชื้อหัดเยอรมันสามารถทำให้เกิดการแท้งบุตรหรือการตายคลอด (การคลอดทารกที่ตายในครรภ์) [doc_6_p1]\n2. **การคลอดก่อนกำหนด**: อาจทำให้เกิดการคลอดก่อนกำหนด [doc_6_p1]\n3. **โรคหัดเยอรมันแต่กำเนิด (Congenital Rubella Syndrome - CRS)**: ทารกที่รอดชีวิตมาได้จะเกิดความผิดปกติหรือความพิการแต่กำเนิด ซึ่งมักจะทำให้ทารกมีความผิดปกติหลายอย่างร่วมกัน ที่พบได้บ่อย ๆ คือ:\n   - ทารกเจริญเติบโตช้า (น้ำหนักตัวแรกเกิดน้อย)\n   - หูหนวก (มักเป็นทั้ง 2 ข้าง)\n   - ต้อกระจก (พบได้ประมาณ 1 ใน 3 ของทารกที่เป็นหัดเยอรมันแต่กำเนิด อาจเป็นกับตาเพียงข้างเดียวหรือสองข้างก็ได้)\n   - นัยน์ตาเล็ก (Microphthalmia)\n   - จอประสาทตาพิการ (Retinopathy)\n   - หัวใจพิการ (Patent ductus arteriosus - PDA)\n   - ปัญญาอ่อน มีพฤติกรรมผิดปกติ\n   - มีภาวะเกล็ดเลือดต่ำ (เลือดออกง่าย)\n   - โลหิตจาง\n   - ตับโต\n   - ม้ามโต [doc_6_p1]\n\n4. **ความผิดปกติอื่น ๆ**: นอกจากนี้ยังมีความผิดปกติที่อาจพบได้แต่ไม่บ่อย เช่น ศีรษะเล็กผิดปกติ, ต้อหิน, ผนังหัวใจรั่ว (ASD, VSD), มีหินปูนในสมอง, ซีด, ดีซ่าน, ตัวเหลืองตาเหลือง, สมองอักเสบ, ตับอักเสบ, กล้ามเนื้อหัวใจอักเสบ, ผิวหนังเป็นลายออกสีน้ำเงิน, เป็นเบาหวานเมื่อเป็นผู้ใหญ่ (อายุ 20-30 ปี) เป็นต้น ซึ่งบางอย่างอาจทำให้ทารกเสียชีวิตภายหลังการคลอดได้ [doc_6_p2]\n\n5. **ความรุนแรงของความผิดปกติ**: โอกาสเสี่ยงต่อการเกิดความผิดปกติของทารกในครรภ์ขึ้นอยู่กับอายุครรภ์ของมารดาในขณะที่มีการติดเชื้อหัดเยอรมัน ถ้ามารดาเป็นหัดเยอรมันในขณะตั้งครรภ์ในช่วงเดือนที่ 2 จะพบทารกผิดปกติสูงถึง 60-85% แต่ถ้ามารดาเป็นหัดเยอรมันในขณะตั้งครรภ์ในช่วงเดือนที่ 3 จะพบทารกผิดปกติประมาณ 1 ใน 3 [doc_6_p2]\n\nดังนั้น โรคหัดเยอรมันจึงมีความอันตรายอย่างยิ่งต่อหญิงตั้งครรภ์และทารกในครรภ์ โดยเฉพาะในช่วงไตรมาสแรกของการตั้งครรภ์ [doc_6_p1] [doc_6_p2]",
+        "chars": 1839,
+        "truncated": false,
+        "no_evidence": false,
+        "has_cjk": false,
+        "citations": 2,
+        "seconds": 30.1
+      }
+    },
+    {
+      "id": "Q4",
+      "question": "ถ้าคนที่ฉีดวัคซีนป้องกันโรคหัดเยอรมันแล้ว จะมีโอกาสติดเชื้อหรือไม่?",
+      "baseline": {
+        "answer": "การฉีดวัคซีนป้องกันโรคหัดเยอรมัน (MMR) มีประสิทธิภาพในการป้องกันโรคค่อนข้างสูง แต่ไม่ได้รับประกันว่าจะป้องกันการติดเชื้อได้ 100% อย่างไรก็ตาม ผู้ที่ได้รับวัคซีนครบตามเกณฑ์มักจะมีโอกาสติดเชื้อน้อยมาก และถ้าหากติดเชื้อจริง ๆ อาการมักจะไม่รุนแรง\n\n### ข้อมูลเพิ่มเติม:\n1. **การฉีดวัคซีน MMR**:\n   - **เข็มแรก**: แนะนำให้ฉีดเมื่อเด็กอายุ 9-12 เดือน\n   - **เข็มที่สอง**: แนะนำให้ฉีดเมื่อเด็กอายุ 4-6 ปี\n\n2. **ประสิทธิภาพของวัคซีน**:\n   - การฉีดวัคซีน MMR ครบ 2 เข็มมีประสิทธิภาพในการป้องกันโรคหัดเยอรมันประมาณ 97%[1],[2]\n   - ผู้ที่ได้รับวัคซีนครบตามเกณฑ์มักจะมีภูมิคุ้มกันต้านทานโรคหัดเยอรมันที่ยั่งยืน\n\n3. **ความเสี่ยงในการติดเชื้อ**:\n   - แม้ว่าผู้ที่ได้รับวัคซีนครบตามเกณฑ์จะมีโอกาสติดเชื้อหัดเยอรมันน้อยมาก แต่ก็ยังมีโอกาสติดเชื้อได้ในกรณีที่ภูมิคุ้มกันลดลงหรือไม่ตอบสนองต่อวัคซีน\n   - ถ้าผู้ที่ได้รับวัคซีนครบแล้วติดเชื้อ อาการมักจะไม่รุนแรง และอาจไม่มีผื่นขึ้นหรือมีผื่นขึ้นน้อย\n\n4. **การดูแลตัวเอง**:\n   - แม้จะได้รับวัคซีนแล้ว ควรปฏิบัติตามข้อแนะนำในการป้องกันการติดเชื้อ เช่น ล้างมือบ่อย ๆ, สวมหน้ากากอนามัยในพื้นที่ที่มีผู้คนแออัด, และหลีกเลี่ยงการสัมผัสกับผู้ป่วย\n\n### สรุป:\nการฉีดวัคซีนป้องกันโรคหัดเยอรมัน (MMR) ช่วยลดความเสี่ยงในการติดเชื้อได้อย่างมาก แต่ไม่ได้ป้องกันได้ 100% ผู้ที่ได้รับวัคซีนครบตามเกณฑ์มักจะมีภูมิคุ้มกันที่ยั่งยืน และหากติดเชื้อจริง ๆ อาการมักจะไม่รุนแรง\n\n[1] [2] ข้อมูลจาก CDC (Centers for Disease Control and Prevention)",
+        "chars": 1352,
+        "truncated": false,
+        "no_evidence": false,
+        "has_cjk": false,
+        "citations": 0,
+        "seconds": 24.8
+      },
+      "improved": {
+        "answer": "ผู้ที่เคยติดเชื้อหัดเยอรมันหรือได้รับการฉีดวัคซีนป้องกันมาแล้วมักจะมีภูมิคุ้มกันไปตลอดชีวิตและไม่กลับมาเป็นซ้ำอีก แต่ก็ยังมีความเป็นไปได้ที่การได้รับเชื้ออีกจะทำให้ติดเชื้อได้ เพียงแต่จะไม่แสดงอาการและเชื้อจะแบ่งตัวอยู่ที่ทางเดินหายใจส่วนบนเท่านั้น ไม่แพร่กระจายเข้าสู่กระแสเลือด [doc_10_p3]",
+        "chars": 291,
+        "truncated": false,
+        "no_evidence": false,
+        "has_cjk": false,
+        "citations": 1,
+        "seconds": 6.8
+      }
+    },
+    {
+      "id": "Q5",
+      "question": "โรคหัดเยอรมันมีผลกระทบอย่างไรต่อระบบสาธารณสุขและเศรษฐกิจของประเทศ?",
+      "baseline": {
+        "answer": "โรคหัดเยอรมัน (Rubella) แม้จะไม่รุนแรงในเด็กหรือผู้ใหญ่ทั่วไป แต่สามารถส่งผลกระทบต่อระบบสาธารณสุขและเศรษฐกิจของประเทศในหลาย ๆ ด้าน โดยเฉพาะอย่างยิ่งหากเกิดการระบาดในช่วงเวลาที่ยาวนาน หรือหากมีการติดเชื้อในกลุ่มหญิงตั้งครรภ์ ซึ่งอาจทำให้เกิดภาวะแทรกซ้อนรุนแรงในทารก ดังนี้:\n\n### ผลกระทบต่อระบบสาธารณสุข\n\n1. **การใช้ทรัพยากรทางการแพทย์:**\n   - **การรักษาผู้ป่วย:** ต้องใช้ทรัพยากรทางการแพทย์ เช่น เตียงในโรงพยาบาล ยา และบุคลากรทางการแพทย์ เพื่อรักษาผู้ป่วยที่มีอาการรุนแรง เช่น ข้ออักเสบ สมองอักเสบ หรือการเลือดออกผิดปกติ\n   - **การป้องกันการติดเชื้อ:** ต้องใช้ทรัพยากรในการฉีดวัคซีนป้องกันหัดเยอรมันให้กับเด็กและผู้ใหญ่ที่ยังไม่มีภูมิคุ้มกัน\n\n2. **การควบคุมการระบาด:**\n   - **การตรวจสอบและติดตาม:** ต้องใช้ทรัพยากรในการตรวจสอบการระบาด ติดตามผู้สัมผัสใกล้ชิด และควบคุมการแพร่กระจายของเชื้อ\n   - **การสื่อสารและการศึกษา:** ต้องใช้ทรัพยากรในการสื่อสารข้อมูลเกี่ยวกับโรคและวิธีป้องกันให้กับประชาชน\n\n3. **ผลกระทบต่อหญิงตั้งครรภ์และทารกในครรภ์:**\n   - **ภาวะแทรกซ้อน:** ถ้าหญิงตั้งครรภ์ติดเชื้อหัดเยอรมันในช่วงไตรมาสแรก อาจทำให้เกิดภาวะแทรกซ้อนรุนแรงในทารก เช่น หูหนวก หัวใจพิการ ต้อกระจก และความพิการทางสมอง\n   - **การรักษาทารก:** ต้องใช้ทรัพยากรในการรักษาทารกที่เกิดจากมารดาที่ติดเชื้อ ซึ่งอาจต้องใช้การรักษาที่ซับซ้อนและยาวนาน\n\n### ผลกระทบต่อเศรษฐกิจ\n\n1. **การสูญเสียกำลังแรงงาน:**\n   - **การขาดงาน:** ผู้ป่วยที่ติดเชื้อหัดเยอรมันอาจต้องหยุดทำงานเพื่อรักษาตัว ทำให้เกิดการสูญเสียกำลังแรงงาน\n   - **การดูแลผู้ป่วย:** ผู้ที่ต้องดูแลผู้ป่วย เช่น ผู้ปกครองหรือบุคคลในครอบครัว อาจต้องหยุดงานเพื่อดูแลผู้ป่วย ทำให้เกิดการสูญเสียรายได้\n\n2. **ต้นทุนการรักษา:**\n   - **ค่ารักษาพยาบาล:** ค่าใช้จ่ายในการรักษาผู้ป่วยที่มีอาการรุนแรง เช่น ข้ออักเสบ สมองอักเสบ หรือการเลือดออกผิดปกติ อาจสูง\n   - **ค่ารักษาทารก:** ค่าใช้จ่ายในการรักษาทารกที่เกิดจากมารดาที่ติดเชื้อหัดเยอรมัน อาจสูงและยาวนาน\n\n3. **การสูญเสียรายได้ของครอบครัว:**\n   - **การดูแลทารก:** ครอบครัวที่มีทารกพิการจากหัดเยอรมันอาจต้องใช้ทรั",
+        "chars": 1881,
+        "truncated": true,
+        "no_evidence": false,
+        "has_cjk": false,
+        "citations": 0,
+        "seconds": 27.7
+      },
+      "improved": {
+        "answer": "เอกสารไม่ได้ระบุ",
+        "chars": 16,
+        "truncated": false,
+        "no_evidence": false,
+        "has_cjk": false,
+        "citations": 0,
+        "seconds": 1.6
+      }
+    }
+  ]
+}

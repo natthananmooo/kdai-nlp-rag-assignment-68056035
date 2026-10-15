@@ -1,0 +1,2040 @@
+{
+ "stats": {
+  "nodes": 119,
+  "edges": 208,
+  "nodes_by_label": {
+   "Disease": 4,
+   "Concept": 23,
+   "Topic": 39,
+   "Section": 53
+  },
+  "edges_by_relationship": {
+   "HAS_TOPIC": 39,
+   "ABOUT_TOPIC": 53,
+   "MENTIONS": 112,
+   "MENTIONS_DISEASE": 4
+  },
+  "weakly_connected": true,
+  "average_degree": 3.5,
+  "cross_document_edges": 4,
+  "concept_hubs": [
+   {
+    "node": "concept:pregnancy",
+    "name": "การตั้งครรภ์",
+    "degree": 12
+   },
+   {
+    "node": "concept:surgery",
+    "name": "การผ่าตัด",
+    "degree": 10
+   },
+   {
+    "node": "concept:glaucoma",
+    "name": "ต้อหิน",
+    "degree": 9
+   },
+   {
+    "node": "concept:measles",
+    "name": "โรคหัด",
+    "degree": 8
+   },
+   {
+    "node": "concept:diabetes",
+    "name": "เบาหวาน",
+    "degree": 7
+   }
+  ]
+ },
+ "nodes": [
+  {
+   "id": "disease:rubella",
+   "label": "Disease",
+   "name": "หัดเยอรมัน"
+  },
+  {
+   "id": "disease:cholera",
+   "label": "Disease",
+   "name": "อหิวาตกโรค"
+  },
+  {
+   "id": "disease:cataract",
+   "label": "Disease",
+   "name": "ต้อกระจก"
+  },
+  {
+   "id": "disease:gerd",
+   "label": "Disease",
+   "name": "กรดไหลย้อน"
+  },
+  {
+   "id": "concept:pregnancy",
+   "label": "Concept",
+   "name": "การตั้งครรภ์"
+  },
+  {
+   "id": "concept:congenital",
+   "label": "Concept",
+   "name": "ความผิดปกติแต่กำเนิด"
+  },
+  {
+   "id": "concept:deafness",
+   "label": "Concept",
+   "name": "หูหนวก"
+  },
+  {
+   "id": "concept:encephalitis",
+   "label": "Concept",
+   "name": "สมองอักเสบ"
+  },
+  {
+   "id": "concept:arthritis",
+   "label": "Concept",
+   "name": "ข้ออักเสบ"
+  },
+  {
+   "id": "concept:measles",
+   "label": "Concept",
+   "name": "โรคหัด"
+  },
+  {
+   "id": "concept:dengue",
+   "label": "Concept",
+   "name": "ไข้เลือดออก"
+  },
+  {
+   "id": "concept:vaccine",
+   "label": "Concept",
+   "name": "วัคซีน"
+  },
+  {
+   "id": "concept:diabetes",
+   "label": "Concept",
+   "name": "เบาหวาน"
+  },
+  {
+   "id": "concept:hypertension",
+   "label": "Concept",
+   "name": "ความดันโลหิตสูง"
+  },
+  {
+   "id": "concept:glaucoma",
+   "label": "Concept",
+   "name": "ต้อหิน"
+  },
+  {
+   "id": "concept:steroid",
+   "label": "Concept",
+   "name": "ยาสเตียรอยด์"
+  },
+  {
+   "id": "concept:smoking",
+   "label": "Concept",
+   "name": "บุหรี่"
+  },
+  {
+   "id": "concept:alcohol",
+   "label": "Concept",
+   "name": "แอลกอฮอล์"
+  },
+  {
+   "id": "concept:obesity",
+   "label": "Concept",
+   "name": "โรคอ้วน"
+  },
+  {
+   "id": "concept:dehydration",
+   "label": "Concept",
+   "name": "ภาวะขาดน้ำ"
+  },
+  {
+   "id": "concept:antibiotic",
+   "label": "Concept",
+   "name": "ยาปฏิชีวนะ"
+  },
+  {
+   "id": "concept:handwashing",
+   "label": "Concept",
+   "name": "การล้างมือ"
+  },
+  {
+   "id": "concept:esophagus",
+   "label": "Concept",
+   "name": "หลอดอาหาร"
+  },
+  {
+   "id": "concept:lens_implant",
+   "label": "Concept",
+   "name": "เลนส์แก้วตาเทียม"
+  },
+  {
+   "id": "concept:surgery",
+   "label": "Concept",
+   "name": "การผ่าตัด"
+  },
+  {
+   "id": "concept:antacid",
+   "label": "Concept",
+   "name": "ยาลดกรด"
+  },
+  {
+   "id": "concept:cancer",
+   "label": "Concept",
+   "name": "มะเร็ง"
+  },
+  {
+   "id": "topic:rubella:overview",
+   "label": "Topic",
+   "name": "ภาพรวม (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "overview"
+  },
+  {
+   "id": "section:doc_0",
+   "label": "Section",
+   "name": "หัดเยอรมัน อาการ สาเหตุ และการรักษาโรคหัดเยอรมัน 10 วิธี !!",
+   "section_id": "doc_0",
+   "disease": "rubella",
+   "topic": "overview"
+  },
+  {
+   "id": "section:doc_1",
+   "label": "Section",
+   "name": "โรคหัดเยอรมัน",
+   "section_id": "doc_1",
+   "disease": "rubella",
+   "topic": "overview"
+  },
+  {
+   "id": "topic:rubella:cause",
+   "label": "Topic",
+   "name": "สาเหตุ (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "cause"
+  },
+  {
+   "id": "section:doc_2",
+   "label": "Section",
+   "name": "สาเหตุของโรคหัดเยอรมัน",
+   "section_id": "doc_2",
+   "disease": "rubella",
+   "topic": "cause"
+  },
+  {
+   "id": "topic:rubella:symptom",
+   "label": "Topic",
+   "name": "อาการ (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "symptom"
+  },
+  {
+   "id": "section:doc_3",
+   "label": "Section",
+   "name": "อาการของโรคหัดเยอรมัน",
+   "section_id": "doc_3",
+   "disease": "rubella",
+   "topic": "symptom"
+  },
+  {
+   "id": "topic:rubella:complication",
+   "label": "Topic",
+   "name": "ภาวะแทรกซ้อน (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "complication"
+  },
+  {
+   "id": "section:doc_4",
+   "label": "Section",
+   "name": "ภาวะแทรกซ้อนของโรคหัดเยอรมัน",
+   "section_id": "doc_4",
+   "disease": "rubella",
+   "topic": "complication"
+  },
+  {
+   "id": "section:doc_5",
+   "label": "Section",
+   "name": "ภาวะแทรกซ้อนที่อาจพบได้ในคนทั่วไปที่เป็นโรคหัดเยอรมัน มีดังนี้",
+   "section_id": "doc_5",
+   "disease": "rubella",
+   "topic": "complication"
+  },
+  {
+   "id": "section:doc_6",
+   "label": "Section",
+   "name": "ภาวะแทรกซ้อนที่พบได้ในหญิงตั้งครรภ์",
+   "section_id": "doc_6",
+   "disease": "rubella",
+   "topic": "complication"
+  },
+  {
+   "id": "topic:rubella:diagnosis",
+   "label": "Topic",
+   "name": "การวินิจฉัย (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "diagnosis"
+  },
+  {
+   "id": "section:doc_7",
+   "label": "Section",
+   "name": "สิ่งที่ตรวจพบในผู้ป่วยหัดเยอรมัน",
+   "section_id": "doc_7",
+   "disease": "rubella",
+   "topic": "diagnosis"
+  },
+  {
+   "id": "topic:rubella:differential",
+   "label": "Topic",
+   "name": "การแยกโรค (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "differential"
+  },
+  {
+   "id": "section:doc_8",
+   "label": "Section",
+   "name": "การแยกโรค",
+   "section_id": "doc_8",
+   "disease": "rubella",
+   "topic": "differential"
+  },
+  {
+   "id": "topic:rubella:treatment",
+   "label": "Topic",
+   "name": "การรักษา (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "treatment"
+  },
+  {
+   "id": "section:doc_9",
+   "label": "Section",
+   "name": "วิธีการรักษาโรคหัดเยอรมัน",
+   "section_id": "doc_9",
+   "disease": "rubella",
+   "topic": "treatment"
+  },
+  {
+   "id": "topic:rubella:advice",
+   "label": "Topic",
+   "name": "คำแนะนำ (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "advice"
+  },
+  {
+   "id": "section:doc_10",
+   "label": "Section",
+   "name": "คำแนะนำและการปฏิบัติตัวของผู้ป่วยโรคหัดเยอรมัน มีดังนี้",
+   "section_id": "doc_10",
+   "disease": "rubella",
+   "topic": "advice"
+  },
+  {
+   "id": "section:doc_11",
+   "label": "Section",
+   "name": "ควรไปพบแพทย์เมื่อ",
+   "section_id": "doc_11",
+   "disease": "rubella",
+   "topic": "advice"
+  },
+  {
+   "id": "section:doc_12",
+   "label": "Section",
+   "name": "สมุนไพรรักษาหัดเยอรมัน (ตามองค์ความรู้ดั้งเดิม) มีอยู่หลายชนิด เช่น",
+   "section_id": "doc_12",
+   "disease": "rubella",
+   "topic": "treatment"
+  },
+  {
+   "id": "topic:rubella:prevention",
+   "label": "Topic",
+   "name": "การป้องกัน (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "prevention"
+  },
+  {
+   "id": "section:doc_13",
+   "label": "Section",
+   "name": "วิธีป้องกันโรคหัดเยอรมัน",
+   "section_id": "doc_13",
+   "disease": "rubella",
+   "topic": "prevention"
+  },
+  {
+   "id": "topic:rubella:related",
+   "label": "Topic",
+   "name": "เรื่องที่เกี่ยวข้อง (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "related"
+  },
+  {
+   "id": "section:doc_14",
+   "label": "Section",
+   "name": "เรื่องที่เกี่ยวข้อง",
+   "section_id": "doc_14",
+   "disease": "rubella",
+   "topic": "related"
+  },
+  {
+   "id": "topic:rubella:reference",
+   "label": "Topic",
+   "name": "แหล่งอ้างอิง (หัดเยอรมัน)",
+   "disease": "rubella",
+   "topic": "reference"
+  },
+  {
+   "id": "section:doc_15",
+   "label": "Section",
+   "name": "เอกสารอ้างอิง",
+   "section_id": "doc_15",
+   "disease": "rubella",
+   "topic": "reference"
+  },
+  {
+   "id": "section:doc_16",
+   "label": "Section",
+   "name": "เมดไทย",
+   "section_id": "doc_16",
+   "disease": "rubella",
+   "topic": "reference"
+  },
+  {
+   "id": "topic:cholera:overview",
+   "label": "Topic",
+   "name": "ภาพรวม (อหิวาตกโรค)",
+   "disease": "cholera",
+   "topic": "overview"
+  },
+  {
+   "id": "section:doc_17",
+   "label": "Section",
+   "name": "อหิวาตกโรค (Cholera) อาการ สาเหตุ การรักษาโรคอหิวาตกโรค 3 วิธี !!",
+   "section_id": "doc_17",
+   "disease": "cholera",
+   "topic": "overview"
+  },
+  {
+   "id": "section:doc_18",
+   "label": "Section",
+   "name": "อหิวาตกโรค",
+   "section_id": "doc_18",
+   "disease": "cholera",
+   "topic": "overview"
+  },
+  {
+   "id": "topic:cholera:cause",
+   "label": "Topic",
+   "name": "สาเหตุ (อหิวาตกโรค)",
+   "disease": "cholera",
+   "topic": "cause"
+  },
+  {
+   "id": "section:doc_19",
+   "label": "Section",
+   "name": "สาเหตุของอหิวาตกโรค",
+   "section_id": "doc_19",
+   "disease": "cholera",
+   "topic": "cause"
+  },
+  {
+   "id": "topic:cholera:symptom",
+   "label": "Topic",
+   "name": "อาการ (อหิวาตกโรค)",
+   "disease": "cholera",
+   "topic": "symptom"
+  },
+  {
+   "id": "section:doc_20",
+   "label": "Section",
+   "name": "อาการของอหิวาตกโรค",
+   "section_id": "doc_20",
+   "disease": "cholera",
+   "topic": "symptom"
+  },
+  {
+   "id": "topic:cholera:complication",
+   "label": "Topic",
+   "name": "ภาวะแทรกซ้อน (อหิวาตกโรค)",
+   "disease": "cholera",
+   "topic": "complication"
+  },
+  {
+   "id": "section:doc_21",
+   "label": "Section",
+   "name": "ภาวะแทรกซ้อนของอหิวาตกโรค",
+   "section_id": "doc_21",
+   "disease": "cholera",
+   "topic": "complication"
+  },
+  {
+   "id": "topic:cholera:diagnosis",
+   "label": "Topic",
+   "name": "การวินิจฉัย (อหิวาตกโรค)",
+   "disease": "cholera",
+   "topic": "diagnosis"
+  },
+  {
+   "id": "section:doc_22",
+   "label": "Section",
+   "name": "การวินิจฉัยอหิวาตกโรค",
+   "section_id": "doc_22",
+   "disease": "cholera",
+   "topic": "diagnosis"
+  },
+  {
+   "id": "topic:cholera:treatment",
+   "label": "Topic",
+   "name": "การรักษา (อหิวาตกโรค)",
+   "disease": "cholera",
+   "topic": "treatment"
+  },
+  {
+   "id": "section:doc_23",
+   "label": "Section",
+   "name": "วิธีรักษาอหิวาตกโรค",
+   "section_id": "doc_23",
+   "disease": "cholera",
+   "topic": "treatment"
+  },
+  {
+   "id": "topic:cholera:advice",
+   "label": "Topic",
+   "name": "คำแนะนำ (อหิวาตกโรค)",
+   "disease": "cholera",
+   "topic": "advice"
+  },
+  {
+   "id": "section:doc_24",
+   "label": "Section",
+   "name": "คำแนะนำและข้อควรรู้เกี่ยวกับอหิวาตกโรค",
+   "section_id": "doc_24",
+   "disease": "cholera",
+   "topic": "advice"
+  },
+  {
+   "id": "topic:cholera:prevention",
+   "label": "Topic",
+   "name": "การป้องกัน (อหิวาตกโรค)",
+   "disease": "cholera",
+   "topic": "prevention"
+  },
+  {
+   "id": "section:doc_25",
+   "label": "Section",
+   "name": "วิธีป้องกันอหิวาตกโรค",
+   "section_id": "doc_25",
+   "disease": "cholera",
+   "topic": "prevention"
+  },
+  {
+   "id": "topic:cholera:reference",
+   "label": "Topic",
+   "name": "แหล่งอ้างอิง (อหิวาตกโรค)",
+   "disease": "cholera",
+   "topic": "reference"
+  },
+  {
+   "id": "section:doc_26",
+   "label": "Section",
+   "name": "เอกสารอ้างอิง",
+   "section_id": "doc_26",
+   "disease": "cholera",
+   "topic": "reference"
+  },
+  {
+   "id": "topic:cataract:overview",
+   "label": "Topic",
+   "name": "ภาพรวม (ต้อกระจก)",
+   "disease": "cataract",
+   "topic": "overview"
+  },
+  {
+   "id": "section:doc_27",
+   "label": "Section",
+   "name": "ต้อกระจก (Cataract) อาการ สาเหตุ และการรักษาโรคต้อกระจก 12 วิธี !!",
+   "section_id": "doc_27",
+   "disease": "cataract",
+   "topic": "overview"
+  },
+  {
+   "id": "section:doc_28",
+   "label": "Section",
+   "name": "โรคต้อกระจก",
+   "section_id": "doc_28",
+   "disease": "cataract",
+   "topic": "overview"
+  },
+  {
+   "id": "topic:cataract:cause",
+   "label": "Topic",
+   "name": "สาเหตุ (ต้อกระจก)",
+   "disease": "cataract",
+   "topic": "cause"
+  },
+  {
+   "id": "section:doc_29",
+   "label": "Section",
+   "name": "สาเหตุของต้อกระจก",
+   "section_id": "doc_29",
+   "disease": "cataract",
+   "topic": "cause"
+  },
+  {
+   "id": "topic:cataract:symptom",
+   "label": "Topic",
+   "name": "อาการ (ต้อกระจก)",
+   "disease": "cataract",
+   "topic": "symptom"
+  },
+  {
+   "id": "section:doc_30",
+   "label": "Section",
+   "name": "อาการของต้อกระจก",
+   "section_id": "doc_30",
+   "disease": "cataract",
+   "topic": "symptom"
+  },
+  {
+   "id": "topic:cataract:diagnosis",
+   "label": "Topic",
+   "name": "การวินิจฉัย (ต้อกระจก)",
+   "disease": "cataract",
+   "topic": "diagnosis"
+  },
+  {
+   "id": "section:doc_31",
+   "label": "Section",
+   "name": "การวินิจฉัยต้อกระจก",
+   "section_id": "doc_31",
+   "disease": "cataract",
+   "topic": "diagnosis"
+  },
+  {
+   "id": "topic:cataract:complication",
+   "label": "Topic",
+   "name": "ภาวะแทรกซ้อน (ต้อกระจก)",
+   "disease": "cataract",
+   "topic": "complication"
+  },
+  {
+   "id": "section:doc_32",
+   "label": "Section",
+   "name": "ภาวะแทรกซ้อนของต้อกระจก",
+   "section_id": "doc_32",
+   "disease": "cataract",
+   "topic": "complication"
+  },
+  {
+   "id": "topic:cataract:treatment",
+   "label": "Topic",
+   "name": "การรักษา (ต้อกระจก)",
+   "disease": "cataract",
+   "topic": "treatment"
+  },
+  {
+   "id": "section:doc_33",
+   "label": "Section",
+   "name": "วิธีรักษาต้อกระจก",
+   "section_id": "doc_33",
+   "disease": "cataract",
+   "topic": "treatment"
+  },
+  {
+   "id": "section:doc_34",
+   "label": "Section",
+   "name": "4. วิธีการผ่าตัดต่อกระจกแบบมาตรฐาน :",
+   "section_id": "doc_34",
+   "disease": "cataract",
+   "topic": "treatment"
+  },
+  {
+   "id": "section:doc_35",
+   "label": "Section",
+   "name": "5. ขั้นตอนการผ่าตัดต่อกระจก :",
+   "section_id": "doc_35",
+   "disease": "cataract",
+   "topic": "treatment"
+  },
+  {
+   "id": "section:doc_36",
+   "label": "Section",
+   "name": "ผลการรักษาต้อกระจกด้วยการผ่าตัด",
+   "section_id": "doc_36",
+   "disease": "cataract",
+   "topic": "treatment"
+  },
+  {
+   "id": "topic:cataract:prevention",
+   "label": "Topic",
+   "name": "การป้องกัน (ต้อกระจก)",
+   "disease": "cataract",
+   "topic": "prevention"
+  },
+  {
+   "id": "section:doc_37",
+   "label": "Section",
+   "name": "วิธีป้องกันต้อกระจก",
+   "section_id": "doc_37",
+   "disease": "cataract",
+   "topic": "prevention"
+  },
+  {
+   "id": "topic:cataract:related",
+   "label": "Topic",
+   "name": "เรื่องที่เกี่ยวข้อง (ต้อกระจก)",
+   "disease": "cataract",
+   "topic": "related"
+  },
+  {
+   "id": "section:doc_38",
+   "label": "Section",
+   "name": "เรื่องที่เกี่ยวข้อง",
+   "section_id": "doc_38",
+   "disease": "cataract",
+   "topic": "related"
+  },
+  {
+   "id": "topic:cataract:reference",
+   "label": "Topic",
+   "name": "แหล่งอ้างอิง (ต้อกระจก)",
+   "disease": "cataract",
+   "topic": "reference"
+  },
+  {
+   "id": "section:doc_39",
+   "label": "Section",
+   "name": "เอกสารอ้างอิง",
+   "section_id": "doc_39",
+   "disease": "cataract",
+   "topic": "reference"
+  },
+  {
+   "id": "section:doc_40",
+   "label": "Section",
+   "name": "เมดไทย",
+   "section_id": "doc_40",
+   "disease": "cataract",
+   "topic": "reference"
+  },
+  {
+   "id": "topic:gerd:overview",
+   "label": "Topic",
+   "name": "ภาพรวม (กรดไหลย้อน)",
+   "disease": "gerd",
+   "topic": "overview"
+  },
+  {
+   "id": "section:doc_41",
+   "label": "Section",
+   "name": "กรดไหลย้อน (GERD) อาการ, สาเหตุ, การรักษาโรคกรดไหลย้อน 25 วิธี !",
+   "section_id": "doc_41",
+   "disease": "gerd",
+   "topic": "overview"
+  },
+  {
+   "id": "section:doc_42",
+   "label": "Section",
+   "name": "โรคกรดไหลย้อน",
+   "section_id": "doc_42",
+   "disease": "gerd",
+   "topic": "overview"
+  },
+  {
+   "id": "topic:gerd:cause",
+   "label": "Topic",
+   "name": "สาเหตุ (กรดไหลย้อน)",
+   "disease": "gerd",
+   "topic": "cause"
+  },
+  {
+   "id": "section:doc_43",
+   "label": "Section",
+   "name": "สาเหตุของโรคกรดไหลย้อน",
+   "section_id": "doc_43",
+   "disease": "gerd",
+   "topic": "cause"
+  },
+  {
+   "id": "topic:gerd:risk",
+   "label": "Topic",
+   "name": "ปัจจัยเสี่ยง (กรดไหลย้อน)",
+   "disease": "gerd",
+   "topic": "risk"
+  },
+  {
+   "id": "section:doc_44",
+   "label": "Section",
+   "name": "ปัจจัยเสี่ยงที่ทำให้โรคกรดไหลย้อนกำเริบ",
+   "section_id": "doc_44",
+   "disease": "gerd",
+   "topic": "risk"
+  },
+  {
+   "id": "topic:gerd:symptom",
+   "label": "Topic",
+   "name": "อาการ (กรดไหลย้อน)",
+   "disease": "gerd",
+   "topic": "symptom"
+  },
+  {
+   "id": "section:doc_45",
+   "label": "Section",
+   "name": "อาการของโรคกรดไหลย้อน",
+   "section_id": "doc_45",
+   "disease": "gerd",
+   "topic": "symptom"
+  },
+  {
+   "id": "topic:gerd:complication",
+   "label": "Topic",
+   "name": "ภาวะแทรกซ้อน (กรดไหลย้อน)",
+   "disease": "gerd",
+   "topic": "complication"
+  },
+  {
+   "id": "section:doc_46",
+   "label": "Section",
+   "name": "ภาวะแทรกซ้อนของโรคกรดไหลย้อน",
+   "section_id": "doc_46",
+   "disease": "gerd",
+   "topic": "complication"
+  },
+  {
+   "id": "topic:gerd:diagnosis",
+   "label": "Topic",
+   "name": "การวินิจฉัย (กรดไหลย้อน)",
+   "disease": "gerd",
+   "topic": "diagnosis"
+  },
+  {
+   "id": "section:doc_47",
+   "label": "Section",
+   "name": "การวินิจฉัยโรคกรดไหลย้อน",
+   "section_id": "doc_47",
+   "disease": "gerd",
+   "topic": "diagnosis"
+  },
+  {
+   "id": "topic:gerd:treatment",
+   "label": "Topic",
+   "name": "การรักษา (กรดไหลย้อน)",
+   "disease": "gerd",
+   "topic": "treatment"
+  },
+  {
+   "id": "section:doc_48",
+   "label": "Section",
+   "name": "วิธีรักษาโรคกรดไหลย้อน",
+   "section_id": "doc_48",
+   "disease": "gerd",
+   "topic": "treatment"
+  },
+  {
+   "id": "topic:gerd:prevention",
+   "label": "Topic",
+   "name": "การป้องกัน (กรดไหลย้อน)",
+   "disease": "gerd",
+   "topic": "prevention"
+  },
+  {
+   "id": "section:doc_49",
+   "label": "Section",
+   "name": "วิธีป้องกันโรคกรดไหลย้อน",
+   "section_id": "doc_49",
+   "disease": "gerd",
+   "topic": "prevention"
+  },
+  {
+   "id": "topic:gerd:related",
+   "label": "Topic",
+   "name": "เรื่องที่เกี่ยวข้อง (กรดไหลย้อน)",
+   "disease": "gerd",
+   "topic": "related"
+  },
+  {
+   "id": "section:doc_50",
+   "label": "Section",
+   "name": "เรื่องที่เกี่ยวข้อง",
+   "section_id": "doc_50",
+   "disease": "gerd",
+   "topic": "related"
+  },
+  {
+   "id": "topic:gerd:reference",
+   "label": "Topic",
+   "name": "แหล่งอ้างอิง (กรดไหลย้อน)",
+   "disease": "gerd",
+   "topic": "reference"
+  },
+  {
+   "id": "section:doc_51",
+   "label": "Section",
+   "name": "เอกสารอ้างอิง",
+   "section_id": "doc_51",
+   "disease": "gerd",
+   "topic": "reference"
+  },
+  {
+   "id": "section:doc_52",
+   "label": "Section",
+   "name": "เมดไทย",
+   "section_id": "doc_52",
+   "disease": "gerd",
+   "topic": "reference"
+  }
+ ],
+ "edges": [
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:overview",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:cause",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:symptom",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:complication",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:diagnosis",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:differential",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:treatment",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:advice",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:prevention",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:related",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:rubella",
+   "target": "topic:rubella:reference",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cholera",
+   "target": "topic:cholera:overview",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cholera",
+   "target": "topic:cholera:cause",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cholera",
+   "target": "topic:cholera:symptom",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cholera",
+   "target": "topic:cholera:complication",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cholera",
+   "target": "topic:cholera:diagnosis",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cholera",
+   "target": "topic:cholera:treatment",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cholera",
+   "target": "topic:cholera:advice",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cholera",
+   "target": "topic:cholera:prevention",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cholera",
+   "target": "topic:cholera:reference",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cataract",
+   "target": "topic:cataract:overview",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cataract",
+   "target": "topic:cataract:cause",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cataract",
+   "target": "topic:cataract:symptom",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cataract",
+   "target": "topic:cataract:diagnosis",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cataract",
+   "target": "topic:cataract:complication",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cataract",
+   "target": "topic:cataract:treatment",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cataract",
+   "target": "topic:cataract:prevention",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cataract",
+   "target": "topic:cataract:related",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:cataract",
+   "target": "topic:cataract:reference",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:gerd",
+   "target": "topic:gerd:overview",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:gerd",
+   "target": "topic:gerd:cause",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:gerd",
+   "target": "topic:gerd:risk",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:gerd",
+   "target": "topic:gerd:symptom",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:gerd",
+   "target": "topic:gerd:complication",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:gerd",
+   "target": "topic:gerd:diagnosis",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:gerd",
+   "target": "topic:gerd:treatment",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:gerd",
+   "target": "topic:gerd:prevention",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:gerd",
+   "target": "topic:gerd:related",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "disease:gerd",
+   "target": "topic:gerd:reference",
+   "relationship": "HAS_TOPIC"
+  },
+  {
+   "source": "section:doc_0",
+   "target": "topic:rubella:overview",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_1",
+   "target": "topic:rubella:overview",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_1",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 3
+  },
+  {
+   "source": "section:doc_1",
+   "target": "concept:measles",
+   "relationship": "MENTIONS",
+   "count": 4
+  },
+  {
+   "source": "section:doc_2",
+   "target": "topic:rubella:cause",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_2",
+   "target": "concept:measles",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_2",
+   "target": "concept:alcohol",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_3",
+   "target": "topic:rubella:symptom",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_3",
+   "target": "disease:cataract",
+   "relationship": "MENTIONS_DISEASE",
+   "count": 1
+  },
+  {
+   "source": "section:doc_3",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_3",
+   "target": "concept:deafness",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_3",
+   "target": "concept:measles",
+   "relationship": "MENTIONS",
+   "count": 5
+  },
+  {
+   "source": "section:doc_4",
+   "target": "topic:rubella:complication",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_5",
+   "target": "topic:rubella:complication",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_5",
+   "target": "concept:encephalitis",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_5",
+   "target": "concept:arthritis",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_6",
+   "target": "topic:rubella:complication",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_6",
+   "target": "disease:cataract",
+   "relationship": "MENTIONS_DISEASE",
+   "count": 1
+  },
+  {
+   "source": "section:doc_6",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 10
+  },
+  {
+   "source": "section:doc_6",
+   "target": "concept:congenital",
+   "relationship": "MENTIONS",
+   "count": 4
+  },
+  {
+   "source": "section:doc_6",
+   "target": "concept:deafness",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_6",
+   "target": "concept:encephalitis",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_6",
+   "target": "concept:diabetes",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_6",
+   "target": "concept:glaucoma",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_7",
+   "target": "topic:rubella:diagnosis",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_8",
+   "target": "topic:rubella:differential",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_8",
+   "target": "concept:measles",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_8",
+   "target": "concept:dengue",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_8",
+   "target": "concept:antibiotic",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_9",
+   "target": "topic:rubella:treatment",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_9",
+   "target": "disease:cataract",
+   "relationship": "MENTIONS_DISEASE",
+   "count": 1
+  },
+  {
+   "source": "section:doc_9",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 7
+  },
+  {
+   "source": "section:doc_9",
+   "target": "concept:encephalitis",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_9",
+   "target": "concept:arthritis",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_9",
+   "target": "concept:glaucoma",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_9",
+   "target": "concept:steroid",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_9",
+   "target": "concept:surgery",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_10",
+   "target": "topic:rubella:advice",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_10",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 3
+  },
+  {
+   "source": "section:doc_10",
+   "target": "concept:congenital",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_10",
+   "target": "concept:measles",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_10",
+   "target": "concept:vaccine",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_11",
+   "target": "topic:rubella:advice",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_11",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_11",
+   "target": "concept:deafness",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_11",
+   "target": "concept:encephalitis",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_11",
+   "target": "concept:vaccine",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_12",
+   "target": "topic:rubella:treatment",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_12",
+   "target": "concept:measles",
+   "relationship": "MENTIONS",
+   "count": 4
+  },
+  {
+   "source": "section:doc_13",
+   "target": "topic:rubella:prevention",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_13",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 3
+  },
+  {
+   "source": "section:doc_13",
+   "target": "concept:measles",
+   "relationship": "MENTIONS",
+   "count": 4
+  },
+  {
+   "source": "section:doc_13",
+   "target": "concept:vaccine",
+   "relationship": "MENTIONS",
+   "count": 18
+  },
+  {
+   "source": "section:doc_13",
+   "target": "concept:alcohol",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_13",
+   "target": "concept:handwashing",
+   "relationship": "MENTIONS",
+   "count": 3
+  },
+  {
+   "source": "section:doc_14",
+   "target": "topic:rubella:related",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_14",
+   "target": "concept:measles",
+   "relationship": "MENTIONS",
+   "count": 3
+  },
+  {
+   "source": "section:doc_15",
+   "target": "topic:rubella:reference",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_16",
+   "target": "topic:rubella:reference",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_17",
+   "target": "topic:cholera:overview",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_18",
+   "target": "topic:cholera:overview",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_18",
+   "target": "concept:dehydration",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_19",
+   "target": "topic:cholera:cause",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_19",
+   "target": "concept:dehydration",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_19",
+   "target": "concept:antibiotic",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_19",
+   "target": "concept:surgery",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_19",
+   "target": "concept:antacid",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_20",
+   "target": "topic:cholera:symptom",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_20",
+   "target": "concept:dehydration",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_21",
+   "target": "topic:cholera:complication",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_21",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_21",
+   "target": "concept:dehydration",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_22",
+   "target": "topic:cholera:diagnosis",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_22",
+   "target": "concept:dehydration",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_23",
+   "target": "topic:cholera:treatment",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_23",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_23",
+   "target": "concept:dehydration",
+   "relationship": "MENTIONS",
+   "count": 6
+  },
+  {
+   "source": "section:doc_23",
+   "target": "concept:antibiotic",
+   "relationship": "MENTIONS",
+   "count": 3
+  },
+  {
+   "source": "section:doc_24",
+   "target": "topic:cholera:advice",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_24",
+   "target": "concept:antibiotic",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_25",
+   "target": "topic:cholera:prevention",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_25",
+   "target": "concept:vaccine",
+   "relationship": "MENTIONS",
+   "count": 5
+  },
+  {
+   "source": "section:doc_25",
+   "target": "concept:antibiotic",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_25",
+   "target": "concept:handwashing",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_26",
+   "target": "topic:cholera:reference",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_27",
+   "target": "topic:cataract:overview",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_28",
+   "target": "topic:cataract:overview",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_29",
+   "target": "topic:cataract:cause",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_29",
+   "target": "disease:rubella",
+   "relationship": "MENTIONS_DISEASE",
+   "count": 1
+  },
+  {
+   "source": "section:doc_29",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_29",
+   "target": "concept:congenital",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_29",
+   "target": "concept:diabetes",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_29",
+   "target": "concept:hypertension",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_29",
+   "target": "concept:glaucoma",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_29",
+   "target": "concept:steroid",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_29",
+   "target": "concept:smoking",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_29",
+   "target": "concept:alcohol",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_29",
+   "target": "concept:obesity",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_29",
+   "target": "concept:cancer",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_30",
+   "target": "topic:cataract:symptom",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_31",
+   "target": "topic:cataract:diagnosis",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_31",
+   "target": "concept:diabetes",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_31",
+   "target": "concept:glaucoma",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_32",
+   "target": "topic:cataract:complication",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_32",
+   "target": "concept:glaucoma",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_32",
+   "target": "concept:surgery",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_33",
+   "target": "topic:cataract:treatment",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_33",
+   "target": "concept:congenital",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_33",
+   "target": "concept:diabetes",
+   "relationship": "MENTIONS",
+   "count": 3
+  },
+  {
+   "source": "section:doc_33",
+   "target": "concept:hypertension",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_33",
+   "target": "concept:glaucoma",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_33",
+   "target": "concept:surgery",
+   "relationship": "MENTIONS",
+   "count": 20
+  },
+  {
+   "source": "section:doc_34",
+   "target": "topic:cataract:treatment",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_34",
+   "target": "concept:surgery",
+   "relationship": "MENTIONS",
+   "count": 8
+  },
+  {
+   "source": "section:doc_35",
+   "target": "topic:cataract:treatment",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_35",
+   "target": "concept:diabetes",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_35",
+   "target": "concept:glaucoma",
+   "relationship": "MENTIONS",
+   "count": 4
+  },
+  {
+   "source": "section:doc_35",
+   "target": "concept:lens_implant",
+   "relationship": "MENTIONS",
+   "count": 10
+  },
+  {
+   "source": "section:doc_35",
+   "target": "concept:surgery",
+   "relationship": "MENTIONS",
+   "count": 15
+  },
+  {
+   "source": "section:doc_36",
+   "target": "topic:cataract:treatment",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_36",
+   "target": "concept:glaucoma",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_36",
+   "target": "concept:lens_implant",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_36",
+   "target": "concept:surgery",
+   "relationship": "MENTIONS",
+   "count": 4
+  },
+  {
+   "source": "section:doc_37",
+   "target": "topic:cataract:prevention",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_37",
+   "target": "concept:steroid",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_37",
+   "target": "concept:smoking",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_37",
+   "target": "concept:alcohol",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_37",
+   "target": "concept:obesity",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_38",
+   "target": "topic:cataract:related",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_38",
+   "target": "concept:glaucoma",
+   "relationship": "MENTIONS",
+   "count": 3
+  },
+  {
+   "source": "section:doc_39",
+   "target": "topic:cataract:reference",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_40",
+   "target": "topic:cataract:reference",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_41",
+   "target": "topic:gerd:overview",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_42",
+   "target": "topic:gerd:overview",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_42",
+   "target": "concept:esophagus",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_43",
+   "target": "topic:gerd:cause",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_43",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_43",
+   "target": "concept:alcohol",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_43",
+   "target": "concept:obesity",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_43",
+   "target": "concept:esophagus",
+   "relationship": "MENTIONS",
+   "count": 15
+  },
+  {
+   "source": "section:doc_44",
+   "target": "topic:gerd:risk",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_44",
+   "target": "concept:pregnancy",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_44",
+   "target": "concept:diabetes",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_44",
+   "target": "concept:smoking",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_44",
+   "target": "concept:alcohol",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_44",
+   "target": "concept:obesity",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_44",
+   "target": "concept:esophagus",
+   "relationship": "MENTIONS",
+   "count": 3
+  },
+  {
+   "source": "section:doc_45",
+   "target": "topic:gerd:symptom",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_45",
+   "target": "concept:esophagus",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_46",
+   "target": "topic:gerd:complication",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_46",
+   "target": "concept:esophagus",
+   "relationship": "MENTIONS",
+   "count": 8
+  },
+  {
+   "source": "section:doc_46",
+   "target": "concept:surgery",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_46",
+   "target": "concept:cancer",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_47",
+   "target": "topic:gerd:diagnosis",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_47",
+   "target": "concept:esophagus",
+   "relationship": "MENTIONS",
+   "count": 7
+  },
+  {
+   "source": "section:doc_47",
+   "target": "concept:cancer",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_48",
+   "target": "topic:gerd:treatment",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_48",
+   "target": "concept:diabetes",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_48",
+   "target": "concept:smoking",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_48",
+   "target": "concept:alcohol",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_48",
+   "target": "concept:obesity",
+   "relationship": "MENTIONS",
+   "count": 3
+  },
+  {
+   "source": "section:doc_48",
+   "target": "concept:esophagus",
+   "relationship": "MENTIONS",
+   "count": 7
+  },
+  {
+   "source": "section:doc_48",
+   "target": "concept:surgery",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_48",
+   "target": "concept:antacid",
+   "relationship": "MENTIONS",
+   "count": 2
+  },
+  {
+   "source": "section:doc_49",
+   "target": "topic:gerd:prevention",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_49",
+   "target": "concept:surgery",
+   "relationship": "MENTIONS",
+   "count": 1
+  },
+  {
+   "source": "section:doc_50",
+   "target": "topic:gerd:related",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_51",
+   "target": "topic:gerd:reference",
+   "relationship": "ABOUT_TOPIC"
+  },
+  {
+   "source": "section:doc_52",
+   "target": "topic:gerd:reference",
+   "relationship": "ABOUT_TOPIC"
+  }
+ ]
+}

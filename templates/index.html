@@ -1,0 +1,344 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RAG สองระบบ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mitr:wght@400;500;600&family=IBM+Plex+Sans+Thai:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --white: #FFFFFF;
+    --ink: #1B2A6B;
+    --ink-soft: #55608F;
+    --line: #DDE3F3;
+    --wash: #F4F7FF;
+    --red: #E5383B;
+    --red-wash: #FFF0F0;
+    --blue: #1F6FEB;
+    --blue-wash: #EEF4FF;
+    --green: #22A45D;
+    --green-wash: #E9F8EF;
+    --yellow: #FFC233;
+    --yellow-wash: #FFF7DE;
+    --radius-l: 18px;
+    --radius-s: 10px;
+    --display: "Mitr", "Noto Sans Thai", system-ui, sans-serif;
+    --body: "IBM Plex Sans Thai", "Noto Sans Thai", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--white); color: var(--ink);
+    font-family: var(--body); font-size: 16px; line-height: 1.65;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 20px; }
+
+  /* ---- หัวเรื่อง: แถบสี่สีคือจุดเด่นของหน้า ---- */
+  .stripe { display: grid; grid-template-columns: 3fr 2fr 1fr 4fr; height: 14px; }
+  .stripe span:nth-child(1) { background: var(--red); }
+  .stripe span:nth-child(2) { background: var(--yellow); }
+  .stripe span:nth-child(3) { background: var(--green); }
+  .stripe span:nth-child(4) { background: var(--blue); }
+  header { padding: 40px 0 28px; }
+  h1 {
+    font-family: var(--display); font-weight: 600; margin: 0;
+    font-size: clamp(30px, 5vw, 52px); line-height: 1.15; letter-spacing: -0.01em;
+    max-width: 18ch;
+  }
+  .lede { margin: 14px 0 0; color: var(--ink-soft); max-width: 62ch; }
+  .status { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px;
+    border-radius: 999px; font-size: 14px; background: var(--wash);
+  }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .dot.red { background: var(--red); } .dot.blue { background: var(--blue); }
+  .dot.green { background: var(--green); } .dot.yellow { background: var(--yellow); }
+  .dot.off { background: #B7BED6; }
+
+  /* ---- ช่องคำถาม ---- */
+  .ask {
+    background: var(--yellow-wash); border-radius: var(--radius-l);
+    padding: 22px; margin-bottom: 30px;
+  }
+  .ask label { font-family: var(--display); font-weight: 500; font-size: 18px; display: block; margin-bottom: 8px; }
+  textarea {
+    width: 100%; min-height: 84px; resize: vertical; padding: 14px 16px;
+    font: inherit; color: var(--ink); background: var(--white);
+    border: 2px solid transparent; border-radius: var(--radius-s); outline: none;
+  }
+  textarea:focus { border-color: var(--yellow); }
+  .samples { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 16px; }
+  .chip {
+    font: inherit; font-size: 14px; color: var(--ink); cursor: pointer;
+    background: var(--white); border: 1.5px solid var(--yellow);
+    border-radius: 999px; padding: 5px 13px; line-height: 1.4;
+  }
+  .chip:hover { background: var(--yellow); }
+  .controls { display: flex; flex-wrap: wrap; align-items: center; gap: 18px; }
+  .check { display: inline-flex; align-items: center; gap: 8px; cursor: pointer; font-size: 15px; }
+  .check input { width: 18px; height: 18px; accent-color: var(--blue); }
+  button.go {
+    font-family: var(--display); font-weight: 500; font-size: 17px; cursor: pointer;
+    background: var(--ink); color: var(--white); border: 0; border-radius: 999px;
+    padding: 11px 26px; margin-left: auto;
+  }
+  button.go:disabled { opacity: .55; cursor: wait; }
+  :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+  .msg { margin-top: 12px; font-size: 15px; min-height: 1.4em; }
+  .msg.err { color: var(--red); }
+
+  /* ---- ผลเทียบสองคอลัมน์ ---- */
+  .versus { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; padding-bottom: 50px; }
+  .sys { border-radius: var(--radius-l); padding: 22px; border-top: 8px solid; }
+  .sys.baseline { background: var(--red-wash); border-color: var(--red); }
+  .sys.improved { background: var(--blue-wash); border-color: var(--blue); }
+  .sys h2 { font-family: var(--display); font-weight: 500; font-size: 22px; margin: 0; }
+  .sys .how { font-size: 14px; color: var(--ink-soft); margin: 4px 0 14px; }
+  .facts { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+  .fact { background: var(--white); border-radius: var(--radius-s); padding: 6px 12px; font-size: 14px; }
+  .fact b { font-family: var(--display); font-weight: 500; font-size: 17px; margin-right: 4px; }
+  .fact.warn { background: var(--red); color: var(--white); }
+  .fact.good { background: var(--green); color: var(--white); }
+
+  .answer { background: var(--white); border-radius: var(--radius-s); padding: 16px 18px; margin-bottom: 16px; }
+  .answer h3 { font-family: var(--display); font-weight: 500; font-size: 17px; margin: 0 0 6px; }
+  .answer .text { white-space: normal; }
+  .answer .text p { margin: 0 0 .6em; }
+  .cite { background: var(--yellow); border-radius: 6px; padding: 0 5px; font-size: 13px; font-weight: 600; }
+  .flags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+  .flag { font-size: 13px; border-radius: 6px; padding: 2px 8px; background: var(--wash); }
+  .flag.bad { background: var(--red); color: var(--white); }
+  .flag.ok { background: var(--green-wash); color: #166B3D; }
+
+  .ev-title { font-family: var(--display); font-weight: 500; font-size: 17px; margin: 0 0 8px; }
+  ol.ev { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .item { background: var(--white); border-radius: var(--radius-s); border-left: 6px solid var(--line); }
+  .item.gold { border-left-color: var(--green); }
+  .item summary { cursor: pointer; padding: 10px 14px; list-style: none; display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; }
+  .item summary::-webkit-details-marker { display: none; }
+  .rank { font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1; grid-row: span 2; align-self: center; width: 1.4em; text-align: center; }
+  .item .t { font-weight: 600; font-size: 15px; line-height: 1.4; }
+  .item .t small { font-weight: 400; color: var(--ink-soft); }
+  .scores { display: flex; flex-wrap: wrap; gap: 6px; font-size: 12.5px; }
+  .score { background: var(--wash); border-radius: 6px; padding: 1px 7px; }
+  .score.miss { color: #8B93B5; }
+  .score.gold { background: var(--green); color: var(--white); }
+  .score.graph { background: var(--green-wash); color: #166B3D; }
+  .gpath { background: var(--green-wash); color: #166B3D; border-radius: 8px; padding: 8px 12px; margin: 0 0 8px; }
+  .bar { height: 5px; border-radius: 3px; background: var(--line); margin-top: 4px; grid-column: 2; }
+  .bar i { display: block; height: 100%; border-radius: 3px; background: var(--blue); }
+  .baseline .bar i { background: var(--red); }
+  .body { padding: 0 14px 14px 14px; font-size: 14.5px; }
+  .ctx { background: var(--yellow-wash); border-radius: 8px; padding: 8px 12px; margin: 0 0 8px; }
+  .ctx.empty { background: var(--red-wash); color: var(--red); }
+  .content { white-space: pre-wrap; max-height: 300px; overflow: auto; color: #2E3A6E; }
+  .placeholder { color: var(--ink-soft); font-size: 15px; background: var(--white); border-radius: var(--radius-s); padding: 16px; }
+
+  footer { border-top: 1px solid var(--line); padding: 22px 0 40px; font-size: 14px; color: var(--ink-soft); }
+  footer p { margin: 0 0 6px; max-width: 80ch; }
+
+  @media (max-width: 860px) {
+    .versus { grid-template-columns: 1fr; }
+    .samples { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 6px; scrollbar-width: thin; }
+    .chip { white-space: nowrap; }
+    button.go { margin-left: 0; width: 100%; }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .loading .sys { animation: pulse 1.2s ease-in-out infinite alternate; }
+    @keyframes pulse { from { opacity: 1; } to { opacity: .55; } }
+  }
+</style>
+</head>
+<body>
+<div class="stripe" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+
+<div class="wrap">
+  <header>
+    <h1>ถามคำถามเดียว แล้วดูว่าระบบไหนหาหลักฐานเจอ</h1>
+    <p class="lede">เทียบ RAG ต้นฉบับจากแล็บ (สีแดง) กับระบบที่ปรับปรุง (สีน้ำเงิน) ด้วยเอกสาร 4 เรื่อง: หัดเยอรมัน อหิวาตกโรค ต้อกระจก และกรดไหลย้อน
+      หลักฐานที่มีแถบสีเขียวคือ section ที่มีคำตอบจริง (เฉพาะคำถามในชุดวัดผล)</p>
+    <div class="status" id="status"><span class="pill"><span class="dot off"></span>กำลังตรวจสถานะ...</span></div>
+  </header>
+
+  <section class="ask" aria-labelledby="qlabel">
+    <label id="qlabel" for="q">คำถามของคุณ</label>
+    <textarea id="q" placeholder="เช่น ทำไมโรคหัดเยอรมันจึงมีอันตรายกับหญิงตั้งครรภ์?"></textarea>
+    <div class="samples" id="samples"></div>
+    <div class="controls">
+      <label class="check"><input type="checkbox" id="wantAnswer" checked> สร้างคำตอบด้วย Qwen (ใช้เครดิต OpenRouter)</label>
+      <label class="check"><input type="checkbox" id="useRerank" checked> ใช้ reranker ในระบบปรับปรุง</label>
+      <label class="check"><input type="checkbox" id="useFilter" checked> <span id="filterLabel">กรองชิ้นที่ไม่เกี่ยวทิ้ง</span></label>
+      <label class="check"><input type="checkbox" id="useGraph" checked> ใช้ GraphRAG</label>
+      <button class="go" id="go">ค้นและเทียบ</button>
+    </div>
+    <div class="msg" id="msg" role="status"></div>
+  </section>
+
+  <main class="versus" id="versus">
+    <section class="sys baseline" aria-labelledby="h-base">
+      <h2 id="h-base">ระบบเดิม (ข้อ 1)</h2>
+      <p class="how">BM25 ตัดคำแบบ standard + vector → RRF → 5 ชิ้น</p>
+      <div id="out-baseline"><p class="placeholder">ผลของระบบเดิมจะแสดงที่นี่</p></div>
+    </section>
+    <section class="sys improved" aria-labelledby="h-imp">
+      <h2 id="h-imp">ระบบปรับปรุง (ข้อ 2)</h2>
+      <p class="how">บริบทไทยจากเอกสารเต็ม + BM25 ภาษาไทย + vector + กราฟความรู้ → RRF 20 ชิ้น → reranker → กรองชิ้นคะแนนต่ำ → ไม่เกิน 5 ชิ้น</p>
+      <div id="out-improved"><p class="placeholder">ผลของระบบปรับปรุงจะแสดงที่นี่</p></div>
+    </section>
+  </main>
+
+  <footer>
+    <p>คะแนน RRF = ผลรวมของ 1 / (60 + อันดับ) จากการค้นแต่ละแบบ ชิ้นที่ทั้ง BM25 และ vector หาเจอจะได้คะแนนสูงกว่า</p>
+    <p>กราฟความรู้สร้างด้วยกฎ ไม่ใช้ LLM เชื่อมโรค หัวข้อ section และคำสำคัญเข้าด้วยกัน แล้วเดินจากคำในคำถามไม่เกิน 2 hop ตามแนวบทความ GraphRAG ของอาจารย์</p>
+    <p>คะแนน rerank มาจาก BAAI/bge-reranker-v2-m3 ซึ่งอ่านคำถามคู่กับเนื้อหาทีละชิ้น ค่ายิ่งใกล้ 1 ยิ่งเกี่ยวข้อง</p>
+    <p>คำตอบสร้างโดย AI เพื่อการเรียนรู้ ไม่ใช่คำแนะนำทางการแพทย์</p>
+  </footer>
+</div>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+
+function md(text) {
+  // แปลง markdown อย่างง่าย: ตัวหนา หัวข้อ รายการ ย่อหน้า และป้ายอ้างอิง [doc_x]
+  const lines = esc(text).split(/\n/);
+  const html = [];
+  let para = [];
+  const flush = () => { if (para.length) { html.push("<p>" + para.join("<br>") + "</p>"); para = []; } };
+  for (const raw of lines) {
+    const line = raw.trim();
+    if (!line) { flush(); continue; }
+    const h = line.match(/^#{1,6}\s+(.*)/);
+    if (h) { flush(); html.push("<p><strong>" + h[1] + "</strong></p>"); continue; }
+    para.push(line);
+  }
+  flush();
+  return html.join("")
+    .replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\[(doc_\d+(?:_p\d+)?)\]/g, '<span class="cite">$1</span>');
+}
+
+async function loadStatus() {
+  try {
+    const s = await (await fetch("/api/status")).json();
+    const pill = (ok, color, text) => `<span class="pill"><span class="dot ${ok ? color : "off"}"></span>${text}</span>`;
+    const cnt = (x) => x.vector == null ? "ยังไม่นำเข้า" : `${x.vector} chunk`;
+    $("status").innerHTML =
+      pill(s.baseline.vector != null, "red", `ระบบเดิม ${cnt(s.baseline)}`) +
+      pill(s.improved.vector != null, "blue", `ระบบปรับปรุง ${cnt(s.improved)}`) +
+      pill(s.reranker, "green", s.reranker ? "reranker พร้อม" : "ปิด reranker") +
+      (s.graph_stats ? pill(true, "green", `กราฟ ${s.graph_stats.nodes} โหนด ${s.graph_stats.edges} เส้น`) : "") +
+      pill(s.llm, "yellow", s.llm ? `LLM ${esc(s.llm_model)}` : "ยังไม่ได้ตั้ง API key");
+    if (!s.llm) { $("wantAnswer").checked = false; $("wantAnswer").disabled = true; }
+    if (!s.reranker) {
+      $("useRerank").checked = false; $("useRerank").disabled = true;
+      $("useFilter").checked = false; $("useFilter").disabled = true;
+    }
+    $("filterLabel").textContent = `กรองชิ้นที่คะแนน rerank ต่ำกว่า ${s.threshold} ทิ้ง`;
+    $("useRerank").onchange = () => { if (!$("useRerank").checked) $("useFilter").checked = false; };
+    $("useFilter").onchange = () => { if ($("useFilter").checked) $("useRerank").checked = true; };
+    $("samples").innerHTML = s.samples.map(q => `<button type="button" class="chip">${esc(q)}</button>`).join("");
+    document.querySelectorAll(".chip").forEach(b => b.onclick = () => { $("q").value = b.textContent; $("q").focus(); });
+  } catch (e) {
+    $("status").innerHTML = '<span class="pill"><span class="dot off"></span>ติดต่อเซิร์ฟเวอร์ไม่ได้</span>';
+  }
+}
+
+function renderSystem(key, data, gold) {
+  const el = $("out-" + key);
+  if (!data) { el.innerHTML = ""; return; }
+  if (data.error) { el.innerHTML = `<p class="placeholder">${esc(data.error)}</p>`; return; }
+  const goldSet = new Set(gold);
+  const res = data.results || [];
+  const hits = res.filter(r => goldSet.has(r.section_id)).length;
+  const withCtx = res.filter(r => (r.context || "").trim()).length;
+
+  let h = '<div class="facts">';
+  h += `<span class="fact ${data.sparse_count === 0 ? "warn" : ""}"><b>${data.sparse_count}</b>ผลจาก BM25</span>`;
+  h += `<span class="fact"><b>${data.dense_count}</b>ผลจาก vector</span>`;
+  if (data.graph_used) h += `<span class="fact"><b>${data.graph_count}</b>ผลจากกราฟ</span>`;
+  if (res.length) h += `<span class="fact ${withCtx < res.length ? "warn" : ""}"><b>${withCtx}/${res.length}</b>ชิ้นมีบริบท</span>`;
+  if (data.filtered_out) h += `<span class="fact"><b>${data.filtered_out}</b>ชิ้นถูกกรองทิ้ง</span>`;
+  if (gold.length) h += `<span class="fact ${hits ? "good" : "warn"}"><b>${hits}/${res.length}</b>ชิ้นตรงคำตอบ</span>`;
+  h += `<span class="fact"><b>${data.seconds}</b>วินาทีค้น</span></div>`;
+
+  if (data.answer !== undefined) {
+    const f = data.answer_flags;
+    h += `<div class="answer"><h3>คำตอบ</h3><div class="text">${md(data.answer)}</div><div class="flags">`;
+    if (f.no_evidence) {
+      h += '<span class="flag ok">ไม่มีหลักฐานผ่านเกณฑ์ จึงไม่ให้ LLM เดาคำตอบ</span>';
+    } else {
+      h += f.truncated ? '<span class="flag bad">ถูกตัดกลางคัน</span>' : '<span class="flag ok">ตอบจบประโยค</span>';
+      h += f.has_cjk ? '<span class="flag bad">มีอักษรจีนปน</span>' : '<span class="flag ok">ภาษาไทยล้วน</span>';
+      h += `<span class="flag">อ้างอิง ${f.citations} แหล่ง</span>`;
+    }
+    h += `<span class="flag">${data.answer_seconds} วินาที</span></div></div>`;
+  }
+
+  if (!res.length) {
+    h += `<p class="placeholder">ไม่มีชิ้นใดผ่านเกณฑ์ความเกี่ยวข้อง${data.threshold ? " " + data.threshold : ""} จึงไม่ได้ส่งหลักฐานให้ LLM</p>`;
+    el.innerHTML = h;
+    return;
+  }
+  const maxScore = Math.max(...res.map(r => r.rerank_score ?? r.rrf), 1e-9);
+  h += `<p class="ev-title">หลักฐาน ${res.length} ชิ้นที่ส่งให้ LLM</p><ol class="ev">`;
+  for (const r of res) {
+    const isGold = goldSet.has(r.section_id);
+    const main = r.rerank_score != null ? r.rerank_score : r.rrf;
+    const sc = [];
+    sc.push(`<span class="score ${r.sparse_rank ? "" : "miss"}">BM25 ${r.sparse_rank ? "อันดับ " + r.sparse_rank : "ไม่เจอ"}</span>`);
+    sc.push(`<span class="score ${r.dense_rank ? "" : "miss"}">vector ${r.dense_rank ? "อันดับ " + r.dense_rank : "ไม่เจอ"}</span>`);
+    if (data.graph_used) sc.push(`<span class="score ${r.graph_rank ? "graph" : "miss"}">กราฟ ${r.graph_rank ? "อันดับ " + r.graph_rank : "ไม่เจอ"}</span>`);
+    sc.push(`<span class="score">RRF ${r.rrf.toFixed(4)}</span>`);
+    if (r.rerank_score != null) sc.push(`<span class="score">rerank ${r.rerank_score.toFixed(3)}</span>`);
+    if (isGold) sc.push('<span class="score gold">ตรงคำตอบ</span>');
+    const ctx = (r.context || "").trim();
+    const parts = (r.title || r.id).split(" › ");
+    const head = parts[parts.length - 1];
+    const docName = parts.length > 1 ? parts[0].replace(/\s*(อาการ|\().*$/, "") : "";
+    h += `<li><details class="item ${isGold ? "gold" : ""}"><summary>
+        <span class="rank">${r.rank}</span>
+        <span class="t">${esc(head)} <small>${docName ? esc(docName) + " " : ""}[${esc(r.id)}]</small></span>
+        <span class="scores">${sc.join("")}</span>
+        <span class="bar"><i style="width:${Math.max(4, 100 * main / maxScore)}%"></i></span>
+      </summary><div class="body">
+        ${r.graph_path ? `<p class="gpath">เส้นทางในกราฟ: ${esc(r.graph_path)}</p>` : ""}
+        <p class="ctx ${ctx ? "" : "empty"}">${ctx ? "บริบท: " + esc(ctx) : "ไม่มีบริบทติดมากับชิ้นนี้"}</p>
+        <div class="content">${esc(r.content)}</div></div></details></li>`;
+  }
+  h += "</ol>";
+  el.innerHTML = h;
+}
+
+async function ask() {
+  const question = $("q").value.trim();
+  if (!question) { $("msg").className = "msg err"; $("msg").textContent = "พิมพ์คำถามก่อนกดค้น"; return; }
+  const answer = $("wantAnswer").checked;
+  $("go").disabled = true;
+  $("versus").classList.add("loading");
+  $("msg").className = "msg";
+  $("msg").textContent = answer ? "กำลังค้นและให้ Qwen เขียนคำตอบทั้งสองระบบ อาจใช้เวลา 30-90 วินาที" : "กำลังค้นเอกสาร...";
+  try {
+    const r = await fetch("/api/ask", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question, answer, rerank: $("useRerank").checked, filter: $("useFilter").checked,
+                             graph: $("useGraph").checked }) });
+    const data = await r.json();
+    if (!r.ok) throw new Error(data.error || "ค้นไม่สำเร็จ");
+    renderSystem("baseline", data.systems.baseline, data.gold);
+    renderSystem("improved", data.systems.improved, data.gold);
+    $("msg").textContent = data.gold.length ? "เสร็จแล้ว คำถามนี้อยู่ในชุดวัดผล จึงแสดงชิ้นที่ตรงคำตอบเป็นสีเขียว" : "เสร็จแล้ว";
+  } catch (e) {
+    $("msg").className = "msg err"; $("msg").textContent = e.message;
+  } finally {
+    $("go").disabled = false; $("versus").classList.remove("loading");
+  }
+}
+
+$("go").onclick = ask;
+$("q").addEventListener("keydown", e => { if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) ask(); });
+loadStatus();
+</script>
+</body>
+</html>

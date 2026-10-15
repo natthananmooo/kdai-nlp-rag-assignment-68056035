@@ -1,0 +1,14 @@
+# ทดสอบบน macOS Intel + Python 3.10 (conda env advrag)
+# Mac ชิป Intel ติดตั้ง torch ได้สูงสุด 2.2.2 จึงต้องตรึง numpy / transformers / sentence-transformers
+torch==2.2.2
+numpy<2
+transformers==4.49.0
+sentence-transformers==3.4.1
+opensearch-py
+openai
+llama-index-core
+flask
+tqdm
+
+# โค้ดต้นฉบับใน original/ ใช้ไลบรารีเพิ่มตาม readme ของอาจารย์ ติดตั้งตามขั้นตอนของอาจารย์:
+#   llama-index  llama-index-embeddings-huggingface  langchain==0.0.354  langchain_community
