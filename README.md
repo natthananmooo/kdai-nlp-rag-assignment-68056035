@@ -58,7 +58,7 @@
 ## สารบัญ
 
 1. [ระบบเดิม (ตามสไลด์หน้า 22 และ 25)](#1-ระบบเดิม-ตามสไลด์หน้า-22-และ-25)
-2. [การปรับปรุง](#2-การปรับปรุง) · [ภาพรวมขั้นตอน](#ภาพรวมขั้นตอน) · [GraphRAG](#graphrag-ตามแนวบทความของอาจารย์)
+2. [การปรับปรุง](#2-การปรับปรุง) · [ดูทีละเทคนิค](#ดูทีละเทคนิคด้วยตัวอย่างจริง) · [ภาพรวมขั้นตอน](#ภาพรวมขั้นตอน) · [GraphRAG](#graphrag-ตามแนวบทความของอาจารย์)
 3. [ความแตกต่างระหว่างข้อ 1 และข้อ 2](#3-ความแตกต่างระหว่างข้อ-1-และข้อ-2) · [ทดลอง prompt 3 แบบ](#ทดลอง-prompt-3-แบบ-ขั้น-g) · [ข้อแลกเปลี่ยน](#ข้อแลกเปลี่ยน)
 4. [วิธีรัน](#วิธีรัน) · [หน้าเว็บ](#หน้าเว็บ) · [โครงสร้างไฟล์](#โครงสร้างไฟล์) · [แผนพัฒนาต่อ](#แผนพัฒนาต่อ)
 
@@ -115,6 +115,34 @@
 | rerank | มี | มี (D) |
 | กรองด้วย threshold | `relevance_rerank`, threshold 0.2 | มี (D2) เลือก threshold จากการทดลองบนข้อมูลภาษาไทยของเราเอง |
 | ไม่มีหลักฐานผ่านเกณฑ์ | ให้แอปตัดสินใจเอง | ตอบว่าไม่พบข้อมูล ไม่เรียก LLM |
+
+### ดูทีละเทคนิคด้วยตัวอย่างจริง
+
+แต่ละรูปใช้คำถามและตัวเลขจริงจาก `results/evaluation.json` และ `results/improved_search_results.json` เทียบกับเทคนิคชื่อเดียวกันในคลังตัวอย่าง [RAG_Techniques](https://github.com/NirDiamant/RAG_Techniques)
+
+**A1 A2 A3 C · Contextual Chunk Header** (เทียบ [contextual_chunk_headers.ipynb](https://github.com/NirDiamant/RAG_Techniques/blob/main/all_rag_techniques/contextual_chunk_headers.ipynb))
+
+![Contextual Chunk Header](docs/tech_header.png)
+
+**B · Fusion Retrieval** (เทียบ [fusion_retrieval.ipynb](https://github.com/NirDiamant/RAG_Techniques/blob/main/all_rag_techniques/fusion_retrieval.ipynb)) notebook รวมคะแนนด้วยค่าถ่วง alpha ส่วนงานนี้ใช้ RRF ตามโค้ดของอาจารย์ และเพิ่มกราฟเป็นทางค้นที่ 3
+
+![Fusion Retrieval](docs/tech_fusion.png)
+
+**D · Reranking** (เทียบ [reranking.ipynb](https://github.com/NirDiamant/RAG_Techniques/blob/main/all_rag_techniques/reranking.ipynb))
+
+![Reranking](docs/tech_rerank.png)
+
+**D2 · Relevance Filtering** (เทียบ [reliable_rag.ipynb](https://github.com/NirDiamant/RAG_Techniques/blob/main/all_rag_techniques/reliable_rag.ipynb) และแนวคิด relevance filtering ของ jev-reranker)
+
+![Relevance Filtering](docs/tech_filter.png)
+
+**GR · Graph RAG** (เทียบ [graph_rag.ipynb](https://github.com/NirDiamant/RAG_Techniques/blob/main/all_rag_techniques/graph_rag.ipynb)) ดูรูปกราฟจริงและประโยคที่ทำให้เกิดแต่ละเส้นใน[ส่วน GraphRAG](#graphrag-ตามแนวบทความของอาจารย์)
+
+**G · ตอบจากเอกสาร + อ้างอิงแหล่ง**
+
+![Prompt และการอ้างอิง](docs/tech_answer.png)
+
+**Explainable Retrieval** (เทียบ [explainable_retrieval.ipynb](https://github.com/NirDiamant/RAG_Techniques/blob/main/all_rag_techniques/explainable_retrieval.ipynb)) หน้าเว็บแสดงว่าแต่ละชิ้นได้คะแนน rerank เท่าไร และกราฟหยิบมาด้วยเส้นทางไหน ดูรูปใน[ส่วนหน้าเว็บ](#หน้าเว็บ)
 
 ### ภาพรวมขั้นตอน
 
