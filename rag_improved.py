@@ -18,7 +18,8 @@ rag_improved.py — แกนหลักของระบบ RAG ฉบับ�
      BAAI/bge-reranker-v2-m3 คัดเหลือ 5 ชิ้น
   D2 Relevance filtering: ตัดชิ้นที่คะแนน rerank ต่ำกว่า threshold ทิ้ง
      ถ้าไม่เหลือเลย ตอบว่าเอกสารไม่มีข้อมูลโดยไม่เรียก LLM
-     (แนวคิดจาก jev-reranker ในบทความที่อาจารย์แนะนำ แต่ไม่ต้องใช้ API ที่เสียเงิน)
+     (แนวคิดจาก jev-reranker ในบทความที่อาจารย์แนะนำ ซึ่งเรียกโมเดลผ่าน API และต้องใช้ API key
+      งานนี้ใช้ bge-reranker-v2-m3 ที่รันบนเครื่องแทน)
   GR GraphRAG (graph_rag.py): knowledge graph แบบ rule-based เดินด้วย BFS 2 hop
      แล้วใช้ผลเป็นตัวค้นที่ 3 ใน RRF คู่กับ BM25 และ vector (ตามบทความของอาจารย์)
   G  Prompt ตอบคำถาม: ให้ตอบจากเอกสารเท่านั้น เป็นภาษาไทย อ้างอิงแหล่ง
