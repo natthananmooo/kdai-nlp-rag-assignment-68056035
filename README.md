@@ -132,7 +132,7 @@
 
 ![Reranking](docs/tech_rerank.png)
 
-**D2 · Relevance Filtering** (เทียบ [reliable_rag.ipynb](https://github.com/NirDiamant/RAG_Techniques/blob/main/all_rag_techniques/reliable_rag.ipynb) และแนวคิด relevance filtering ของ jev-reranker)
+**D2 · Relevance Filtering** (แนวคิด relevance filtering ของ jev-reranker) คล้ายขั้นกรองชิ้นใน [reliable_rag.ipynb](https://github.com/NirDiamant/RAG_Techniques/blob/main/all_rag_techniques/reliable_rag.ipynb) แต่ notebook ให้ LLM ตัดสินว่าแต่ละชิ้นเกี่ยวไหม (yes/no) ส่วนงานนี้ใช้คะแนน reranker กับ threshold และยังไม่มีขั้นที่ notebook ให้ LLM ตรวจคำตอบซ้ำว่าแต่งเกินหลักฐานหรือไม่
 
 ![Relevance Filtering](docs/tech_filter.png)
 
