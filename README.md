@@ -233,6 +233,152 @@ flowchart LR
 
 คำถามเดิมของอาจารย์ทั้ง 7 ข้อใช้ตามต้นฉบับ ไม่ได้ตัดหรือแก้ไข ที่เพิ่มอีก 14 ข้อเพราะ 7 ข้อน้อยเกินไปจนตัวเลขแกว่งง่าย มีข้อที่เอกสารไม่มีคำตอบเพียงข้อเดียว และไม่มีข้อที่ต้องต่อข้อมูลข้ามเอกสาร เฉลยของทุกข้อ รวมทั้ง 7 ข้อของอาจารย์ ผู้จัดทำกำหนดเองจากการอ่านเอกสาร เพราะต้นฉบับไม่มีเฉลยให้
 
+#### คำถาม เฉลย และไฟล์ผล: ของอาจารย์เทียบกับงานนี้
+
+ระบบเดิมของอาจารย์มีคำถามแต่ไม่มีเฉลย คำถาม 5 ข้อเขียนไว้ในโค้ด `original/onlysearchAuthenticRAG.py` (บรรทัด 261) รันแล้วบันทึกผลรอบนั้นเป็น JSON ส่วนอีก 2 ข้ออยู่ใน `original/authenticRAG.py` (บรรทัด 445 และ 452) ซึ่งแสดงผลทางหน้าจออย่างเดียว ไม่ได้บันทึกเป็นไฟล์ ไฟล์ของอาจารย์จึงใช้ดูว่าค้นเจออะไรและตอบว่าอะไร แต่วัดเป็นตัวเลขไม่ได้ เพราะไม่มีช่องบอกว่าคำตอบที่ถูกอยู่ใน section ไหน งานนี้จึงเพิ่มไฟล์เฉลย แล้วเอาผลของทั้งสองระบบไปเทียบกับเฉลยเดียวกัน
+
+**1. ไฟล์ผลของอาจารย์** `results/original_search_results_qwen25.json` (ตัวอย่าง Q2 ตัดข้อความยาวให้สั้น)
+
+```json
+{
+  "question": "อธิบายสาเหตุของโรคหัดเยอรมันและการป้องกัน",
+  "answer": "### สาเหตุของโรคหัดเยอรมัน\n\nโรคหัดเยอรมัน (German measles) หรือรูเบลลา (Rubella)…",
+  "results": [
+    {
+      "doc_id": "doc_2",
+      "score": 0.016666666666666666,
+      "content": "## สาเหตุของโรคหัดเยอรมัน\n\nสาเหตุ : เกิดจากเชื้อหัดเยอรมัน ซ…",
+      "context": ""
+    },
+    "… อีก 4 ชิ้น"
+  ]
+}
+```
+
+| ช่อง | ความหมาย |
+|---|---|
+| `question` | คำถาม |
+| `answer` | คำตอบที่ LLM เขียน |
+| `results` | 5 ชิ้นที่ส่งให้ LLM เรียงตามคะแนน |
+| `results[].doc_id` | รหัสชิ้น (1 ชิ้น = 1 section) |
+| `results[].score` | คะแนน RRF ที่รวมจาก BM25 และ vector (0.016666… = 1/60 คืออันดับ 1 จากทางเดียว) |
+| `results[].content` | เนื้อหาของชิ้น |
+| `results[].context` | บริบทที่ LLM สร้างไว้ตอนนำเข้าเอกสาร (`contextualized_content`) |
+
+ไม่มีช่องไหนบอกว่าคำตอบที่ถูกอยู่ใน section ไหน และช่อง `context` ว่าง ตรงกับปัญหาบริบทไปไม่ถึง LLM ในส่วนที่ 1
+
+**2. ไฟล์ผลของงานนี้** `results/improved_search_results.json` (สร้างโดย `improved_search.py` ด้วยคำถาม 5 ข้อชุดเดียวกัน)
+
+```json
+{
+  "question": "อธิบายสาเหตุของโรคหัดเยอรมันและการป้องกัน",
+  "answer": "สาเหตุของโรคหัดเยอรมันเกิดจากเชื้อไวรัสที่มีชื่อว่า \"รูเบลลา…",
+  "answer_flags": {"chars": 1321, "truncated": false, "no_evidence": false, "has_cjk": false, "citations": 4},
+  "search": {"sparse_count": 20, "dense_count": 20, "graph_count": 20, "graph_used": true,
+             "candidates": 20, "reranked": true, "threshold": 0.1, "filtered_out": 0, "seconds": 30.82},
+  "results": [
+    {
+      "id": "doc_2_p1", "section_id": "doc_2",
+      "title": "หัดเยอรมัน อาการ สาเหตุ และการรักษาโรคหัดเยอรมัน 1…",
+      "content": "## สาเหตุของโรคหัดเยอรมัน\n\nสาเหตุ : เกิดจากเชื้อหั…",
+      "context": "เอกสารนี้กล่าวถึงโรคหัดเยอรมัน (German measles/Rub…",
+      "rrf": 0.04794721407624633,
+      "sparse_rank": 7, "dense_rank": 3, "graph_rank": 1,
+      "graph_path": "[hop1][ABOUT_TOPIC] จาก สาเหตุ (หัดเยอรมัน) (คำถาม…",
+      "rerank_score": 0.9712256193161011,
+      "rank": 1
+    },
+    "… อีก 4 ชิ้น"
+  ]
+}
+```
+
+รูปแบบเดียวกับของอาจารย์ (`question`, `answer`, `results`) แล้วเพิ่มช่องต่อไปนี้
+
+| ช่อง | ความหมาย |
+|---|---|
+| `answer_flags.chars` | ความยาวคำตอบ (ตัวอักษร) |
+| `answer_flags.truncated` | คำตอบถูกตัดเพราะเกิน `max_tokens` หรือไม่ |
+| `answer_flags.no_evidence` | ไม่มีชิ้นผ่านเกณฑ์ จึงตอบว่าไม่มีข้อมูลโดยไม่เรียก LLM หรือไม่ |
+| `answer_flags.has_cjk` | คำตอบมีอักษรจีนหรือญี่ปุ่นปนหรือไม่ |
+| `answer_flags.citations` | จำนวนรหัส `[doc_x]` ที่ไม่ซ้ำกันในคำตอบ |
+| `search.sparse_count` / `dense_count` / `graph_count` | BM25 / vector / กราฟ หาเจอกี่ชิ้น (ขอทางละ 20) |
+| `search.graph_used` | เปิดใช้กราฟหรือไม่ |
+| `search.candidates` | จำนวนผู้สมัครหลังรวมด้วย RRF ที่ส่งให้ reranker |
+| `search.reranked` | ใช้ reranker หรือไม่ |
+| `search.threshold` | เกณฑ์คะแนน rerank ที่ใช้กรอง (D2) |
+| `search.filtered_out` | จำนวนชิ้นใน 5 อันดับแรกที่ถูกกรองทิ้ง |
+| `search.seconds` | เวลาค้น (ไม่รวมเวลาที่ LLM ตอบ) |
+| `results[].id` | รหัสชิ้น เช่น `doc_2_p1` = section `doc_2` ส่วนที่ 1 |
+| `results[].section_id` | section ต้นทาง ใช้เทียบกับเฉลย |
+| `results[].title` | หัวเรื่อง (ชื่อเอกสาร › หัวข้อ) |
+| `results[].content` / `context` | เนื้อหา และบริบทภาษาไทย |
+| `results[].rrf` | คะแนน RRF ที่รวมจาก 3 ทาง |
+| `results[].sparse_rank` / `dense_rank` / `graph_rank` | อันดับที่ BM25 / vector / กราฟ ให้ชิ้นนี้ (นับจาก 1, `null` = ทางนั้นหาไม่เจอ) |
+| `results[].graph_path` | กราฟหยิบชิ้นนี้มาด้วยเส้นทางไหน |
+| `results[].rerank_score` | คะแนน 0–1 จาก reranker |
+| `results[].rank` | อันดับสุดท้ายที่ส่งให้ LLM |
+
+คำตอบในไฟล์นี้มาจากการรัน `improved_search.py` คนละรอบกับ `evaluate.py` จึงไม่ตรงกับตารางคุณภาพคำตอบด้านล่าง ซึ่งใช้คำตอบจาก `results/evaluation.json`
+
+**3. ไฟล์เฉลย (มีเฉพาะงานนี้)** `eval_questions.json` คำถาม 21 ข้อพร้อมเฉลย
+
+```json
+{
+  "id": "Q2",
+  "set": "hands-on 2",
+  "question": "อธิบายสาเหตุของโรคหัดเยอรมันและการป้องกัน",
+  "gold": ["doc_2", "doc_13"],
+  "note": "สาเหตุ + วิธีป้องกัน"
+}
+```
+
+| ช่อง | ความหมาย |
+|---|---|
+| `id` | รหัสคำถาม Q1–Q21 |
+| `set` | ที่มาของคำถาม เช่น hands-on 2, hands-on 1, ข้ามเอกสาร |
+| `question` | ข้อความคำถาม (7 ข้อของอาจารย์ใช้ตามโค้ดต้นฉบับทุกตัวอักษร) |
+| `gold` | เฉลยว่าคำตอบอยู่ใน section ไหน เป็น `[]` เมื่อเอกสารไม่มีคำตอบ เช่น Q5 |
+| `note` | เหตุผลที่เลือกเฉลยนั้น |
+
+**4. ไฟล์ผลวัดเทียบเฉลย (มีเฉพาะงานนี้)** `results/evaluation.json` สร้างโดย `evaluate.py` ซึ่งรันทั้งสองระบบด้วยคำถามทั้ง 21 ข้อ แล้วเทียบกับ `gold` (ตัวอย่าง Q2 แสดง 2 จาก 5 ระบบ)
+
+```json
+{
+  "id": "Q2",
+  "question": "อธิบายสาเหตุของโรคหัดเยอรมันและการป้องกัน",
+  "gold": ["doc_2", "doc_13"],
+  "systems": {
+    "baseline":       {"top_sections": ["doc_2", "doc_0", "doc_1", "doc_13", "doc_15"],
+                       "hit": 1.0, "recall": 1.0, "mrr": 1.0, "precision": 0.4},
+    "improved_graph": {"top_sections": ["doc_2", "doc_13"],
+                       "hit": 1.0, "recall": 1.0, "mrr": 1.0, "precision": 1.0},
+    "…": "อีก 3 ระบบ"
+  }
+}
+```
+
+| ช่อง | ความหมาย |
+|---|---|
+| `id` / `question` / `gold` | คัดลอกมาจาก `eval_questions.json` |
+| `systems` | ผลของ 5 ระบบ: `baseline` (ระบบเดิม), `improved_no_rerank` (A+B+C), `improved_rerank` (+D), `improved` (+D2), `improved_graph` (+GraphRAG ระบบสุดท้าย) |
+| `top_sections` | section ที่ส่งให้ LLM เรียงตามอันดับ ตัดตัวซ้ำออก |
+| `hit` | มี section ที่เป็นเฉลยอย่างน้อย 1 ตัวหรือไม่ (1 หรือ 0) |
+| `recall` | section เฉลยที่หาเจอ ÷ section เฉลยทั้งหมด |
+| `mrr` | 1 ÷ อันดับของ section เฉลยตัวแรก |
+| `precision` | ชิ้นที่ส่งให้ LLM แล้วมาจาก section เฉลย ÷ ชิ้นที่ส่งทั้งหมด |
+
+ในไฟล์จริงแต่ละระบบยังมีช่อง `top` (รหัสชิ้น), `kept` (จำนวนชิ้นที่ส่ง), `sparse_count`, `graph_count`, `from_graph`, `context_coverage` (สัดส่วนชิ้นที่มีบริบท) และ `seconds` ข้อที่เอกสารไม่มีคำตอบ (`gold` เป็น `[]`) ไม่คิด hit, recall, mrr, precision
+
+ระบบเดิมส่ง 5 section ตรงเฉลย 2 (Precision 0.4) ระบบสุดท้ายส่ง 5 ชิ้นที่มาจาก 2 section และทั้งสองเป็นเฉลย (Precision 1.0) ฉบับอ่านง่ายของไฟล์นี้อยู่ที่ `results/evaluation.md`
+
+| | ระบบเดิม (อาจารย์) | งานนี้ |
+|---|---|---|
+| คำถาม | เขียนในโค้ด 5 + 2 ข้อ | แยกไฟล์ `eval_questions.json` 21 ข้อ |
+| เฉลย | ไม่มี | มี (`gold`) พร้อมเหตุผล (`note`) |
+| ไฟล์ผลของการค้นและตอบ | `original_search_results_qwen25.json` | `improved_search_results.json` (ข้อมูลละเอียดกว่า) |
+| ไฟล์ผลวัด | ไม่มี | `evaluation.json` และ `evaluation.md` |
+
 ผลจริงจาก `python evaluate.py --answers` บน MacBook Pro (Intel, RAM 8 GB) ผลเต็มรายข้ออยู่ที่ `results/evaluation.md`
 
 | ระบบ | Hit@5 | Recall@5 | MRR@5 | Precision | ชิ้นที่ส่งเฉลี่ย | BM25 เจอเฉลี่ย | ชิ้นที่มีบริบท |
