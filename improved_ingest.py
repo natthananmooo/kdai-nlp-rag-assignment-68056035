@@ -13,43 +13,52 @@ improved_ingest.py — นำเข้าเอกสารเข้าระบ
      BM25 ใช้ Thai analyzer และ vector index เก็บบริบทไว้ด้วย
 """
 
-import argparse
-import sys
+import argparse  # อ่าน option จาก command line (--dry-run, --no-llm)
+import sys  # ใช้ sys.exit หยุดโปรแกรมพร้อมรหัสสถานะ
 
+# ฟังก์ชันและค่าตั้งต้นทั้งหมดอยู่ใน rag_improved.py (เรียกผ่าน R.ชื่อ)
 import rag_improved as R
 
 
+# ลำดับการทำงาน: แบ่ง section -> แบ่งชิ้น -> สร้างบริบท -> embedding -> สร้าง index -> อัปโหลด
 def main() -> None:
+    # ---- รับ option จาก command line ----
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry-run", action="store_true", help="แสดงการแบ่ง chunk เท่านั้น")
     ap.add_argument("--no-llm", action="store_true",
                     help="ไม่เรียก LLM: section ที่ยังไม่มีบริบทใน cache ใช้ชื่อเอกสาร+หัวข้อเป็นบริบทชั่วคราว")
     args = ap.parse_args()
 
+    # ---- ขั้นที่ 1: แบ่ง section แบบต้นฉบับ (MarkdownNodeParser) ----
     sections, full_docs = R.load_sections()
     R.log(f"แบ่ง section แบบต้นฉบับได้ {len(sections)} section")
+    # ตรวจว่าได้ 53 section ตรงกับระบบเดิม (ใช้รหัส doc_x เทียบผลกัน)
     if len(sections) != 53:
         R.log("! จำนวน section ไม่เท่ากับ 53 ของระบบเดิม การเทียบผลด้วยรหัส doc_x อาจคลาดเคลื่อน")
+    # ---- ขั้นที่ 3 (A3): แบ่ง section ที่ยาวเกินเป็นชิ้นย่อย (ทำก่อนเพื่อแสดงผลใน --dry-run ได้) ----
     chunks = R.build_chunks(sections, full_docs)
     longest = max(len(s["text"]) for s in sections)
     R.log(f"แบ่ง section ที่ยาวเกิน {R.MAX_CHUNK_CHARS} ตัวอักษรแล้วได้ {len(chunks)} chunk "
           f"(section ยาวสุดเดิม {longest} ตัวอักษร, chunk ยาวสุดตอนนี้ "
           f"{max(len(c.content) for c in chunks)} ตัวอักษร)")
 
+    # --dry-run: แสดงการแบ่งชิ้นแล้วจบ ไม่เรียก LLM/OpenSearch (ใช้ตรวจ chunking ได้ฟรี)
     if args.dry_run:
         for c in chunks:
             R.log(f"{c.chunk_id:<12} {len(c.content):>5}  {c.title}")
         return
 
+    # เตรียม LLM และการเชื่อมต่อ OpenSearch
     llm = None if args.no_llm else R.LLM()
     client = R.opensearch_client()
     client.info()  # ตรวจว่าเชื่อมต่อ OpenSearch ได้ก่อนเสียค่า LLM
 
     # ---- บริบทต่อ section (เรียก LLM 1 ครั้งต่อ section เท่าต้นฉบับ) ----
-    cache = R.load_context_cache()
-    section_context: dict[str, str] = {}
-    provisional = []
+    cache = R.load_context_cache()  # โหลดบริบทที่เคยสร้างแล้ว
+    section_context: dict[str, str] = {}  # section_id -> บริบท
+    provisional = []  # section ที่ใช้บริบทชั่วคราว (โหมด --no-llm)
     for i, s in enumerate(sections, 1):
+        # มีใน cache แล้ว: ใช้เลย ไม่เรียก LLM ซ้ำ (ประหยัดเงินและเวลา)
         key = R._cache_key(s["source"], s["text"])
         if key in cache:
             section_context[s["section_id"]] = cache[key]
@@ -61,12 +70,15 @@ def main() -> None:
                 f"ส่วน '{R._first_heading(s['text'])}' จากบทความเรื่อง {doc_title}")
             provisional.append(s["section_id"])
             continue
+        # ---- ขั้นที่ 2 (A1, A2): ให้ LLM เขียนบริบทภาษาไทยจากเอกสารเต็ม ----
         try:
             ctx = R.generate_section_context(llm, full_docs[s["source"]], s["text"])
+        # เครดิตหมด: หยุดและบอกว่าทำไปกี่ section แล้ว (ส่วนที่เสร็จอยู่ใน cache รันต่อได้)
         except R.OutOfCredits as e:
             done = sum(1 for x in sections if R._cache_key(x["source"], x["text"]) in cache)
             R.log(f"\n! หยุดที่ section {i}/{len(sections)}: {e}\n  ทำเสร็จแล้ว {done} section")
             sys.exit(2)
+        # บันทึก cache ทันทีทุก section ถ้าโปรแกรมหยุดกลางทาง งานที่ทำแล้วไม่หาย
         cache[key] = ctx
         R.save_context_cache(cache)
         section_context[s["section_id"]] = ctx
@@ -75,28 +87,35 @@ def main() -> None:
     if provisional:
         R.log(f"! โหมด --no-llm: {len(provisional)} section ใช้บริบทชั่วคราว (ชื่อเอกสาร + หัวข้อ) "
               f"ผลวัดยังไม่ใช่ผลสุดท้าย เมื่อเติมเครดิตแล้วให้รัน python improved_ingest.py อีกครั้ง")
+    # บันทึกข้อมูลการนำเข้า ให้ evaluate.py รู้ว่าผลเป็นผลชั่วคราวหรือไม่
     (R.ROOT / "results" / "ingest_info.json").write_text(
         R.json.dumps({"sections": len(sections), "chunks": len(chunks),
                       "llm_contexts": len(sections) - len(provisional),
                       "provisional_contexts": provisional}, ensure_ascii=False, indent=2),
         encoding="utf-8")
 
+    # ทุกชิ้นใช้บริบทของ section ที่ตัวเองมาจาก
     for c in chunks:
         c.context = section_context[c.section_id]
 
     # ---- embedding ----
-    models = R.Models(load_reranker=False)
+    models = R.Models(load_reranker=False)  # ตอนนำเข้าไม่ใช้ reranker จึงไม่ต้องโหลด
     R.log(f"กำลังสร้าง embedding {len(chunks)} chunk ...")
+    # ---- ขั้นที่ 4a: แปลง (หัวข้อ + บริบท + เนื้อหา) เป็นเวกเตอร์ = Contextual Embeddings ----
     vectors = models.embed([c.text_for_embedding() for c in chunks])
 
     # ---- สร้าง index ใหม่ ----
     bm25_body, vector_body = R.improved_index_bodies(models.dim)
+    # ---- ขั้นที่ 4b (B, C): ลบ index เดิมแล้วสร้างใหม่ทุกครั้ง ข้อมูลจะไม่ซ้ำซ้อน
+    # (ไม่แตะ anthropic-* ของระบบเดิม) ----
     for name, body in ((R.IMPROVED_BM25_INDEX, bm25_body), (R.IMPROVED_VECTOR_INDEX, vector_body)):
         if client.indices.exists(index=name):
             client.indices.delete(index=name)
         client.indices.create(index=name, body=body)
         R.log(f"สร้าง index {name} ใหม่แล้ว")
 
+    # ---- เตรียมข้อมูลสำหรับ Bulk API: [คำสั่ง, ข้อมูล, คำสั่ง, ข้อมูล, ...] ----
+    # common = field ที่ทั้งสอง index มีเหมือนกัน (C: vector index เก็บบริบทด้วย)
     bm25_ops, vec_ops = [], []
     for c, v in zip(chunks, vectors):
         common = {"chunk_id": c.chunk_id, "section_id": c.section_id, "source": c.source,
@@ -105,17 +124,21 @@ def main() -> None:
         vec_ops += [{"index": {"_index": R.IMPROVED_VECTOR_INDEX, "_id": c.chunk_id}},
                     {**common, "embedding": v}]
 
+    # ---- ขั้นที่ 4c: อัปโหลดทีละ index ด้วย Bulk API (ส่งทีเดียวทั้งก้อน เร็วกว่าส่งทีละรายการ) ----
     for name, ops in ((R.IMPROVED_BM25_INDEX, bm25_ops), (R.IMPROVED_VECTOR_INDEX, vec_ops)):
         resp = client.bulk(body=ops)
+        # ถ้ามีรายการผิดพลาด แสดงตัวอย่าง error แล้วหยุด
         if resp.get("errors"):
             bad = [it for it in resp["items"] if it["index"].get("error")]
             R.log(f"! นำเข้า {name} ผิดพลาด {len(bad)} รายการ ตัวอย่าง: {bad[0]['index']['error']}")
             sys.exit(1)
+        # refresh ให้ข้อมูลค้นหาได้ทันที แล้วนับจำนวนเพื่อยืนยัน
         client.indices.refresh(index=name)
         count = client.count(index=name)["count"]
         R.log(f"นำเข้า {name} สำเร็จ {count} chunk")
 
     # ---- โชว์ผลของ Thai analyzer เทียบ standard (ประกอบสไลด์หน้า 23) ----
+    # standard ตัดคำไทยไม่ได้ ส่วน thai ตัดเป็นคำ ๆ ด้วยพจนานุกรม (เหตุผลของขั้น B)
     sample = "อาการของหัดเยอรมัน"
     for analyzer in ("standard", "thai"):
         tokens = R.analyze_tokens(client, sample, analyzer)

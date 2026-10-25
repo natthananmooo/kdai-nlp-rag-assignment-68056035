@@ -16,17 +16,21 @@ evaluate.py — วัดผลเทียบระบบเดิม (ข้�
 ผลลัพธ์: results/evaluation.json และ results/evaluation.md
 """
 
-import argparse
-import json
-import statistics
-import time
+import argparse  # รับ option --answers
+import json  # อ่านคำถาม / บันทึกผล
+import statistics  # คำนวณค่าเฉลี่ย
+import time  # จับเวลาการสร้างคำตอบ
 
+# ใช้ทั้ง BaselineRAG (ระบบเดิม) และ ImprovedRAG (ระบบปรับปรุง) จาก rag_improved.py
 import rag_improved as R
 
 
+# คำถามที่ต้องต่อข้อมูลข้ามเอกสาร (ทดสอบ GraphRAG) แสดงแยกตารางในรายงาน
 MULTI_HOP_IDS = {"Q7", "Q19", "Q20", "Q21"}
 
 
+# แปลงผลลัพธ์เป็นรายการ section ไม่ซ้ำ ตามลำดับที่เจอ
+# (ชิ้นย่อยหลายชิ้นจาก section เดียวกันนับเป็น 1 จึงเทียบกับระบบเดิมที่ไม่ได้แบ่งชิ้นได้ยุติธรรม)
 def section_order(results: list[dict]) -> list[str]:
     seen, order = set(), []
     for r in results:
@@ -37,34 +41,43 @@ def section_order(results: list[dict]) -> list[str]:
     return order
 
 
+# คำนวณตัวชี้วัดการค้นคืนมาตรฐานของ Information Retrieval เทียบกับ gold (section ที่ถูกต้อง)
 def metrics(results: list[dict], gold: list[str]) -> dict:
     order = section_order(results)
     gold_set = set(gold)
+    # first = อันดับแรกที่เจอ section ที่ถูก (ไม่เจอ = None)
     first = next((i for i, s in enumerate(order, 1) if s in gold_set), None)
     m = {
-        "hit": 1.0 if first else 0.0,
-        "recall": len(gold_set & set(order)) / len(gold_set),
-        "mrr": 1.0 / first if first else 0.0,
+        "hit": 1.0 if first else 0.0,  # Hit: เจออย่างน้อย 1 ชิ้นไหม
+        "recall": len(gold_set & set(order)) / len(gold_set),  # Recall: เจอกี่ส่วนของ gold ทั้งหมด
+        "mrr": 1.0 / first if first else 0.0,  # MRR (Mean Reciprocal Rank): 1/อันดับแรกที่ถูก
     }
+    # Precision: สัดส่วนชิ้นที่ส่งให้ LLM ที่ถูก (ไม่มีชิ้นเลยคิดไม่ได้ จึงข้าม)
     if results:
         m["precision"] = sum(1 for r in results if r["section_id"] in gold_set) / len(results)
     return m
 
 
+# ค่าเฉลี่ยที่ข้ามค่า None ปัดทศนิยม 3 ตำแหน่ง
 def mean(xs):
     xs = [x for x in xs if x is not None]
     return round(statistics.mean(xs), 3) if xs else 0.0
 
 
+# D2: ตัดชิ้นที่คะแนน rerank ต่ำกว่า t (t = 0 คือไม่กรอง)
+# ใช้จำลองการกรองจากผลค้นชุดเดิม ไม่ต้องค้นใหม่
 def apply_threshold(results: list[dict], t: float) -> list[dict]:
     return [r for r in results if (r["rerank_score"] or 0) >= t] if t > 0 else list(results)
 
 
+# ลำดับการทำงาน: ค้นทุกคำถามด้วยทุกแบบ -> คิดคะแนน -> สรุปค่าเฉลี่ย -> ทดลอง threshold
+# -> (ถ้าเลือก) สร้างคำตอบ -> บันทึก JSON + Markdown
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--answers", action="store_true", help="สร้างคำตอบด้วย LLM เทียบกันด้วย")
     args = ap.parse_args()
 
+    # ---- เตรียมคำถาม โมเดล และทั้งสองระบบ ----
     qs = json.loads((R.ROOT / "eval_questions.json").read_text(encoding="utf-8"))["questions"]
     client = R.opensearch_client()
     models = R.Models(load_reranker=True)
@@ -76,6 +89,7 @@ def main() -> None:
     if not imp.available():
         raise SystemExit("ไม่พบ improved-* index ให้รัน python improved_ingest.py ก่อน")
 
+    # ระบบ 5 แบบที่วัด = ablation study: เพิ่มเทคนิคทีละขั้น ดูว่าแต่ละเทคนิคช่วยได้แค่ไหน
     t_default = R.RERANK_THRESHOLD
     labels = {
         "baseline": "ระบบเดิม (ข้อ 1)",
@@ -85,9 +99,11 @@ def main() -> None:
         "improved_graph": f"ปรับปรุงครบ + GraphRAG (ระบบสุดท้าย)",
     }
 
+    # ---- วัดผลทีละคำถาม ----
     rows = []
     for q in qs:
         row = {"id": q["id"], "question": q["question"], "gold": q["gold"], "systems": {}}
+        # ค้นครั้งเดียวต่อแบบ แล้วใช้ apply_threshold จำลองการกรอง (ไม่ต้องค้นซ้ำ)
         b = base.search(q["question"])
         nr = imp.search(q["question"], use_reranker=False, use_graph=False)
         rr = imp.search(q["question"], use_reranker=True, threshold=0, use_graph=False)
@@ -99,6 +115,7 @@ def main() -> None:
             "improved": (rr, apply_threshold(rr["results"], t_default)),
             "improved_graph": (rg, apply_threshold(rg["results"], t_default)),
         }
+        # เก็บผลของแต่ละแบบ: ชิ้นที่ได้, จำนวน, BM25 เจอกี่ชิ้น, มาจากกราฟกี่ชิ้น, มีบริบทกี่ %
         for key, (found, res) in variants.items():
             entry = {
                 "top": [r["id"] for r in res],
@@ -110,7 +127,7 @@ def main() -> None:
                 "context_coverage": (sum(1 for r in res if r["context"].strip()) / len(res)) if res else None,
                 "seconds": found["seconds"],
             }
-            if q["gold"]:
+            if q["gold"]:  # คำถามที่เอกสารไม่มีคำตอบ ไม่คิดคะแนนการค้นคืน
                 entry.update(metrics(res, q["gold"]))
             row["systems"][key] = entry
         # เก็บคะแนน rerank ของ 5 อันดับแรกของระบบสุดท้ายไว้ทดลอง threshold
@@ -122,9 +139,10 @@ def main() -> None:
             f"{k}: hit={v.get('hit', '-')} ส่ง={v['kept']} bm25={v['sparse_count']}"
             for k, v in row["systems"].items()))
 
+    # ---- สรุปค่าเฉลี่ยของแต่ละระบบ ----
     summary = {}
     for key, label in labels.items():
-        scored = [r["systems"][key] for r in rows if r["gold"]]
+        scored = [r["systems"][key] for r in rows if r["gold"]]  # เฉพาะคำถามที่เอกสารมีคำตอบ
         allr = [r["systems"][key] for r in rows]
         summary[key] = {
             "label": label,
@@ -142,6 +160,8 @@ def main() -> None:
 
     # ---- ทดลองหลาย threshold (เทียบกับตารางในบทความ jev-reranker) ----
     sweep = []
+    # ลองทีละ threshold กับคะแนน rerank ชุดเดียวกัน
+    # นับด้วยว่าคำถามที่ตอบได้ถูกปฏิเสธผิดกี่ข้อ และคำถามที่ตอบไม่ได้ถูกปฏิเสธถูกกี่ข้อ
     for t in R.THRESHOLD_SWEEP:
         ans_rows, kept_all, no_ans_rejected, ans_rejected = [], [], 0, 0
         for r in rows:
@@ -169,7 +189,7 @@ def main() -> None:
 
     # ---- คำตอบ (ถ้าเลือก --answers) ----
     answers = []
-    if args.answers:
+    if args.answers:  # สร้างคำตอบเฉพาะ 5 คำถามหลัก ทั้งสองระบบ
         for q in qs[:5]:
             pair = {"id": q["id"], "question": q["question"]}
             for key, rag in (("baseline", base), ("improved", imp)):
@@ -182,12 +202,14 @@ def main() -> None:
             R.log(f"{q['id']} ตอบแล้ว: เดิม {pair['baseline']['chars']} ตัวอักษร | "
                   f"ใหม่ {pair['improved']['chars']} ตัวอักษร")
 
+    # ถ้ายังใช้บริบทชั่วคราว (--no-llm) เตือนว่าผลยังไม่ใช่ผลสุดท้าย
     info_path = R.ROOT / "results" / "ingest_info.json"
     ingest_info = json.loads(info_path.read_text(encoding="utf-8")) if info_path.exists() else {}
     if ingest_info.get("provisional_contexts"):
         R.log(f"\n! ระบบปรับปรุงยังใช้บริบทชั่วคราว {len(ingest_info['provisional_contexts'])} section "
               "ผลนี้ยังไม่ใช่ผลสุดท้าย")
 
+    # ---- บันทึกผลเป็น JSON (ข้อมูลดิบ) และ Markdown (ตารางสำหรับรายงาน) ----
     out = {"summary": summary, "threshold_sweep": sweep, "threshold_default": t_default,
            "ingest_info": ingest_info,
            "per_question": rows, "analyzer_demo": analyzer_demo, "answers": answers}
@@ -208,8 +230,11 @@ def main() -> None:
     R.log("บันทึกที่ results/evaluation.md และ results/evaluation.json")
 
 
+# สร้างรายงาน Markdown: ตารางสรุป, คำถาม multi-hop, ผลทดลอง threshold,
+# รายคำถาม, การตัดคำของ analyzer และคำตอบ
 def render_md(out: dict, qs: list[dict]) -> str:
     s = out["summary"]
+    # L = รายการบรรทัดของรายงาน นำมาต่อกันตอนท้ายฟังก์ชัน
     L = ["# ผลการวัดผล: ระบบเดิม vs ระบบปรับปรุง", "",
          f"คำถาม {len(qs)} ข้อ (คิดคะแนนการค้นคืน {sum(1 for q in qs if q['gold'])} ข้อที่เอกสารมีคำตอบ)", ""]
     prov = out.get("ingest_info", {}).get("provisional_contexts") or []
@@ -249,6 +274,7 @@ def render_md(out: dict, qs: list[dict]) -> str:
           "|---|---|---|---|---|---|"]
     for r in out["per_question"]:
         b, i = r["systems"]["baseline"], r["systems"]["improved"]
+        # แสดง section ที่ส่งให้ LLM พร้อม MRR
         fmt = lambda e: (", ".join(e["top_sections"]) or "(ไม่ส่ง)") + (f" ({e['mrr']:.2f})" if r["gold"] else "")
         scores = ", ".join(f"{x['score']:.2f}" for x in r["rerank_top5"] if x["score"] is not None)
         L.append(f"| {r['id']} | {r['question']} | {', '.join(r['gold']) or '(เอกสารไม่มี)'} | {fmt(b)} | {fmt(i)} | {scores} |")
